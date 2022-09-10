@@ -2,6 +2,47 @@
 <html>
 <body>
 
+<canvas id="screen" width="1000" height="600" style="border:3px solid #000000;"></canvas>
+
+
+<script>
+
+var canvas = document.getElementById("screen");
+var ctx = canvas.getContext("2d");
+var pi = Math.PI
+
+var x = 500;
+var y = 300;
+
+var dx = 0;
+var dy = 4;
+
+function draw(){
+	ctx.clearRect(0,0,1000,600);		//clear the screen
+
+
+	ctx.beginPath();
+	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball
+	ctx.fillStyle = "#0000FF";
+	ctx.fill();
+	ctx.closePath();
+
+	x += dx;							//move the ball
+	y += dy;
+
+	dx += 0.05;
+	dy -= 0.05;
+}
+
+
+setInterval(draw, 10);					//loop "draw" function every 10ms
+
+
+
+
+</script>
+
+
 
 
 
