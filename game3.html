@@ -12,7 +12,7 @@ var ctx = canvas.getContext("2d");
 var pi = Math.PI
 
 var dx = 0;
-var dy = 0;
+var dy = 20;
 
 function draw(){
 	ctx.clearRect(0,0,1000,600);		//clear the screen
@@ -27,8 +27,8 @@ function draw(){
 	x += dx;							//move the ball
 	y += dy;
 
-	dx += 1;
-	dy -= 1;
+	dx += 2;
+	dy -= 2;
 }
 
 setInterval(draw, 10);					//loop "draw" function every 10ms
