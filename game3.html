@@ -11,16 +11,26 @@ var canvas = document.getElementById("screen");
 var ctx = canvas.getContext("2d");
 var pi = Math.PI
 
+var dx;
+var dy;
+
 function draw(){
+	ctx.clearRect(0,0,1000,600);		//clear the screen
+
+
 	ctx.beginPath();
-	ctx.arc(500, 300, 10, 0, pi*2);
+	ctx.arc(500, 300, 10, 0, pi*2);		//draw the ball
 	ctx.fillStyle = "#0000FF";
 	ctx.fill();
 	ctx.closePath();
 
+	x += dx;							//move the ball
+	y += dy;
 }
 
-setInterval(draw, 10);
+setInterval(draw, 10);					//loop "draw" function every 10ms
+
+
 
 
 </script>
