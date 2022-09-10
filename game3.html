@@ -15,7 +15,7 @@ var x = 500;
 var y = 300;
 
 var dx = 0;
-var dy = 20;
+var dy = 4;
 
 function draw(){
 	ctx.clearRect(0,0,1000,600);		//clear the screen
@@ -30,8 +30,8 @@ function draw(){
 	x += dx;							//move the ball
 	y += dy;
 
-	dx += 2;
-	dy -= 2;
+	dx += 0.5;
+	dy -= 0.5;
 }
 
 setInterval(draw, 10);					//loop "draw" function every 10ms
