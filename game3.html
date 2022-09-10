@@ -11,6 +11,9 @@ var canvas = document.getElementById("screen");
 var ctx = canvas.getContext("2d");
 var pi = Math.PI
 
+var x = 500;
+var y = 300;
+
 var dx = 0;
 var dy = 20;
 
@@ -19,7 +22,7 @@ function draw(){
 
 
 	ctx.beginPath();
-	ctx.arc(500, 300, 10, 0, pi*2);		//draw the ball
+	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball
 	ctx.fillStyle = "#0000FF";
 	ctx.fill();
 	ctx.closePath();
