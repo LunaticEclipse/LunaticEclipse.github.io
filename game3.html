@@ -14,10 +14,17 @@ var pi = Math.PI
 var x = 500;
 var y = 300;
 
+var dx = 0;
+var dy = 0;
+
 function mainLoop(){
 	draw();
+	move();
 	WASD();
 }
+
+
+
 
 
 function draw(){
@@ -32,6 +39,22 @@ function draw(){
 }
 
 
+
+
+
+
+function move(){
+	x += dx;
+	y += dy;
+
+	//add focus mode
+}
+
+
+
+
+
+
 function WASD(){
 	window.addEventListener("keydown", function (event) {
   if (event.defaultPrevented) {
@@ -40,16 +63,16 @@ function WASD(){
 
   switch (event.key) {
     case "ArrowDown":
-      y += 15;
+      dy = 2;
       break;
     case "ArrowUp":
-      y -= 15;
+      dy = -2;
       break;
     case "ArrowLeft":
-      x -= 15;
+      dx = -2;
       break;
     case "ArrowRight":
-      x += 15;
+      dx = 2;
       break;
     default:
       return; // Quit when this doesn't handle the key event.
@@ -61,13 +84,46 @@ function WASD(){
 	}, true);
 	// the last option dispatches the event to the listener first,
 	// then dispatches event to window
+
+
+
+	window.addEventListener("keyup", function (event) {
+  if (event.defaultPrevented) {
+    return; 
+  }
+
+  switch (event.key) {
+    case "ArrowDown":
+      dy = 0;
+      break;
+    case "ArrowUp":
+      dy = 0;
+      break;
+    case "ArrowLeft":
+      dx = 0;
+      break;
+    case "ArrowRight":
+      dx = 0;
+      break;
+    default:
+      return; // Quit when this doesn't handle the key event.
+  }
+
+  // Cancel the default action to avoid it being handled twice
+  event.preventDefault();
+	
+	}, true);
+
 }
 
 
-setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
 
 
+
+
+
+setInterval(mainLoop, 5);					//loop "mainLoop" function every 10ms
 
 
 
