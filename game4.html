@@ -17,12 +17,16 @@ var y = 300;
 var dx = 0;
 var dy = 4;
 
+function mainLoop(){
+	draw();
+}
+
 function draw(){
 	ctx.clearRect(0,0,1000,600);		//clear the screen
 
 
 	ctx.beginPath();
-	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball
+	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball at (x, y)
 	ctx.fillStyle = "#0000FF";
 	ctx.fill();
 	ctx.closePath();
@@ -35,7 +39,7 @@ function draw(){
 }
 
 
-setInterval(draw, 10);					//loop "draw" function every 10ms
+setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
 
 
