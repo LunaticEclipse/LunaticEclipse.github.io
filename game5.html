@@ -34,8 +34,8 @@ setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
 function pattern(){
 	if(t%2 == 1){
-		shoot1(600+150*cos(t*pi/180)*sin(t*pi/60), 350+150*sin(t*pi/180)*sin(t*pi/60), 2, t*pi/36);
-		shoot1(600-150*cos(t*pi/180)*sin(t*pi/60), 350-150*sin(t*pi/180)*sin(t*pi/60), -2, t*pi/36);
+		shoot1(600+150*cos(t*pi/270)*sin(t*pi/180), 350+150*sin(t*pi/270)*sin(t*pi/180), 2, t*pi/36);
+		shoot1(600-150*cos(t*pi/270)*sin(t*pi/180), 350-150*sin(t*pi/270)*sin(t*pi/180), -2, t*pi/36);
 	}
 }
 
