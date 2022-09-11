@@ -13,7 +13,9 @@
 <script>
 
 	function pattern(){
-		shoot1(cx, 300, 2, t/15, "#000000")
+		if(t%4 == 1){
+			shoot1(cx, 300, 2, t/15, "#000000")
+		}
 	}
 
 
