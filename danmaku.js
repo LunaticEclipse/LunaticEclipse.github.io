@@ -6,11 +6,13 @@
 //NEED A CANVAS WITH id "screen"
 //NEED A CANVAS WITH id "screen"
 //NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
 
-
+//NEED mathFunctions.js
+//NEED mathFunctions.js
+//NEED mathFunctions.js
+//NEED mathFunctions.js
+//NEED mathFunctions.js
+//NEED mathFunctions.js
 
 //NEED TO SCRIPT A FUNCTION pattern()
 //NEED TO SCRIPT A FUNCTION pattern()
@@ -33,19 +35,6 @@ var count = 0; //bullet count
 //a bullet object: {x, y, vx, vy}
 
 
-
-function mainLoop(){
-	pattern();
-	draw();
-	t++;
-}
-
-setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
-
-
-
-
-
 function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), color:color};
 	count += 1;
@@ -55,10 +44,6 @@ function shoot2(x, y, vx, vy, color){
 	bullets[count] = {x:x, y:y, vx:vx, vy:vy, color:color};
 	count += 1;
 }
-
-
-
-
 
 
 function draw(){
