@@ -42,13 +42,13 @@ setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
 function pattern(){
 	if(t%6 == 1){
-		shoot1(cx+75*cos(t/15),250+75*sin(t/15),2,t/15+pi/3);
-		shoot1(cx+75*cos(t/15+2*pi/3),250+75*sin(t/15+2*pi/3),2,t/15+2*pi/3+pi/3);
-		shoot1(cx+75*cos(t/15+4*pi/3),250+75*sin(t/15+4*pi/3),2,t/15+4*pi/3+pi/3);
+		shoot1(cx+75*cos(t/15),250+75*sin(t/15),2,t/15+pi/3, "#000000");
+		shoot1(cx+75*cos(t/15+2*pi/3),250+75*sin(t/15+2*pi/3),2,t/15+2*pi/3+pi/3, "#000000");
+		shoot1(cx+75*cos(t/15+4*pi/3),250+75*sin(t/15+4*pi/3),2,t/15+4*pi/3+pi/3, "#000000");
 
-		shoot1(cx+75*cos(t/15),250+75*sin(t/15),1.9,t/15+pi/3);
-		shoot1(cx+75*cos(t/15+2*pi/3),250+75*sin(t/15+2*pi/3),1.9,t/15+2*pi/3+pi/3);
-		shoot1(cx+75*cos(t/15+4*pi/3),250+75*sin(t/15+4*pi/3),1.9,t/15+4*pi/3+pi/3);
+		shoot1(cx+75*cos(t/15),250+75*sin(t/15),1.9,t/15+pi/3, "#FF0000");
+		shoot1(cx+75*cos(t/15+2*pi/3),250+75*sin(t/15+2*pi/3),1.9,t/15+2*pi/3+pi/3, "#FF0000");
+		shoot1(cx+75*cos(t/15+4*pi/3),250+75*sin(t/15+4*pi/3),1.9,t/15+4*pi/3+pi/3, "#FF0000");
 	}
 }
 
@@ -59,13 +59,13 @@ function pattern(){
 
 
 
-function shoot1(x, y, v, angle){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle)};
+function shoot1(x, y, v, angle, color){
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), color:color};
 	count += 1;
 }
 
-function shoot2(x, y, vx, vy){
-	bullets[count] = {x:x, y:y, vx:vx, vy:vy};
+function shoot2(x, y, vx, vy, color){
+	bullets[count] = {x:x, y:y, vx:vx, vy:vy, color:color};
 	count += 1;
 }
 
@@ -82,7 +82,7 @@ function draw(){
 	for (let i = 0; i<count; i++){
 		ctx.beginPath();
 		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		//draw the ball at (x, y)
-		ctx.fillStyle = "#000000";
+		ctx.fillStyle = bullets[i].color;
 		ctx.fill();
 		ctx.closePath();
 
