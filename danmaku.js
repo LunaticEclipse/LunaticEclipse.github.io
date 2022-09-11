@@ -49,16 +49,20 @@ function shoot2(x, y, vx, vy, color){
 function draw(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);	//refresh screen
 
-
+	ctx.beginPath();
+	ctx.arc(x, y, 5, 0, pi*2);		//draw the ball at (x, y)
+	ctx.fillStyle = "#0000FF";
+	ctx.fill();
+	ctx.closePath();
 
 	for (let i = 0; i<count; i++){
 		ctx.beginPath();
-		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		//draw the ball at (x, y)
+		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
 		ctx.fillStyle = bullets[i].color;
 		ctx.fill();
 		ctx.closePath();
 
-		bullets[i].x += bullets[i].vx;							//move the ball
+		bullets[i].x += bullets[i].vx;							
 		bullets[i].y += bullets[i].vy;
 	}
 }
