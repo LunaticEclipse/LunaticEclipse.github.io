@@ -4,6 +4,7 @@
 
 <canvas id="screen" width="1000" height="600" style="border:3px solid #000000;"></canvas>
 
+<script src="mathFunctions.js"></script>
 
 <script>
 
@@ -11,36 +12,68 @@ var canvas = document.getElementById("screen");
 var ctx = canvas.getContext("2d");
 var pi = Math.PI
 
-var x = 500;
-var y = 300;
-
-var dx = 0;
-var dy = 4;
-
 function mainLoop(){
+	pattern();
 	draw();
 }
 
-function draw(){
-	ctx.clearRect(0,0,1000,600);		//clear the screen
+setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
 
-	ctx.beginPath();
-	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball at (x, y)
-	ctx.fillStyle = "#0000FF";
-	ctx.fill();
-	ctx.closePath();
 
-	x += dx;							//move the ball
-	y += dy;
 
-	dx += 0.05;
-	dy -= 0.05;
+
+
+function pattern(){
+
+
 }
 
 
-setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
+
+
+
+
+var bullets = [];
+var count = 0; //bullet count
+
+//a bullet object: {x, y, vx, vy}
+
+function shoot1(x, y, v, angle){
+	bullets[count] = {x:x, y:x, vx:v*Math.cos(angle), vy:Math.sin(angle)};
+	count += 1;
+}
+
+function shoot2(x, y, vx, vy){
+	bullets[count] = {x:x, y:x, vx:vx, vy:vy};
+	count += 1;
+}
+
+
+
+
+
+
+
+
+function draw(){
+	ctx.clearRect(0,0,canvas.width,canvas.height);	//refresh screen
+
+
+
+		ctx.beginPath();
+		ctx.arc(x, y, 5, 0, pi*2);		//draw the ball at (x, y)
+		ctx.fillStyle = "#000000";
+		ctx.fill();
+		ctx.closePath();
+
+		x += dx;							//move the ball
+		y += dy;
+
+		dx += 0.05;
+		dy -= 0.05;
+}
 
 
 
