@@ -41,7 +41,7 @@ var count = 0; //bullet count
 //a bullet object: {x, y, vx, vy}
 
 function shoot1(x, y, v, angle){
-	bullets[count] = {x:x, y:x, vx:v*Math.cos(angle), vy:Math.sin(angle)};
+	bullets[count] = {x:x, y:x, vx:v*cos(angle), vy:sin(angle)};
 	count += 1;
 }
 
@@ -55,24 +55,22 @@ function shoot2(x, y, vx, vy){
 
 
 
-
-
 function draw(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);	//refresh screen
 
 
 
+	for (let i = 0; i<=bullets.lenght; i++){
+
 		ctx.beginPath();
-		ctx.arc(x, y, 5, 0, pi*2);		//draw the ball at (x, y)
+		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		//draw the ball at (x, y)
 		ctx.fillStyle = "#000000";
 		ctx.fill();
 		ctx.closePath();
 
-		x += dx;							//move the ball
-		y += dy;
-
-		dx += 0.05;
-		dy -= 0.05;
+		bullets[i].x += bullets[i].dx;							//move the ball
+		bullets[i].y += bullets[i].dy;
+	}
 }
 
 
