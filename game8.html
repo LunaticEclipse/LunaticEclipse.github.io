@@ -8,23 +8,16 @@
 <script type="text/javascript" src="danmaku.js"></script>
 
 
-
-
 <script>
-
 	// player starting position!!
 	var x = 500;
 	var y = 300;
-
-	var dx = 0;
-	var dy = 0;
 
 	function pattern(){
 		if(t%4 == 1){
 			shoot1(cx, 300, 2, t/15, "#000000")
 		}
 	}
-
 
 	function mainLoop(){
 		pattern();
@@ -33,5 +26,5 @@
 		t++;
 	}
 	setInterval(mainLoop, 5);	
-
+	
 </script>
