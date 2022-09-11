@@ -54,7 +54,7 @@ function pattern(){
 
 
 function shoot1(x, y, v, angle){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:sin(angle)};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle)};
 	count += 1;
 }
 
