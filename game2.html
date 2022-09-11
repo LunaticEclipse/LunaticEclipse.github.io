@@ -79,13 +79,13 @@ function pattern(){
 
 
 function shoot1(x, y, v, angle){
-	bullets[count] = {x:x, y:x, vx:v*cos(angle), vy:sin(angle)};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle)};
 	count += 1;
 }
 
 function shoot2(x, y, vx, vy){
 	document.getElementById("status").innerHTML = "In shoot2()";
-	bullets[count] = {x:x, y:x, vx:vx, vy:vy};
+	bullets[count] = {x:x, y:y, vx:vx, vy:vy};
 	count += 1;
 }
 
