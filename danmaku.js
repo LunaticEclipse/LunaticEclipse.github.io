@@ -1,11 +1,11 @@
 
 
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
-//NEED A CANVAS WITH id "screen"
+//NEED A CANVAS WITH id "danmaku"
+//NEED A CANVAS WITH id "danmaku"
+//NEED A CANVAS WITH id "danmaku"
+//NEED A CANVAS WITH id "danmaku"
+//NEED A CANVAS WITH id "danmaku"
+//NEED A CANVAS WITH id "danmaku"
 
 //NEED mathFunctions.js
 //NEED mathFunctions.js
@@ -23,7 +23,7 @@
 
 
 
-var canvas = document.getElementById("screen");
+var canvas = document.getElementById("danmaku");
 var ctx = canvas.getContext("2d");
 var t = 0;
 
