@@ -36,7 +36,6 @@ function mainLoop(){
 function draw(){
 	ctx.clearRect(0,0,1000,600);		//clear the screen
 
-
 	ctx.beginPath();
 	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball at (x, y)
 	ctx.fillStyle = "#0000FF";
@@ -66,6 +65,7 @@ function WASD(){
   if (event.defaultPrevented) {
     return; // Do nothing if the event was already processed
   }
+
 
   switch (event.key) {
     case "ArrowDown":
@@ -120,6 +120,8 @@ function WASD(){
 	
 	}, true);
 
+
+
 }
 
 
@@ -129,7 +131,7 @@ function WASD(){
 
 
 
-setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
+setInterval(mainLoop, 5);					//loop "mainLoop" function every 5ms
 
 
 
