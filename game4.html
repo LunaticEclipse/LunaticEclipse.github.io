@@ -4,15 +4,28 @@
 
 <canvas id="screen" width="1000" height="600" style="border:3px solid #000000;"></canvas>
 
+<p> Bullet Count = </p> <p id="counter">[failed]</p>
+<p> Time = </p> <p id="time"> [failed] </p>
+
 <script type="text/javascript" src="mathFunctions.js"></script>
 
 <script>
 var canvas = document.getElementById("screen");
 var ctx = canvas.getContext("2d");
+var t = 0;
+
+var bullets = [];
+var count = 0; //bullet count
+//a bullet object: {x, y, vx, vy}
+
+
 
 function mainLoop(){
+	document.getElementById("counter").innerHTML = count;
+	document.getElementById("time").innerHTML = t;
 	pattern();
 	draw();
+	t++;
 }
 
 setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
@@ -24,8 +37,11 @@ setInterval(mainLoop, 10);					//loop "mainLoop" function every 10ms
 
 
 function pattern(){
-
-
+	if(t%3 == 1){
+		shoot1(500,250,2,t/15);
+		shoot1(500,250,2,t/15+2*pi/3);
+		shoot1(500,250,2,t/15+4*pi/3);
+	}
 }
 
 
@@ -35,18 +51,15 @@ function pattern(){
 
 
 
-var bullets = [];
-var count = 0; //bullet count
 
-//a bullet object: {x, y, vx, vy}
 
 function shoot1(x, y, v, angle){
-	bullets[count] = {x:x, y:x, vx:v*cos(angle), vy:sin(angle)};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:sin(angle)};
 	count += 1;
 }
 
 function shoot2(x, y, vx, vy){
-	bullets[count] = {x:x, y:x, vx:vx, vy:vy};
+	bullets[count] = {x:x, y:y, vx:vx, vy:vy};
 	count += 1;
 }
 
@@ -60,25 +73,21 @@ function draw(){
 
 
 
-	for (let i = 0; i<=bullets.lenght; i++){
-
+	for (let i = 0; i<count; i++){
 		ctx.beginPath();
 		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		//draw the ball at (x, y)
 		ctx.fillStyle = "#000000";
 		ctx.fill();
 		ctx.closePath();
 
-		bullets[i].x += bullets[i].dx;							//move the ball
-		bullets[i].y += bullets[i].dy;
+		bullets[i].x += bullets[i].vx;							//move the ball
+		bullets[i].y += bullets[i].vy;
 	}
 }
 
 
 
 </script>
-
-
-
 
 
 </body>

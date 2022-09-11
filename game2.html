@@ -2,17 +2,122 @@
 <html>
 <body>
 
-<p id="math"> failed </p>
+<canvas id="screen" width="1000" height="600" style="border:3px solid #000000;"></canvas>
+
+<p> Bullet Count = </p> <p id="counter">[failed]</p>
+<p> Time = </p> <p id="time"> [failed] </p>
+<p> Status = </p> <p id="status"> [failed] </p>
+
+<p id="bullets[0].x"> n</p>
+<p id="bullets[0].y"> n</p>
+<p id="bullets[0].vx">n</p>
+<p id="bullets[0].vy"> n</p>
+
+
+
+
 
 <script type="text/javascript" src="mathFunctions.js"></script>
 
 <script>
-	
-	document.getElementById("math").innerHTML = sin(1);
+var canvas = document.getElementById("screen");
+var ctx = canvas.getContext("2d");
+var t = 0;
+
+var bullets = [];
+var count = 0; //bullet count
+//a bullet object: {x, y, vx, vy}
+
+
+
+function mainLoop(){
+	document.getElementById("counter").innerHTML = count;
+	document.getElementById("status").innerHTML = "Printed Count";
+
+	document.getElementById("time").innerHTML = t;
+	document.getElementById("status").innerHTML = "Printed t";
+
+	pattern();
+	document.getElementById("status").innerHTML = "pattern() completed";
+
+	draw();
+	document.getElementById("status").innerHTML = "draw() completed";
+
+	t++;
+	document.getElementById("status").innerHTML = "t increased";
+
+	document.getElementById("bullets[0].x").innerHTML = bullets[1].x;
+	document.getElementById("bullets[0].y").innerHTML = bullets[1].y;
+	document.getElementById("bullets[0].vx").innerHTML = bullets[1].vx;
+	document.getElementById("bullets[0].vy").innerHTML = bullets[1].vy;
+}
+
+setInterval(mainLoop, 1000);					//loop "mainLoop" function every 10ms
+
+
+
+
+
+
+
+function pattern(){
+	document.getElementById("status").innerHTML = "In pattern()";
+	if(t%10 == 1){
+		document.getElementById("status").innerHTML = "In conditional (pattern)";
+		shoot2(500,300,5,0);
+		document.getElementById("status").innerHTML = "Bullet shot";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+function shoot1(x, y, v, angle){
+	bullets[count] = {x:x, y:x, vx:v*cos(angle), vy:sin(angle)};
+	count += 1;
+}
+
+function shoot2(x, y, vx, vy){
+	document.getElementById("status").innerHTML = "In shoot2()";
+	bullets[count] = {x:x, y:x, vx:vx, vy:vy};
+	count += 1;
+}
+
+
+
+
+
+
+function draw(){
+	document.getElementById("status").innerHTML = "In draw()";
+
+	ctx.clearRect(0,0,canvas.width,canvas.height);	//refresh screen
+
+
+
+	for (let i = 0; i<count; i++){
+		document.getElementById("status").innerHTML = "In for loop " + i;
+		ctx.beginPath();
+		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		//draw the ball at (x, y)
+		ctx.fillStyle = "#000000";
+		ctx.fill();
+		ctx.closePath();
+
+		bullets[i].x += bullets[i].vx;							//move the ball
+		bullets[i].y += bullets[i].vy;
+	}
+}
+
+
 
 </script>
 
-<h1 id="math"> failed </h1>
 
 </body>
 </html>
