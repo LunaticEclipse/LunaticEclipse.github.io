@@ -50,7 +50,10 @@ function shoot2(x, y, vx, vy, color){
 	count += 1;
 }
 
-
+function shoot3(x, y, v1, v2, a, angle, color){
+	bullets[count] = {x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v2:v2, ax:a*cos(angle), ay:a*sin(angle), color:color};
+	count += 1;
+}
 
 
 
@@ -144,6 +147,19 @@ function draw(){
 
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
+
+
+
+			//!!what if current v is negative?
+			if(bullets[i].a>0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))<bullets[i].v2){
+				bullets[i].vx += bullets[i].ax;							
+				bullets[i].vy += bullets[i].ay;
+			}
+
+			if(bullets[i].a<0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))>bullets[i].v2){
+				bullets[i].vx += bullets[i].ax;							
+				bullets[i].vy += bullets[i].ay;
+			}
 		}
 	}
 }
