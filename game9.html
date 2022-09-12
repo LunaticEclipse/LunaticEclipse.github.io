@@ -17,9 +17,9 @@
 
 	function pattern(){
 		if(t%4 == 1){
-			shoot1(cx, 50+730*Math.pow(sin(t/300),2), 0.5, t/60, "#000000")
-			shoot1(cx, 50+730*Math.pow(sin(t/300),2), 0.5, t/60+2*pi/3, "#000000")
-			shoot1(cx, 50+730*Math.pow(sin(t/300),2), 0.5, t/60+4*pi/3, "#000000")
+			shoot1(cx, 50+730*sq(sin(t/300)), 0.5, t/60, "#000000")
+			shoot1(cx, 50+730*sq(sin(t/300)), 0.5, t/60+2*pi/3, "#000000")
+			shoot1(cx, 50+730*sq(sin(t/300)), 0.5, t/60+4*pi/3, "#000000")
 		}
 	}
 
