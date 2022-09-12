@@ -135,19 +135,15 @@ function draw(){
 	y += dy;
 
 	for (let i = 0; i<count; i++){
-		if(bullets[i].x < -500 || bullets[i].x > cx*2+500){
-			break;
-		} else if(bullets[i].y < -500 || bullets[i].y > cy*2+500){
-			break;
+		if(bullets[i].x>-500 && bullets[i].x<cx*2+500 && bullets[i].y>-500 && bullets[i].y<cy*2+500){
+			ctx.beginPath();
+			ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
+			ctx.fillStyle = bullets[i].color;
+			ctx.fill();
+			ctx.closePath();
+
+			bullets[i].x += bullets[i].vx;							
+			bullets[i].y += bullets[i].vy;
 		}
-
-		ctx.beginPath();
-		ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
-		ctx.fillStyle = bullets[i].color;
-		ctx.fill();
-		ctx.closePath();
-
-		bullets[i].x += bullets[i].vx;							
-		bullets[i].y += bullets[i].vy;
 	}
 }
