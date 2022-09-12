@@ -15,13 +15,12 @@
 	var x = cx;
 	var y = 600;
 
-	var ex = cx;
-	var ey = 200;
 
 	function pattern(){
 		if(t%4 == 1){
-			for(let i = 0; i<2*pi; i+=pi/5){
-				shoot1(ex+30*cos(i), ey+30*sin(i), 0.75, i, "#000000")
+			for(let i = 0; i<10; i++){
+				let j = i*pi/5
+				shoot1(750+30*cos(j), 200+30*sin(j), 0.75, j, "#000000")
 			}
 		}
 	}
