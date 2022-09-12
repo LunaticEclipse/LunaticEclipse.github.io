@@ -12,6 +12,9 @@
 
 <script>
 
+	var x = cx;
+	var y = 600;
+
 	function pattern(){
 		shoot1(cx, 300, 2, t/15, "#000000")
 	}
@@ -21,6 +24,7 @@
 
 	function mainLoop(){
 		pattern();
+		WASD();
 		draw();
 		t++;
 	}
