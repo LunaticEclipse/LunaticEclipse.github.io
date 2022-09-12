@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="danmaku" width="1500" height="1000" style="border:0px solid #000000;"></canvas>
+
+<audio src="bgm1.mp3" autoplay></audio>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+<script>
+	// player starting position!!
+	var x = cx;
+	var y = 600;
+
+	var ex = cx;
+	var ey = 200;
+
+	function pattern(){
+		if(t%4 == 1){
+			for(let i = 0; i<2*pi; i+=pi/5){
+				shoot1(ex+30*cos(i), ey+30*sin(i), 0.75, i, "#000000")
+			}
+		}
+	}
+
+	function mainLoop(){
+		pattern();
+		WASD()
+		draw();
+		t++;
+	}
+	setInterval(mainLoop, 5);	
+
+</script>
