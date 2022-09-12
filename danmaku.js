@@ -138,7 +138,7 @@ function draw(){
 	y += dy;
 
 	for (let i = 0; i<count; i++){
-		if(bullets[i].x>-500 && bullets[i].x<cx*2+500 && bullets[i].y>-500 && bullets[i].y<cy*2+500){
+		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
 			
 			let vx = bullets[i].v*cos(bullets[i].angle);
 			let vx = bullets[i].v*sin(bullets[i].angle);
@@ -154,19 +154,23 @@ function draw(){
 
 
 
-			//!!what if current v is negative?
+			// !!angle MIGHT get flipped halfway
 
-			/*
-			if(bullets[i].a>0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))<bullets[i].v2){
-				bullets[i].vx += bullets[i].ax;							
-				bullets[i].vy += bullets[i].ay;
+			
+			if(bullets[i].a>0 && bullets[i].v<bullets[i].v2){
+				vx += bullets[i].ax;							
+				vy += bullets[i].ay;
+				bullets[i].v = sqrt(sq(vx)+sq(vy));
+				bullets[i].angle = atan(vy/vx);
 			}
 
-			if(bullets[i].a<0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))>bullets[i].v2){
-				bullets[i].vx += bullets[i].ax;							
-				bullets[i].vy += bullets[i].ay;
+			if(bullets[i].a<0 && bullets[i].v>bullets[i].v2){
+				vx += bullets[i].ax;							
+				vy += bullets[i].ay;
+				bullets[i].v = sqrt(sq(vx)+sq(vy));
+				bullets[i].angle = atan(vy/vx);
 			}
-			*/
+			
 		}
 	}
 }
