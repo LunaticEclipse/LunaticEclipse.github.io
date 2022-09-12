@@ -41,17 +41,17 @@ var dx = 0;
 var dy = 0;
 
 function shoot1(x, y, v, angle, color){
-	bullets[count] = {x:x, y:y, v:v, angle:angle, color:color};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), color:color};
 	count += 1;
 }
 
 function shoot2(x, y, vx, vy, color){
-	bullets[count] = {x:x, y:y, v:sqrt(sq(vx)+sq(vy)), angle:atan(vy/vx), color:color};
+	bullets[count] = {x:x, y:y, vx:vx, vy:vy, color:color};
 	count += 1;
 }
 
 function shoot3(x, y, v1, v2, a, angle, color){
-	bullets[count] = {x:x, y:y, v:v1, v2:v2, a:a, angle:angle, color:color};
+	bullets[count] = {x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v2:v2, ax:a*cos(angle), ay:a*sin(angle), color:color};
 	count += 1;
 }
 
