@@ -151,6 +151,8 @@ function draw(){
 
 
 			//!!what if current v is negative?
+
+			/*
 			if(bullets[i].a>0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))<bullets[i].v2){
 				bullets[i].vx += bullets[i].ax;							
 				bullets[i].vy += bullets[i].ay;
@@ -160,6 +162,7 @@ function draw(){
 				bullets[i].vx += bullets[i].ax;							
 				bullets[i].vy += bullets[i].ay;
 			}
+			*/
 		}
 	}
 }
