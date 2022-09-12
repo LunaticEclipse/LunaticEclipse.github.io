@@ -139,14 +139,18 @@ function draw(){
 
 	for (let i = 0; i<count; i++){
 		if(bullets[i].x>-500 && bullets[i].x<cx*2+500 && bullets[i].y>-500 && bullets[i].y<cy*2+500){
+			
+			let vx = bullets[i].v*cos(bullets[i].angle);
+			let vx = bullets[i].v*sin(bullets[i].angle);
+
 			ctx.beginPath();
 			ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
 			ctx.fillStyle = bullets[i].color;
 			ctx.fill();
 			ctx.closePath();
 
-			bullets[i].x += bullets[i].vx;							
-			bullets[i].y += bullets[i].vy;
+			bullets[i].x += vx;							
+			bullets[i].y += vy;
 
 
 
