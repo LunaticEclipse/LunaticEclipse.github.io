@@ -1,4 +1,4 @@
-var pi = Math.PI
+var pi = Math.PI;
 
 function sqrt(x){
 	return Math.sqrt(x);
@@ -28,7 +28,7 @@ function acos(x){
 	return Math.acos(x);
 }
 
-function tan(x){
+function atan(x){
 	return Math.atan(x);
 }
 
