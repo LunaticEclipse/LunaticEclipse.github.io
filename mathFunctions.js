@@ -4,6 +4,10 @@ function sqrt(x){
 	return Math.sqrt(x);
 }
 
+function sq(x){
+	return Math.pow(x,2);
+}
+
 function abs(x){
 	return Math.abs(x);
 }
