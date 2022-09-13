@@ -144,7 +144,7 @@ function draw(){
 	y += dy;
 
 	for (let i = 0; i<count; i++){
-		if(bullets[i].x>-500 && bullets[i].x<cx*2+500 && bullets[i].y>-500 && bullets[i].y<cy*2+500){
+		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
 			ctx.beginPath();
 			ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
 			ctx.fillStyle = bullets[i].color;
