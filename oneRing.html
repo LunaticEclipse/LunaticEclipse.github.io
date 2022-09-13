@@ -17,13 +17,6 @@
 
 	function pattern(){
 		if(t%2==1){
-			/*
-			for(let i = 0; i<3; i++){
-				let j = t/40+i*pi/6
-				shoot1(cx+300*cos(j), 350+300*sin(j), 1, j+pi+pi/36, "#000000");
-			}
-			*/
-
 			for(let i = 0; i<5; i++){
 				let j = t/40+i*pi/10
 				shoot1(cx+300*cos(j+pi), 350+300*sin(j+pi), 1, -j+pi-pi/36, "#000000");
