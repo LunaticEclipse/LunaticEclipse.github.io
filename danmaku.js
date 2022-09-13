@@ -154,7 +154,10 @@ function draw(){
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
-			bullets[i].angle += bullets[i].spin;
+
+			//bullets[i].angle += bullets[i].spin;
+
+
 
 			//!!what if current v is negative?
 
