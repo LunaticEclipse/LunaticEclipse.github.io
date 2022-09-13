@@ -17,7 +17,6 @@
 	function pattern(){
 		if(t%4==1){
 			for(let i = 0; i < 6; i++){
-				//let j = i*pi/2+pi*0.75*sin(t/750)*sin(t/30);
 				let j = i*pi/3+pi*sin(t/90)
 				shoot1(cx+200*cos(j), 250+200*sin(j), 0.75, j+pi+pi/20, "#000000");
 			}
