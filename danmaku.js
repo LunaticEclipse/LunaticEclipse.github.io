@@ -41,20 +41,26 @@ var dx = 0;
 var dy = 0;
 
 function shoot1(x, y, v, angle, color){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), color:color};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
 	count += 1;
 }
 
 function shoot2(x, y, vx, vy, color){
-	bullets[count] = {x:x, y:y, vx:vx, vy:vy, color:color};
+	bullets[count] = {x:x, y:y, vx:vx, vy:vy, spin:0, color:color};
 	count += 1;
 }
 
+/*
 function shoot3(x, y, v1, v2, a, angle, color){
 	bullets[count] = {x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v2:v2, ax:a*cos(angle), ay:a*sin(angle), color:color};
 	count += 1;
 }
+*/
 
+function shoot4(x, y, v, angle, spin, color){
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:spin, color:color};
+	count += 1;
+}
 
 
 function WASD(){
@@ -148,7 +154,7 @@ function draw(){
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
-
+			bullets[i].angle += bullets[i].spin;
 
 			//!!what if current v is negative?
 
