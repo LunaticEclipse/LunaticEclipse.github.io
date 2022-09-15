@@ -4,11 +4,15 @@
 
 <canvas id="screen" width="1000" height="600" style="border:3px solid #000000;"></canvas>
 
+<p id="listener"> [failed] </p>
 <p> Use arrow keys to move </p>
 <p> Shifting is to be added </p>
 <p> Diagonal movements are Pythagorean -- no good </p>
 <p> Sharp left-right/up-down movements to be polished </p>
 <h1> Research Simutaneous Key Presses </h1>
+
+
+
 
 <script type="text/javascript" src="mathFunctions.js"></script>
 
@@ -16,129 +20,42 @@
 
 var canvas = document.getElementById("screen");
 var ctx = canvas.getContext("2d");
-
-var x = 500;
+// player starting position!!
+  
+var x = 750;
 var y = 300;
 
-var dx = 0;
-var dy = 0;
+document.addEventListener("keydown", WASD);
 
-function mainLoop(){
-	draw();
-	move();
-	WASD();
+function WASD(){
+  document.getElementById("listener").innerHTML = "yay"
 }
-
-
 
 
 
 function draw(){
-	ctx.clearRect(0,0,1000,600);		//clear the screen
+  ctx.clearRect(0,0,canvas.width,canvas.height);  //refresh screen
 
-	ctx.beginPath();
-	ctx.arc(x, y, 10, 0, pi*2);		//draw the ball at (x, y)
-	ctx.fillStyle = "#0000FF";
-	ctx.fill();
-	ctx.closePath();
+  ctx.beginPath();
+  ctx.arc(x, y, 5, 0, pi*2);    //draw the ball at (x, y)
+  ctx.fillStyle = "#0000FF";
+  ctx.fill();
+  ctx.closePath();
+
+  x += dx;
+  y += dy;
 }
 
-
-
-
-
-
-function move(){
-	x += dx;
-	y += dy;
-
-	//add focus mode
+function mainLoop(){
+  WASD();
+  draw();
+  t++;
 }
-
-
-
-
-
-
-function WASD(){
-	window.addEventListener("keydown", function (event) {
-  if (event.defaultPrevented) {
-    return; // Do nothing if the event was already processed
-  }
-
-
-  switch (event.key) {
-    case "ArrowDown":
-      dy = 2;
-      break;
-    case "ArrowUp":
-      dy = -2;
-      break;
-    case "ArrowLeft":
-      dx = -2;
-      break;
-    case "ArrowRight":
-      dx = 2;
-      break;
-    default:
-      return; // Quit when this doesn't handle the key event.
-  }
-
-  // Cancel the default action to avoid it being handled twice
-  event.preventDefault();
-	
-	}, true);
-	// the last option dispatches the event to the listener first,
-	// then dispatches event to window
-
-
-
-	window.addEventListener("keyup", function (event) {
-  if (event.defaultPrevented) {
-    return; 
-  }
-
-  switch (event.key) {
-    case "ArrowDown":
-      dy = 0;
-      break;
-    case "ArrowUp":
-      dy = 0;
-      break;
-    case "ArrowLeft":
-      dx = 0;
-      break;
-    case "ArrowRight":
-      dx = 0;
-      break;
-    default:
-      return; // Quit when this doesn't handle the key event.
-  }
-
-  // Cancel the default action to avoid it being handled twice
-  event.preventDefault();
-	
-	}, true);
-
-
-
-}
-
-
-
-
-
-
-
 
 setInterval(mainLoop, 5);					//loop "mainLoop" function every 5ms
 
 
-
 </script>
-
-
-
 
 
 </body>
