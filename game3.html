@@ -4,7 +4,6 @@
 
 <canvas id="screen" width="1000" height="600" style="border:3px solid #000000;"></canvas>
 
-<p id="listener"> [failed] </p>
 <p> Use arrow keys to move </p>
 <p> Shifting is to be added </p>
 <p> Diagonal movements are Pythagorean -- no good </p>
@@ -25,15 +24,42 @@ var ctx = canvas.getContext("2d");
 var x = 750;
 var y = 300;
 
+var dx = 0;
+var dy = 0;
+
 document.addEventListener("keydown", WASD);
+document.addEventListener("keyup", stop);
 
 function WASD(){
-  if(event.key == 'W'){
-    document.getElementById("listener").innerHTML = "W"
+  if(event.key == "W"){
+    dy = -1;
   }
-  if(event.key == 'S'){
-    document.getElementById("listener").innerHTML = "S"
+  if(event.key == "S"){
+    dy = 1;
   }
+  if(event.key == "A"){
+    dx = -1;
+  }
+  if(event.key == "D"){
+    dx = =1;
+  }
+  if(event.key == "w"){
+    dy = -2;
+  }
+  if(event.key == "s"){
+    dy = 2;
+  }
+  if(event.key == "a"){
+    dx = -2;
+  }
+  if(event.key == "d"){
+    dx = 2;
+  }
+}
+
+function stop(){
+  dx = 0;
+  dy = 0;
 }
 
 
