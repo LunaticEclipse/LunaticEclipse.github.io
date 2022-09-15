@@ -28,7 +28,12 @@ var y = 300;
 document.addEventListener("keydown", WASD);
 
 function WASD(){
-  document.getElementById("listener").innerHTML = "yay"
+  if(event.key == 'W'){
+    document.getElementById("listener").innerHTML = "W"
+  }
+  if(event.key == 'S'){
+    document.getElementById("listener").innerHTML = "S"
+  }
 }
 
 
