@@ -4,8 +4,6 @@
 
 <canvas id="danmaku" width="1500" height="1000" style="border:0px solid #000000;"></canvas>
 
-<p id="time"> [failed] </p>
-
 <script type="text/javascript" src="mathFunctions.js"></script>
 <script type="text/javascript" src="danmaku.js"></script>
 
@@ -42,7 +40,6 @@
 		WASD()
 		draw();
 		t++;
-		document.getElementById("time").innerHTML = t;
 	}
 	setInterval(mainLoop, 5);	
 
