@@ -31,29 +31,34 @@ document.addEventListener("keydown", WASD);
 document.addEventListener("keyup", stop);
 
 function WASD(){
-  if(event.key == "W"){
-    dy = -1;
-  }
-  if(event.key == "S"){
-    dy = 1;
-  }
-  if(event.key == "A"){
-    dx = -1;
-  }
-  if(event.key == "D"){
-    dx = 1;
-  }
-  if(event.key == "w"){
-    dy = -2;
-  }
-  if(event.key == "s"){
-    dy = 2;
-  }
-  if(event.key == "a"){
-    dx = -2;
-  }
-  if(event.key == "d"){
-    dx = 2;
+  if(event.key == "s" && event.key == "d"){
+    dx = 2*sqrt(2);
+    dy = 2*sqrt(2);
+  } else {
+    if(event.key == "W"){
+      dy = -0.7;
+    }
+    if(event.key == "S"){
+      dy = 0.7;
+    }
+    if(event.key == "A"){
+      dx = -0.7;
+    }
+    if(event.key == "D"){
+      dx = 0.7;
+    }
+    if(event.key == "w"){
+      dy = -2;
+    }
+    if(event.key == "s"){
+      dy = 2;
+    }
+    if(event.key == "a"){
+      dx = -2;
+    }
+    if(event.key == "d"){
+      dx = 2;
+    }
   }
 }
 
