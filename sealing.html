@@ -27,7 +27,7 @@ function draw(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);	//refresh screen
 
 	for (let i = 0; i<count; i++){
-		if(bullets[i].x>150 && bullets[i].x<1350 && bullets[i].y>-100 && bullets[i].y<1000){
+		if(bullets[i].x>0 && bullets[i].x<1500 && bullets[i].y>-100 && bullets[i].y<1000){
 			ctx.beginPath();
 			ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
 			ctx.fillStyle = bullets[i].color;
