@@ -47,14 +47,14 @@ function draw(){
 					let j = i*pi/4;
 					sx = 750+(50+sqrt(100*t))*cos(j+t/160);
 					sy = 375+(50+sqrt(100*t))*sin(j+t/160);
-					shoot1(sx, sy, -0.4, j+t/50+pi/3, "#000000");
+					shoot1(sx, sy, -0.2, j+t/50+pi/3, "#000000");
 				}
 			} else if (t>=1500 && t<=3000){
 				for(let i = 0; i<8; i++){
 					let j = i*pi/4;
 					sx = 750+(50+sqrt(100*(3000-t)))*cos(j+t/160);
 					sy = 375+(50+sqrt(100*(3000-t)))*sin(j+t/160);
-					shoot1(sx, sy, -0.4, j+(3000-t)/50+pi/3, "#000000");
+					shoot1(sx, sy, -0.2, j+(3000-t)/50+pi/3, "#000000");
 				}
 			} else {
 				t = 0;
