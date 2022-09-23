@@ -100,16 +100,16 @@ function WASD(){
 	      dxR = 2;
 	      break;
 	    case "W":
-	      dyU = 1.2;
+	      dyU = 1;
 	      break;
 	    case "S":
-	      dyD = 1.2;
+	      dyD = 1;
 	      break;
 	    case "A":
-	      dxL = 1.2;
+	      dxL = 1;
 	      break;
 	    case "D":
-	      dxR = 1.2;
+	      dxR = 1;
 	      break;
 	    default:
 	      return; // Quit when this doesn't handle the key event.
