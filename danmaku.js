@@ -22,6 +22,9 @@
 
 
 
+
+//x is player x coord; same for y
+
 //accessing the canvas in html
 var canvas = document.getElementById("danmaku");
 var ctx = canvas.getContext("2d");
@@ -84,7 +87,6 @@ function WASD(){
 	  if (event.defaultPrevented) {
 	    return; // Do nothing if the event was already processed
 	  }
-
 
 	  switch (event.key) {
 	    case "w":
