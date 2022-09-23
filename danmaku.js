@@ -58,6 +58,7 @@ function shoot3(x, y, tx, ty, v, color){
 		var angle = atan((ty-y)/(tx-x));
 		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
 	}
+	count += 1;
 }
 
 /*
