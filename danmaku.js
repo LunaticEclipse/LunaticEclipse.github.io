@@ -50,6 +50,16 @@ function shoot2(x, y, vx, vy, color){
 	count += 1;
 }
 
+function shoot3(x, y, tx, ty, v, color){
+	if(x > tx){
+		var angle = atan((ty-y)/(tx-x))+pi;
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
+	} else {
+		var angle = atan((ty-y)/(tx-x));
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
+	}
+}
+
 /*
 function shoot3(x, y, v1, v2, a, angle, color){
 	bullets[count] = {x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v2:v2, ax:a*cos(angle), ay:a*sin(angle), color:color};

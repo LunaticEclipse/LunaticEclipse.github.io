@@ -2,21 +2,27 @@
 <html>
 <body>
 
-<canvas id="danmaku" width="1500" height="1000" style="border:0px solid #000000;"></canvas>
+<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
 
-<p id="time"> [failed] </p>
+<p id="1"></p>
+<audio src="bgm1.mp3" autoplay></audio>
 
 <script type="text/javascript" src="mathFunctions.js"></script>
 <script type="text/javascript" src="danmaku.js"></script>
 
 
+
 <script>
-	// player starting position!!
-	var x = cx-50;
-	var y = 600;
+	var x = 500;
+	var y = 500;
 
 	function pattern(){
-		
+		//shoot1(700, 300, 2, atan((y-300)/(x-700)), "#000000")
+		shoot3(700, 300, x, y, 2, "#AAAAFF")
+		shoot1(700, 300, 2, 0, "#FF0000")
+		shoot1(700, 300, 2, pi/2, "#0000FF")
+		shoot1(700, 300, 2, pi, "#FF0000")
+		shoot1(700, 300, 2, -pi/2, "#0000FF")
 	}
 
 	function mainLoop(){
@@ -24,7 +30,6 @@
 		WASD()
 		draw();
 		t++;
-		document.getElementById("time").innerHTML = t;
 	}
 	setInterval(mainLoop, 5);	
 
