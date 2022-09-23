@@ -17,8 +17,9 @@
 	var y = 500;
 
 	function pattern(){
-		//shoot1(700, 300, 2, atan((y-300)/(x-700)), "#000000")
-		shoot3(700, 300, x, y, 2, "#AAAAFF")
+		if(t%3==1){
+			shoot3(700, 200, x, y, 2, "#000000")
+		}
 	}
 
 	function mainLoop(){

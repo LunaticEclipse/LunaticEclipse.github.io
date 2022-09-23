@@ -24,47 +24,67 @@ var ctx = canvas.getContext("2d");
 var x = 750;
 var y = 300;
 
-var dx = 0;
-var dy = 0;
+var dxL = 0;
+var dxR = 0;
+var dyU = 0;
+var dyD = 0;
 
 document.addEventListener("keydown", WASD);
 document.addEventListener("keyup", stop);
 
 function WASD(){
-  if(event.key == "s" && event.key == "d"){
-    dx = 2*sqrt(2);
-    dy = 2*sqrt(2);
-  } else {
     if(event.key == "W"){
-      dy = -0.7;
+      dyU = 0.5;
     }
     if(event.key == "S"){
-      dy = 0.7;
+      dyD = 0.5;
     }
     if(event.key == "A"){
-      dx = -0.7;
+      dxL = 0.5;
     }
     if(event.key == "D"){
-      dx = 0.7;
+      dxR = 0.5;
     }
     if(event.key == "w"){
-      dy = -2;
+      dyU = 2;
     }
     if(event.key == "s"){
-      dy = 2;
+      dyD = 2;
     }
     if(event.key == "a"){
-      dx = -2;
+      dxL = 2;
     }
     if(event.key == "d"){
-      dx = 2;
+      dxR = 2;
     }
-  }
 }
 
+
 function stop(){
-  dx = 0;
-  dy = 0;
+  if(event.key == "W"){
+      dyU = 0;
+    }
+    if(event.key == "S"){
+      dyD = 0;
+    }
+    if(event.key == "A"){
+      dxL = 0;
+    }
+    if(event.key == "D"){
+      dxR = 0;
+    }
+  if(event.key == "w"){
+      dyU = 0;
+    }
+    if(event.key == "s"){
+      dyD = 0;
+    }
+    if(event.key == "a"){
+      dxL = 0;
+    }
+    if(event.key == "d"){
+      dxR = 0;
+    }
 }
 
 
@@ -78,8 +98,10 @@ function draw(){
   ctx.fill();
   ctx.closePath();
 
-  x += dx;
-  y += dy;
+  x -= dxL;
+  x += dxR;
+  y += dyD;
+  y -= dyU;
 }
 
 function mainLoop(){
