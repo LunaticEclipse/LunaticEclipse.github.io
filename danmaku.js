@@ -40,16 +40,19 @@ var count = 0; //bullet count
 var dx = 0;
 var dy = 0;
 
+//basic shot
 function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
 	count += 1;
 }
 
+//vector shot
 function shoot2(x, y, vx, vy, color){
 	bullets[count] = {x:x, y:y, vx:vx, vy:vy, spin:0, color:color};
 	count += 1;
 }
 
+//homing shot
 function shoot3(x, y, tx, ty, v, color){
 	if(x > tx){
 		var angle = atan((ty-y)/(tx-x))+pi;
