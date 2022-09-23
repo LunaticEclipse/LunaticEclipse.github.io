@@ -130,6 +130,11 @@ function WASD(){
 	  }
 
 	  switch (event.key) {
+	  	case "shift":
+	  		dxL = 0;
+	 		dxR = 0;
+			dyU = 0;
+			dyD = 0;
 	    case "w":
 	      dyU = 0;
 	      break;
