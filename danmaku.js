@@ -37,8 +37,10 @@ var count = 0; //bullet count
 //a bullet object: {x, y, vx, vy}
 
 //player speed tracker
-var dx = 0;
-var dy = 0;
+var dxL = 0;
+var dxR = 0;
+var dyU = 0;
+var dyD = 0;
 
 //basic shot
 function shoot1(x, y, v, angle, color){
@@ -85,17 +87,29 @@ function WASD(){
 
 
 	  switch (event.key) {
-	    case "ArrowDown":
-	      dy = 2;
+	    case "w":
+	      dyU = 2;
 	      break;
-	    case "ArrowUp":
-	      dy = -2;
+	    case "s":
+	      dyD = 2;
 	      break;
-	    case "ArrowLeft":
-	      dx = -2;
+	    case "a":
+	      dxL = 2;
 	      break;
-	    case "ArrowRight":
-	      dx = 2;
+	    case "d":
+	      dxR = 2;
+	      break;
+	    case "W":
+	      dyU = 0.5;
+	      break;
+	    case "S":
+	      dyD = 0.5;
+	      break;
+	    case "A":
+	      dxL = 0.5;
+	      break;
+	    case "D":
+	      dxR = 0.5;
 	      break;
 	    default:
 	      return; // Quit when this doesn't handle the key event.
@@ -116,17 +130,29 @@ function WASD(){
 	  }
 
 	  switch (event.key) {
-	    case "ArrowDown":
-	      dy = 0;
+	    case "w":
+	      dyU = 0;
 	      break;
-	    case "ArrowUp":
-	      dy = 0;
+	    case "s":
+	      dyD = 0;
 	      break;
-	    case "ArrowLeft":
-	      dx = 0;
+	    case "a":
+	      dxL = 0;
 	      break;
-	    case "ArrowRight":
-	      dx = 0;
+	    case "d":
+	      dxR = 0;
+	      break;
+	    case "W":
+	      dyU = 0;
+	      break;
+	    case "S":
+	      dyD = 0;
+	      break;
+	    case "A":
+	      dxL = 0;
+	      break;
+	    case "D":
+	      dxR = 0;
 	      break;
 	    default:
 	      return; // Quit when this doesn't handle the key event.
@@ -154,8 +180,10 @@ function draw(){
 	ctx.fill();
 	ctx.closePath();
 
-	x += dx;
-	y += dy;
+	x -= dxL;
+  	x += dxR;
+  	y += dyD;
+  	y -= dyU;
 
 	for (let i = 0; i<count; i++){
 		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
