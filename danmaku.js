@@ -69,16 +69,19 @@ function shoot3(x, y, tx, ty, v, color){
 	count += 1;
 }
 
-/*
-function shoot3(x, y, v1, v2, a, angle, color){
-	bullets[count] = {x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v2:v2, ax:a*cos(angle), ay:a*sin(angle), color:color};
-	count += 1;
-}
-*/
-
 function shoot4(x, y, v, angle, spin, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:spin, color:color};
 	count += 1;
+}
+
+function shootRing(x, y, v, angle, member, r, color){
+	var i = 0;
+	while(i<member){
+		var a = angle + i*2*pi/member;
+		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), spin:0, color:color};
+		count += 1;
+		i += 1;
+	}
 }
 
 
