@@ -230,7 +230,7 @@ function draw(){
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
-			if(bullets[i].x == x || bullets[i].y == y){
+			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 100){
 				bullets[i].color = "#FF0000";
 			}
 
