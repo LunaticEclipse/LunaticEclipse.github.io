@@ -94,7 +94,7 @@ function shootRing(x, y, v, angle, member, r, color){
 }
 
 function shootAcc(x, y, v1, a, v2, angle, color){
-	bullets[count] = {flag:"acc", x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v1, a:a, v2:v2, angle:angle, spin:0, color:color};
+	bullets[count] = {flag:"acc", x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v:v1, a:a, v2:v2, angle:angle, spin:0, color:color};
 	count += 1;
 }
 
