@@ -102,7 +102,7 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 	var i = 0;
 	while(i<member){
 		var ang = angle + i*2*pi/member;
-		bullets[count] = {flag:"acc", x:x+r*cos(ang), y:y+r*sin(ang), vx:v1*cos(ang), vy:v1*sin(ang), v:v1, a:a, v2:v2, angle:angle, color:color};
+		bullets[count] = {flag:"acc", x:x+r*cos(ang), y:y+r*sin(ang), vx:v1*cos(ang), vy:v1*sin(ang), v:v1, a:a, v2:v2, angle:ang, color:color};
 		count += 1;
 		i += 1;
 	}
