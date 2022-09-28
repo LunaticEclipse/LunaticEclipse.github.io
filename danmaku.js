@@ -110,6 +110,10 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 
 
 function WASD(){
+
+	var unfocusSpeed = 2;
+	var focusSpeed = 0.7;
+
 		window.addEventListener("keydown", function (event) {
 	  if (event.defaultPrevented) {
 	    return; // Do nothing if the event was already processed
@@ -117,28 +121,28 @@ function WASD(){
 
 	  switch (event.key) {
 	    case "w":
-	      dyU = 2;
+	      dyU = unfocusSpeed;
 	      break;
 	    case "s":
-	      dyD = 2;
+	      dyD = unfocusSpeed;
 	      break;
 	    case "a":
-	      dxL = 2;
+	      dxL = unfocusSpeed;
 	      break;
 	    case "d":
-	      dxR = 2;
+	      dxR = unfocusSpeed;
 	      break;
 	    case "W":
-	      dyU = 1;
+	      dyU = focusSpeed;
 	      break;
 	    case "S":
-	      dyD = 1;
+	      dyD = focusSpeed;
 	      break;
 	    case "A":
-	      dxL = 1;
+	      dxL = focusSpeed;
 	      break;
 	    case "D":
-	      dxR = 1;
+	      dxR = focusSpeed;
 	      break;
 	    default:
 	      return; // Quit when this doesn't handle the key event.
