@@ -47,30 +47,39 @@ var dyD = 0;
 
 //basic shot
 function shoot1(x, y, v, angle, color){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
 	count += 1;
 }
 
 //vector shot
+// !!NOT updated to acc shots
+/*
 function shoot2(x, y, vx, vy, color){
 	bullets[count] = {x:x, y:y, vx:vx, vy:vy, spin:0, color:color};
 	count += 1;
 }
+*/
 
 //homing shot
 function shoot3(x, y, tx, ty, v, color){
 	if(x > tx){
 		var angle = atan((ty-y)/(tx-x))+pi;
-		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
 	} else {
 		var angle = atan((ty-y)/(tx-x));
-		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:0, color:color};
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
 	}
 	count += 1;
 }
 
-function shoot4(x, y, v, angle, spin, color){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), spin:spin, color:color};
+function shootHoming(x, y, tx, ty, v, color){
+	if(x > tx){
+		var angle = atan((ty-y)/(tx-x))+pi;
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+	} else {
+		var angle = atan((ty-y)/(tx-x));
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+	}
 	count += 1;
 }
 
@@ -78,10 +87,15 @@ function shootRing(x, y, v, angle, member, r, color){
 	var i = 0;
 	while(i<member){
 		var a = angle + i*2*pi/member;
-		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), spin:0, color:color};
+		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), v:v, spin:0, angle:angle, color:color};
 		count += 1;
 		i += 1;
 	}
+}
+
+function shootAcc(x, y, v1, a, v2, angle, flag, color){
+	bullets[count] = {flag:"acc", x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v1, a:a, v2:v2, angle:angle, spin:0, color:color};
+	count += 1;
 }
 
 
@@ -206,24 +220,18 @@ function draw(){
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
-
-			//bullets[i].angle += bullets[i].spin;
-
-
-
-			//!!what if current v is negative?
-
-			/*
-			if(bullets[i].a>0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))<bullets[i].v2){
-				bullets[i].vx += bullets[i].ax;							
-				bullets[i].vy += bullets[i].ay;
+			if(bullets[i].flag == "acc"){
+				if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
+					bullets[i].v += bullets[i].a;
+					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+				} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
+					bullets[i].v += bullets[i].a;
+					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+				}
 			}
 
-			if(bullets[i].a<0 && sqrt(sq(bullets[i].vx)+sq(bullets[i].vy))>bullets[i].v2){
-				bullets[i].vx += bullets[i].ax;							
-				bullets[i].vy += bullets[i].ay;
-			}
-			*/
 		}
 	}
 }

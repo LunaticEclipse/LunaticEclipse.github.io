@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
+
+
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+	var x = 500;
+	var y = 500;
+
+	function pattern(){
+		if(t==10){
+			var bx = 500;
+			var by = 250;
+			var r = 200;
+
+			var i = bx;
+			
+			while(i<bx+r){
+				shoot1(i, by+(i-bx)*tan(pi/6), 0, 0, "#000000");
+				shoot1(i, by-(i-bx)*tan(pi/6), 0, 0, "#000000");
+				i++;
+			}
+			while(i<bx+2*r){
+				shoot1(i, by+(r)*tan(pi/6)-(i-bx-r)*tan(pi/6), 0, 0, "#000000");
+				shoot1(i, by-(r)*tan(pi/6)+(i-bx-r)*tan(pi/6), 0, 0, "#000000");
+				i++;
+			}
+
+			by += 400/sqrt(3);
+			i  = bx;
+			while(i<bx+r){
+				shoot1(i, by+(i-bx)*tan(pi/6), 0, 0, "#000000");
+				shoot1(i, by-(i-bx)*tan(pi/6), 0, 0, "#000000");
+				i++;
+			}
+			while(i<bx+2*r){
+				shoot1(i, by+(r)*tan(pi/6)-(i-bx-r)*tan(pi/6), 0, 0, "#000000");
+				shoot1(i, by-(r)*tan(pi/6)+(i-bx-r)*tan(pi/6), 0, 0, "#000000");
+				i++;
+			}
+		}
+	}
+
+	function mainLoop(){
+		pattern();
+		WASD()
+		draw();
+		t++;
+	}
+	setInterval(mainLoop, 5);	
+
+</script>
+
+
+
+</body>
+</html>
