@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
+
+<p id="1"></p>
+<audio src="bgm1.mp3" autoplay></audio>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+	var x = 750;
+	var y = 500;
+
+	function pattern(){
+		/* Spread Spiral
+		if(t%6 == 1){
+			shoot1(cx+75*cos(t/15),250+75*sin(t/15),2,t/15+pi/3, "#000000");
+			shoot1(cx+75*cos(t/15+2*pi/3),250+75*sin(t/15+2*pi/3),2,t/15+2*pi/3+pi/3, "#000000");
+			shoot1(cx+75*cos(t/15+4*pi/3),250+75*sin(t/15+4*pi/3),2,t/15+4*pi/3+pi/3, "#000000");
+
+			shoot1(cx+75*cos(t/15),250+75*sin(t/15),1.9,t/15+pi/3, "#000000");
+			shoot1(cx+75*cos(t/15+2*pi/3),250+75*sin(t/15+2*pi/3),1.9,t/15+2*pi/3+pi/3, "#000000");
+			shoot1(cx+75*cos(t/15+4*pi/3),250+75*sin(t/15+4*pi/3),1.9,t/15+4*pi/3+pi/3, "#000000");
+		}	
+		*/
+
+		
+		if(t%23 == 1){
+			//shootRing(750+50*cos(t/3),250+50*sin(t/3),-1,t/15,32,50,"#000000")
+			//shootRing(750,250,1,t/30,32,75*cos(t/50),"#000000")
+
+			//shootAcc(750, 250, 2, -0.02, 0.5, t/30+2*pi/3, "#000000");
+			//shootAcc(750, 250, 2, -0.02, 0.5, t/30, "#000000");
+			//shootAcc(750, 250, 2, -0.02, 0.5, t/30-2*pi/3, "#000000");
+
+			shootAccRing(750+100*cos(7*t), 250+100*sin(7*t), -1.5, 0.008, -0.5, t/50, 25, 50, "#000000")
+		}
+		
+	}
+
+	function mainLoop(){
+		pattern();
+		WASD()
+		draw();
+		t++;
+	}
+	setInterval(mainLoop, 5);	
+
+</script>
+
+
+
+</body>
+</html>

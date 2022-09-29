@@ -240,6 +240,10 @@ function draw(){
 			ctx.fill();
 			ctx.closePath();
 
+			if(bullets[i].delay == 0){
+				bullets[i].color = "#FF0000"
+			}
+
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
