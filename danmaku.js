@@ -54,20 +54,34 @@ function aim(x, y, tx, ty){
 	}
 }
 
+
+
+
+/*
+BULLET ATTRIBUTES:
+x, y, vx, vy	[self-explanatory]
+color	 		string of hex-code ("#000000"), can also be integer (for some reasons?)
+
+a 				acceleration
+v2 				final speed of accelerating bullet
+	[v1 DOES NOT EXIST]
+flag 			to identify acc bullets (flag = "acc" leads to acceleration codes)
+angle 			initial angle 	(stored for accelerating bullets)
+v 				initial v 		(stored for accelerating bullets)
+
+index 			index of bullet to be replaced
+delay 			delay before replacing the bullet 
+	[unit: 5ms  (e.g. delay=10 means a 50ms delay)]
+
+spin 			[useless]
+*/
+
+
 //basic shot
 function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
 	count += 1;
 }
-
-//vector shot
-// !!NOT updated to acc shots
-/*
-function shoot2(x, y, vx, vy, color){
-	bullets[count] = {x:x, y:y, vx:vx, vy:vy, spin:0, color:color};
-	count += 1;
-}
-*/
 
 //homing shot
 function shoot3(x, y, tx, ty, v, color){
@@ -116,6 +130,16 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 		i += 1;
 	}
 }
+
+
+/////// CONSTRUCTION IN PROGRESS  //////////
+function addPattern(index, delay, v1, a, v2, angle, color){
+	
+	bullets[count] = {index:index, delay:delay, vx:v1*cos(angle), vy:v1*sin(angle), v:v1, a:a, v2:v2, angle:angle, color:color}
+	count += 1;
+}
+/////// CONSTRUCTION IN PROGRESS  //////////
+
 
 
 function WASD(){
@@ -233,25 +257,45 @@ function draw(){
   	y -= dyU;
 
 	for (let i = 0; i<count; i++){
+
+
+/////// CONSTRUCTION IN PROGRESS  //////////
+		//handle addPattern
+		if(bullets[i].delay == 0){
+			bullets[index] = {flag:"acc", x:bullets[index].x, y:bullets[index].y, vx:bullets[i].vx, vy:bullets[i].vy, v:bullets[i].v, a:bullets[i].a, v2:bullets[i].v2, angle:bullets[i].angle, color:bullets[i].color};
+		} else if(bullets[i].delay > 0){
+			alert(bullets[i.delay])
+			bullets[i].delay--;
+		} 
+/////// CONSTRUCTION IN PROGRESS  //////////
+
 		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
+			
+			//draw black circle at (x,y)
 			ctx.beginPath();
 			ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
 			ctx.fillStyle = bullets[i].color;
 			ctx.fill();
 			ctx.closePath();
 
-			if(bullets[i].delay == 0){
-				bullets[i].color = "#FF0000"
-			}
 
+			//moving the bullet
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
+
+
+			//hit detection 
 			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 25){
 				bullets[i].color = "#FF0000";
 			}
 
+
+			//handle shootAcc
 			if(bullets[i].flag == "acc"){
+
+				//slow down for negative a
+				//speed up 	for positive a
 				if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
 					bullets[i].v += bullets[i].a;
 					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
