@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
+
+<p id="1"></p>
+<audio src="bgm1.mp3" autoplay></audio>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+	var x = 750;
+	var y = 500;
+
+	function pattern(){
+		if(t%5 == 1){
+			shootAccRing(750, 300, 1.5, -0.003, -1.5, t/300, 3, 0, "#000000")
+		}
+
+		if(t%75 == 1){
+			shootRing(750, 300, 0.7, -t/500, 10, 10, "#AA0000")
+			shootRing(750, 300, 0.7, -t/500, 10, 14, "#AA0000")
+			shootRing(750, 300, 0.7, -t/500, 10, 18, "#AA0000")
+		}
+	}
+
+	function mainLoop(){
+		pattern();
+		WASD()
+		draw();
+		t++;
+	}
+	setInterval(mainLoop, 5);	
+
+</script>
+
+
+
+</body>
+</html>
