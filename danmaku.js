@@ -45,6 +45,15 @@ var dxR = 0;
 var dyU = 0;
 var dyD = 0;
 
+//angle to aim at target
+function aim(x, y, tx, ty){
+	if(x > tx){
+		return atan((ty-y)/(tx-x))+pi;
+	} else {
+		return atan((ty-y)/(tx-x));
+	}
+}
+
 //basic shot
 function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
