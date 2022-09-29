@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
+
+<p id="1"></p>
+<audio src="bgm1.mp3" autoplay></audio>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+	var x = 750;
+	var y = 500;
+
+	function pattern(){
+		var r = 0.01; //ratio of speed or time
+
+		var rainbow = "#000000";
+
+		switch((t/3)%7){
+			case 0:
+				rainbow = "#FF0000";
+				break;
+			case 1:
+				rainbow = "#FF7F00";
+				break;
+			case 2:
+				rainbow = "#FFFF00";
+				break;
+			case 3:
+				rainbow = "#00FF00";
+				break;
+			case 4:
+				rainbow = "#0000FF";
+				break;
+			case 5:
+				rainbow = "#4B0082";
+				break;
+			case 6:
+				rainbow = "#9400D3";
+				break;
+		}
+
+		/*
+		if(t%3 == 1){
+			shootAcc(750+175*cos(t/50)*sin(t/100), 220+175*sin(t/50)*sin(t/100), -0.2, 0.002, 1.5, t/25, "#000000");
+			
+			shootAcc(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), 0.2, -0.002, -1.5, t/25, "#000000");
+		}
+		*/
+
+		if(t%3 == 1){
+
+			shootAcc(750+175*cos(t/50)*sin(t/100), 220+175*sin(t/50)*sin(t/100), -0.5, 0.002, 1.5, -t/25, rainbow);
+			
+			shootAcc(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), 0.5, -0.002, -1.5, -t/25, rainbow);
+		}
+
+
+	}
+
+	function mainLoop(){
+		pattern();
+		WASD()
+		draw();
+		t++;
+	}
+	setInterval(mainLoop, 5);	
+
+</script>
+
+
+
+</body>
+</html>
