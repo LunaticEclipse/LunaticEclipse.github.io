@@ -23,27 +23,48 @@
 
 
 
-//x is player x coord; same for y
+
 
 //accessing the canvas in html
 var canvas = document.getElementById("danmaku");
 var ctx = canvas.getContext("2d");
 var t = 0;
 
+
+
 //midpoint of canvas
 var cx = canvas.width/2;
 var cy = canvas.height/2;
+
+
+
+//title of spell cards
+var title = 0;
+
+
 
 //bullet tracking
 var bullets = [];
 var count = 0; //bullet count
 //a bullet object: {x, y, vx, vy}
 
+
+
+//player coordinates
+var x = 0;
+var y = 0;
+
 //player speed tracker
 var dxL = 0;
 var dxR = 0;
 var dyU = 0;
 var dyD = 0;
+
+
+
+
+
+
 
 //angle to aim at target
 function aim(x, y, tx, ty){
@@ -139,6 +160,9 @@ function addPattern(index, delay, v1, a, v2, angle, color){
 	count += 1;
 }
 /////// CONSTRUCTION IN PROGRESS  //////////
+
+
+
 
 
 
@@ -243,20 +267,36 @@ function WASD(){
 
 
 function draw(){
-	ctx.clearRect(0,0,canvas.width,canvas.height);	//refresh screen
 
+	//refreshing screen
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+	//drawing spell card title
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "#000000";
+	ctx.fillText(title, 100, 50);
+
+
+	//drawing the player
 	ctx.beginPath();
-	ctx.arc(x, y, 5, 0, pi*2);		//draw the ball at (x, y)
+	ctx.arc(x, y, 5, 0, pi*2);		
 	ctx.fillStyle = "#0000FF";
 	ctx.fill();
 	ctx.closePath();
 
+
+	//player movement
 	x -= dxL;
   	x += dxR;
   	y += dyD;
   	y -= dyU;
 
+
+  	//handling bullets
 	for (let i = 0; i<count; i++){
+
+
 
 
 /////// CONSTRUCTION IN PROGRESS  //////////
@@ -269,6 +309,11 @@ function draw(){
 		} 
 /////// CONSTRUCTION IN PROGRESS  //////////
 
+
+
+
+
+		//if bullets are in loading zone
 		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
 			
 			//draw black circle at (x,y)
