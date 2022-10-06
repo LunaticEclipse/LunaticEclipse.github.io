@@ -263,6 +263,9 @@ function WASD(){
 	}
 
 
+function shotType(type){
+	return [0,0,12,12]
+}
 
 
 
@@ -304,7 +307,7 @@ function draw(){
 		if(bullets[i].delay == 0){
 			bullets[index] = {flag:"acc", x:bullets[index].x, y:bullets[index].y, vx:bullets[i].vx, vy:bullets[i].vy, v:bullets[i].v, a:bullets[i].a, v2:bullets[i].v2, angle:bullets[i].angle, color:bullets[i].color};
 		} else if(bullets[i].delay > 0){
-			alert(bullets[i.delay])
+			//alert(bullets[i.delay])
 			bullets[i].delay--;
 		} 
 /////// CONSTRUCTION IN PROGRESS  //////////
@@ -318,11 +321,23 @@ function draw(){
 			
 			//draw black circle at (x,y)
 			if (bullets[i].color.charAt(0) == '#'){
+
+				//bullet is a monochromic circle
+				
 				ctx.beginPath();
 				ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
 				ctx.fillStyle = bullets[i].color;
 				ctx.fill();
 				ctx.closePath();
+
+			} else {
+
+				//bullet is of a special type
+				var img = document.createElement('img');
+				img.src = "img/Default_Shot.png"
+
+				var a = shotType(bullets[i].color);
+				ctx.drawImage(img,a[0],a[1],a[2], a[3],bullets[i].x,bullets[i].y,12,12);
 			}
 
 
@@ -335,7 +350,7 @@ function draw(){
 
 			//hit detection 
 			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 25){
-				bullets[i].color = "#FF0000";
+				bullets[i].color = "FF0000";
 			}
 
 
