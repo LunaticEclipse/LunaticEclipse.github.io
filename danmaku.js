@@ -317,11 +317,14 @@ function draw(){
 		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
 			
 			//draw black circle at (x,y)
-			ctx.beginPath();
-			ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
-			ctx.fillStyle = bullets[i].color;
-			ctx.fill();
-			ctx.closePath();
+			if (bullets[i].color.charAt(0) == '#'){
+				ctx.beginPath();
+				ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
+				ctx.fillStyle = bullets[i].color;
+				ctx.fill();
+				ctx.closePath();
+			}
+
 
 
 			//moving the bullet
