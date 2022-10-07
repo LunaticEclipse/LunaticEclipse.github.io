@@ -364,8 +364,8 @@ function draw(){
 
 				if (toggle){
 					var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 5, bullets[i].x, bullets[i].y, 10);
-					grd.addColorStop(0, "white");
-					grd.addColorStop(1, bullets[i].color);
+					grd.addColorStop(0, bullets[i].color);
+					grd.addColorStop(1, "white");
 					ctx.fillStyle = grd;
 
 					ctx.beginPath();
