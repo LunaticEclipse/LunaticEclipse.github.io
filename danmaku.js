@@ -363,7 +363,15 @@ function draw(){
 				//draw circle at (x,y)
 
 				if (toggle){
+					var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 5, bullets[i].x, bullets[i].y, 10);
+					grd.addColorStop(0, "white");
+					grd.addColorStop(1, bullets[i].color);
+					ctx.fillStyle = grd;
 
+					ctx.beginPath();
+					ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);
+					ctx.fill();
+					ctx.closePath();
 				} else {
 					ctx.beginPath();
 					ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
