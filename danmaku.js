@@ -31,6 +31,10 @@ var ctx = canvas.getContext("2d");
 var t = 0;
 
 
+//bullet sprite
+var shot = document.createElement('img');
+shot.src = "img/Default_Shot.png";
+
 
 //midpoint of canvas
 var cx = canvas.width/2;
@@ -264,7 +268,33 @@ function WASD(){
 
 
 function shotType(type){
-	return [0,0,12,12]
+	switch (type){
+		case "smallred":
+			return [0,0,12,12];
+			break;
+		case "smallorange":
+			return [12,0,24,12];
+			break;
+		case "smallyellow":
+			return [24,0,36,12];
+			break;
+		case "smallgreen":
+			return [36,0,48,12];
+			break;
+		case "smallcyan":
+			return [48,0,60,12];
+			break;
+		case "smallblue":
+			return [60,0,72,12];
+			break;
+		case "smallpurple":
+			return [72,0,84,12];
+			break;
+		case "smallgray":
+			return [84,0,96,12];
+			break;
+
+	}
 }
 
 
@@ -273,6 +303,11 @@ function draw(){
 
 	//refreshing screen
 	ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+	//drawing the background
+	//ctx.fillStyle = "#303030"
+	//ctx.fillRect(0,0,canvas.width,canvas.height);
 
 
 	//drawing spell card title
@@ -333,11 +368,9 @@ function draw(){
 			} else {
 
 				//bullet is of a special type
-				var img = document.createElement('img');
-				img.src = "img/Default_Shot.png"
-
+				
 				var a = shotType(bullets[i].color);
-				ctx.drawImage(img,a[0],a[1],a[2], a[3],bullets[i].x,bullets[i].y,12,12);
+				ctx.drawImage(shot,a[0],a[1],a[2]-a[0],a[3]-a[1],bullets[i].x,bullets[i].y, a[2]-a[0], a[3]-a[1]);
 			}
 
 
@@ -350,7 +383,9 @@ function draw(){
 
 			//hit detection 
 			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 25){
-				bullets[i].color = "FF0000";
+				if (bullets[i].color.charAt(0) == '#'){
+					bullets[i].color = "#FF0000";
+				}
 			}
 
 
