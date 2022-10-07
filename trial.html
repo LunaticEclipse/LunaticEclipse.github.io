@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color:  Indigo;
+		}
+
+	</style>
+
+</head>
+
+
 <body>
 
 <canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
@@ -17,9 +31,11 @@
 	var x = 750;
 	var y = 500;
 
+	toggle = true;
+
 	function pattern(){
 		if(t%60 == 1){
-			shoot1(750, 300, 1, pi/2, "smallblue")
+			shoot1(750, 300, 1, pi/2, "#FFFF00")
 			//addPattern(count-1, 60, 1, -0.01, -2, pi, "#FF0000");
 		}
 	}

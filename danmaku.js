@@ -22,8 +22,8 @@
 
 
 
-
-
+//a toggle for options under development
+var toggle = false;
 
 //accessing the canvas in html
 var canvas = document.getElementById("danmaku");
@@ -319,7 +319,8 @@ function draw(){
 	//drawing the player
 	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, pi*2);		
-	ctx.fillStyle = "#0000FF";
+	if(!toggle) ctx.fillStyle = "#0000FF";
+	if(toggle) ctx.fillStyle = "#FFFFFF"
 	ctx.fill();
 	ctx.closePath();
 
@@ -354,16 +355,24 @@ function draw(){
 		//if bullets are in loading zone
 		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
 			
-			//draw black circle at (x,y)
+			
 			if (bullets[i].color.charAt(0) == '#'){
 
+
 				//bullet is a monochromic circle
-				
-				ctx.beginPath();
-				ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
-				ctx.fillStyle = bullets[i].color;
-				ctx.fill();
-				ctx.closePath();
+				//draw circle at (x,y)
+
+				if (toggle){
+
+				} else {
+					ctx.beginPath();
+					ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
+					ctx.fillStyle = bullets[i].color;
+					ctx.fill();
+					ctx.closePath();
+				}
+
+
 
 			} else {
 
@@ -383,6 +392,8 @@ function draw(){
 
 			//hit detection 
 			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 25){
+
+				//change color to red (but only when it is standard monochromic bullet)
 				if (bullets[i].color.charAt(0) == '#'){
 					bullets[i].color = "#FF0000";
 				}
