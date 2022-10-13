@@ -369,16 +369,30 @@ function draw(){
 				//draw circle at (x,y)
 
 				if (toggle){
-					var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
-					grd.addColorStop(0, bullets[i].color);
-					grd.addColorStop(1, hexToRgbA(bullets[i].color));
-					ctx.fillStyle = grd;
+					if(bullets[i].hit){
+						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 30);
+						grd.addColorStop(0, bullets[i].color);
+						grd.addColorStop(1, hexToRgbA(bullets[i].color));
+						ctx.fillStyle = grd;
 
-					ctx.beginPath();
-					ctx.arc(bullets[i].x, bullets[i].y, 20, 0, pi*2);
-					ctx.fill();
-					ctx.closePath();
+						ctx.beginPath();
+						ctx.arc(bullets[i].x, bullets[i].y, 30, 0, pi*2);
+						ctx.fill();
+						ctx.closePath();
+					} else {
+
+						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
+						grd.addColorStop(0, bullets[i].color);
+						grd.addColorStop(1, hexToRgbA(bullets[i].color));
+						ctx.fillStyle = grd;
+
+						ctx.beginPath();
+						ctx.arc(bullets[i].x, bullets[i].y, 20, 0, pi*2);
+						ctx.fill();
+						ctx.closePath();
+					}
 				}
+
 			}
 		}
 
