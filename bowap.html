@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html>
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
 <body>
 
-<canvas id="danmaku" width="1500" height="1000" style="border:0px solid #000000;"></canvas>
+<canvas id="danmaku" width="1500" height="850" style="border:0px solid #000000;"></canvas>
 
 
 <script type="text/javascript" src="mathFunctions.js"></script>
@@ -13,6 +24,8 @@
 	// player starting position!!
 	var x = cx-50;
 	var y = 600;
+
+	var toggle = true;
 
 	function pattern(){
 		if(t%4==1){
