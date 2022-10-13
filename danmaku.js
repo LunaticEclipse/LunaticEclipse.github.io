@@ -297,7 +297,18 @@ function shotType(type){
 	}
 }
 
-
+function hexToRgbA(hex){
+    var c;
+    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c= hex.substring(1).split('');
+        if(c.length== 3){
+            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c= '0x'+c.join('');
+        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0)';
+    }
+    throw new Error('Bad Hex');
+}
 
 function draw(){
 
@@ -331,8 +342,11 @@ function draw(){
   	y += dyD;
   	y -= dyU;
 
-  	var loaded = false;
 
+
+
+
+  	var loaded = false;
   	for (let i = 0; i<count; i++){
 
 		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
@@ -340,6 +354,9 @@ function draw(){
 		}
 
 
+
+
+		// rendering the glow of bright bullets
 		if(loaded){
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -349,8 +366,8 @@ function draw(){
 
 				if (toggle){
 					var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
-					grd.addColorStop(0, "rgba(255,50,50,1)");
-					grd.addColorStop(1, "rgba(255,50,50,0)");
+					grd.addColorStop(0, bullets[i].color);
+					grd.addColorStop(1, hexToRgbA(bullets[i].color));
 					ctx.fillStyle = grd;
 
 					ctx.beginPath();
@@ -397,6 +414,7 @@ function draw(){
 					ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);
 					ctx.fill();
 					ctx.closePath();
+
 				} else {
 					ctx.beginPath();
 					ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
