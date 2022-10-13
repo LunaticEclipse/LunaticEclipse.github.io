@@ -370,6 +370,8 @@ function draw(){
 
 				if (toggle){
 					if(bullets[i].hit){
+						//red bullets have brighter aura (30)
+
 						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 30);
 						grd.addColorStop(0, bullets[i].color);
 						grd.addColorStop(1, hexToRgbA(bullets[i].color));
@@ -380,7 +382,8 @@ function draw(){
 						ctx.fill();
 						ctx.closePath();
 					} else {
-
+						//regular bullet aura (20)
+						
 						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
 						grd.addColorStop(0, bullets[i].color);
 						grd.addColorStop(1, hexToRgbA(bullets[i].color));
