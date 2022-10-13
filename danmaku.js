@@ -335,9 +335,9 @@ function hexToRgbA(hex){
 
 
 
+
 var lastCalledTime;
 var fps;
-
 function requestAnimFrame() {
 
   if(!lastCalledTime) {
@@ -376,6 +376,8 @@ function draw(){
 
 
 	//drawing spell card title
+	//OVERRIDE!! FPS DISPLAY
+	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
 	ctx.fillText(fps, 100, 50);
