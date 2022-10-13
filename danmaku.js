@@ -190,6 +190,9 @@ function WASD(){
 	var unfocusSpeed = 2;
 	var focusSpeed = 0.7;
 
+
+//KEY DOWN
+
 		window.addEventListener("keydown", function (event) {
 	  if (event.defaultPrevented) {
 	    return; // Do nothing if the event was already processed
@@ -233,17 +236,15 @@ function WASD(){
 
 
 
+
+
+//KEY UP
 		window.addEventListener("keyup", function (event) {
 	  if (event.defaultPrevented) {
 	    return; 
 	  }
 
 	  switch (event.key) {
-	  	case "shift":
-	  		dxL = 0;
-	 		dxR = 0;
-			dyU = 0;
-			dyD = 0;
 	    case "w":
 	      dyU = 0;
 	      break;
@@ -316,51 +317,6 @@ function shotType(type){
 
 
 
-function hexToRgbA(hex){
-    var c;
-    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-        c= hex.substring(1).split('');
-        if(c.length== 3){
-            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-        }
-        c= '0x'+c.join('');
-        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0)';
-    }
-    throw new Error('Bad Hex');
-}
-
-
-
-
-
-
-
-
-var lastCalledTime;
-var fps;
-function requestAnimFrame() {
-
-  if(!lastCalledTime) {
-     lastCalledTime = Date.now();
-     fps = 0;
-     return;
-  }
-  delta = (Date.now() - lastCalledTime)/1000;
-  lastCalledTime = Date.now();
-  fps = 1/delta;
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 function draw(){
 
@@ -370,17 +326,14 @@ function draw(){
 
 
 
-	//drawing the background
-	//ctx.fillStyle = "#303030"
-	//ctx.fillRect(0,0,canvas.width,canvas.height);
-
 
 	//drawing spell card title
 	//OVERRIDE!! FPS DISPLAY
+
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(fps, 100, 50);
+	//ctx.fillText(fps, 100, 50);
 
 
 
@@ -545,3 +498,39 @@ function draw(){
 		}
 	}
 }
+
+
+
+
+function hexToRgbA(hex){
+    var c;
+    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c= hex.substring(1).split('');
+        if(c.length== 3){
+            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c= '0x'+c.join('');
+        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0)';
+    }
+    throw new Error('Bad Hex');
+}
+
+
+
+
+
+var lastCalledTime;
+var fps;
+function requestAnimFrame() {
+
+  if(!lastCalledTime) {
+     lastCalledTime = Date.now();
+     fps = 0;
+     return;
+  }
+  delta = (Date.now() - lastCalledTime)/1000;
+  lastCalledTime = Date.now();
+  fps = 1/delta;
+}
+
+

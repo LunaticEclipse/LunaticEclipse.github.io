@@ -32,12 +32,41 @@
 
 	toggle = true;
 
+	var clr = 0;
+	var rainbow = "#000000";
+
+	switch(clr%7){
+			case 0:
+				rainbow = "#FF0000";
+				break;
+			case 1:
+				rainbow = "#FF7F00";
+				break;
+			case 2:
+				rainbow = "#FFFF00";
+				break;
+			case 3:
+				rainbow = "#00FF00";
+				break;
+			case 4:
+				rainbow = "#0000FF";
+				break;
+			case 5:
+				rainbow = "#4B0082";
+				break;
+			case 6:
+				rainbow = "#9400D3";
+				break;
+		}
+
+
 	function pattern(){
+		if(t%3==1){
+			shootAcc(750+175*cos(t/50)*sin(t/100), 220+175*sin(t/50)*sin(t/100), -0.5, 0.002, 1.5, -t/25, "#FF0000");
 
+			shootAcc(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), 0.5, -0.002, -1.5, -t/25, "#FF0000");
 
-		if(t%8==1){
-			shootRing(cx, 250, 1.5, sq(t/200), 5, 10, "#FF00FF")
-			//shoot(cx,250,1,0,"#FF00FF")
+			clr++;
 		}
 	}
 
