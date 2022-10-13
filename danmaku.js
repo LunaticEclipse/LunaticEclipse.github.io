@@ -52,6 +52,10 @@ var bullets = [];
 var count = 0; //bullet count
 //a bullet object: {x, y, vx, vy}
 
+//tracking addPattern
+var queue = [];
+var countQ = 0;
+
 
 
 //player coordinates
@@ -170,11 +174,11 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 
 /////// CONSTRUCTION IN PROGRESS  //////////
 function addPattern(index, delay, v1, a, v2, angle, color){
-	
-	bullets[count] = {index:index, delay:delay, vx:v1*cos(angle), vy:v1*sin(angle), v:v1, a:a, v2:v2, angle:angle, color:color}
-	count += 1;
+	queue[countQ] = {index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color}
+	countQ += 1;
 }
 /////// CONSTRUCTION IN PROGRESS  //////////
+
 
 
 
@@ -368,9 +372,31 @@ function draw(){
 //BULLET DEPARTMENT
 
 
+// handle addPattern
 
+	for(let i = 0; i<countQ; i++){
+
+		if(queue[i].delay == 0){
+			
+			bullets[queue[i].index].flag = "acc";
+			bullets[queue[i].index].v = queue[i].v;
+			bullets[queue[i].index].angle = queue[i].angle;
+			bullets[queue[i].index].vx = queue[i].v*cos(queue[i].angle);		
+			bullets[queue[i].index].vy = queue[i].v*sin(queue[i].angle);
+			bullets[queue[i].index].a = queue[i].a;
+			bullets[queue[i].index].v2 = queue[i].v2;
+			bullets[queue[i].index].color = queue[i].color;
+			
+			queue[i].delay = -1;
+
+		} else if(queue[i].delay > 0){
+			queue[i].delay--;
+		}
+	}
 
   	
+
+// handle aura
   	for (let i = 0; i<count; i++){
 
 		// rendering the glow of bright bullets
