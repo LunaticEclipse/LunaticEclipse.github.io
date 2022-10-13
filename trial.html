@@ -6,7 +6,7 @@
 	<style>
 
 		body{
-			background-color:  Indigo;
+			background-color: #000435;
 		}
 
 	</style>
@@ -16,7 +16,7 @@
 
 <body>
 
-<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
+<canvas id="danmaku" width="1500" height="850" style="border:0px solid #000000;"></canvas>
 
 
 <p id="1"></p>
@@ -34,8 +34,8 @@
 	toggle = true;
 
 	function pattern(){
-		if(t%60 == 1){
-			shoot1(750, 300, 1, pi/2, "#FF0000")
+		if(t%30 == 1){
+			shootAccRing(cx+100*cos(t/15),cy+100*sin(t/15),1.5,-0.01,0.7,0,16,30,"#FF0000")
 			//addPattern(count-1, 60, 1, -0.01, -2, pi, "#FF0000");
 		}
 	}

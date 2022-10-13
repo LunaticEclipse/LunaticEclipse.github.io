@@ -331,6 +331,39 @@ function draw(){
   	y += dyD;
   	y -= dyU;
 
+  	var loaded = false;
+
+  	for (let i = 0; i<count; i++){
+
+		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
+			loaded = true;
+		}
+
+
+		if(loaded){
+			if (bullets[i].color.charAt(0) == '#'){
+
+
+				//bullet is a monochromic circle
+				//draw circle at (x,y)
+
+				if (toggle){
+					var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
+					grd.addColorStop(0, "rgba(255,50,50,1)");
+					grd.addColorStop(1, "rgba(255,50,50,0)");
+					ctx.fillStyle = grd;
+
+					ctx.beginPath();
+					ctx.arc(bullets[i].x, bullets[i].y, 20, 0, pi*2);
+					ctx.fill();
+					ctx.closePath();
+				}
+			}
+		}
+
+  	}
+
+
 
   	//handling bullets
 	for (let i = 0; i<count; i++){
@@ -349,12 +382,8 @@ function draw(){
 /////// CONSTRUCTION IN PROGRESS  //////////
 
 
-
-
-
 		//if bullets are in loading zone
-		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
-			
+		if(loaded){
 			
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -363,12 +392,8 @@ function draw(){
 				//draw circle at (x,y)
 
 				if (toggle){
-					var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 5, bullets[i].x, bullets[i].y, 10);
-					grd.addColorStop(0, bullets[i].color);
-					grd.addColorStop(1, "white");
-					ctx.fillStyle = grd;
-
 					ctx.beginPath();
+					ctx.fillStyle = "#FFFFFF";
 					ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);
 					ctx.fill();
 					ctx.closePath();
