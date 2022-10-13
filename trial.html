@@ -27,8 +27,8 @@
 
 
 <script>
-	var x = 750;
-	var y = 500;
+	var x = cx;
+	var y = cy+200;
 
 	toggle = true;
 
@@ -43,7 +43,8 @@
 
 	function mainLoop(){
 		pattern();
-		WASD()
+		WASD();
+		requestAnimFrame();
 		draw();
 		t++;
 	}

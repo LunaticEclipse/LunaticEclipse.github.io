@@ -70,6 +70,15 @@ var dyD = 0;
 
 
 
+
+
+
+
+
+
+
+
+
 //angle to aim at target
 function aim(x, y, tx, ty){
 	if(x > tx){
@@ -78,8 +87,6 @@ function aim(x, y, tx, ty){
 		return atan((ty-y)/(tx-x));
 	}
 }
-
-
 
 
 /*
@@ -168,6 +175,10 @@ function addPattern(index, delay, v1, a, v2, angle, color){
 	count += 1;
 }
 /////// CONSTRUCTION IN PROGRESS  //////////
+
+
+
+
 
 
 
@@ -265,10 +276,11 @@ function WASD(){
 	  event.preventDefault();
 		
 		}, true);
-
-
-
 	}
+
+
+
+
 
 
 function shotType(type){
@@ -301,6 +313,9 @@ function shotType(type){
 	}
 }
 
+
+
+
 function hexToRgbA(hex){
     var c;
     if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -314,10 +329,45 @@ function hexToRgbA(hex){
     throw new Error('Bad Hex');
 }
 
+
+
+
+
+
+
+var lastCalledTime;
+var fps;
+
+function requestAnimFrame() {
+
+  if(!lastCalledTime) {
+     lastCalledTime = Date.now();
+     fps = 0;
+     return;
+  }
+  delta = (Date.now() - lastCalledTime)/1000;
+  lastCalledTime = Date.now();
+  fps = 1/delta;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function draw(){
 
 	//refreshing screen
 	ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
 
 
 	//drawing the background
@@ -327,8 +377,13 @@ function draw(){
 
 	//drawing spell card title
 	ctx.font = "30px Arial";
-	ctx.fillStyle = "#000000";
-	ctx.fillText(title, 100, 50);
+	ctx.fillStyle = "#FF0000";
+	ctx.fillText(fps, 100, 50);
+
+
+
+
+
 
 
 	//drawing the player
@@ -350,18 +405,22 @@ function draw(){
 
 
 
-  	var loaded = false;
+
+
+
+
+
+//BULLET DEPARTMENT
+
+
+
+
+  	
   	for (let i = 0; i<count; i++){
 
-		if(bullets[i].x>-500 && bullets[i].x<canvas.width+500 && bullets[i].y>-500 && bullets[i].y<canvas.height+500){
-			loaded = true;
-		}
-
-
-
-
 		// rendering the glow of bright bullets
-		if(loaded){
+		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
+
 			if (bullets[i].color.charAt(0) == '#'){
 
 
@@ -383,7 +442,7 @@ function draw(){
 						ctx.closePath();
 					} else {
 						//regular bullet aura (20)
-						
+
 						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
 						grd.addColorStop(0, bullets[i].color);
 						grd.addColorStop(1, hexToRgbA(bullets[i].color));
@@ -407,21 +466,8 @@ function draw(){
 	for (let i = 0; i<count; i++){
 
 
-
-
-/////// CONSTRUCTION IN PROGRESS  //////////
-		//handle addPattern
-		if(bullets[i].delay == 0){
-			bullets[index] = {flag:"acc", x:bullets[index].x, y:bullets[index].y, vx:bullets[i].vx, vy:bullets[i].vy, v:bullets[i].v, a:bullets[i].a, v2:bullets[i].v2, angle:bullets[i].angle, color:bullets[i].color};
-		} else if(bullets[i].delay > 0){
-			//alert(bullets[i.delay])
-			bullets[i].delay--;
-		} 
-/////// CONSTRUCTION IN PROGRESS  //////////
-
-
 		//if bullets are in loading zone
-		if(loaded){
+		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
 			
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -450,7 +496,7 @@ function draw(){
 
 			} else {
 
-				//bullet is of a special type
+				//bullet is of a special type, draw from Default_Shot.png
 				
 				var a = shotType(bullets[i].color);
 				ctx.drawImage(shot,a[0],a[1],a[2]-a[0],a[3]-a[1],bullets[i].x,bullets[i].y, a[2]-a[0], a[3]-a[1]);
@@ -472,6 +518,8 @@ function draw(){
 				if (bullets[i].color.charAt(0) == '#'){
 					bullets[i].color = "#FF0000";
 				}
+
+				// flag bullet as hit
 				bullets[i].hit = 1;
 			}
 
