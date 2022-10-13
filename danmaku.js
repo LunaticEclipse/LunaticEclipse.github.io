@@ -107,6 +107,10 @@ function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
 	count += 1;
 }
+function shoot(x, y, v, angle, color){
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+	count += 1;
+}
 
 //homing shot
 function shoot3(x, y, tx, ty, v, color){
@@ -409,8 +413,10 @@ function draw(){
 				//draw circle at (x,y)
 
 				if (toggle){
+					if(bullets[i].hit)	ctx.fillStyle = "#FFD8D8";
+					else 	ctx.fillStyle = "#FFFFFF";
+
 					ctx.beginPath();
-					ctx.fillStyle = "#FFFFFF";
 					ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);
 					ctx.fill();
 					ctx.closePath();
@@ -442,12 +448,14 @@ function draw(){
 
 
 			//hit detection 
-			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 25){
+			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 100){
 
 				//change color to red (but only when it is standard monochromic bullet)
+				
 				if (bullets[i].color.charAt(0) == '#'){
 					bullets[i].color = "#FF0000";
 				}
+				bullets[i].hit = 1;
 			}
 
 
