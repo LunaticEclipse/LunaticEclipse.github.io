@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
+
+
 <body>
 
-<canvas id="danmaku" width="1500" height="700" style="border:0px solid #000000;"></canvas>
+<canvas id="danmaku" width="1500" height="850" style="border:0px solid #000000;"></canvas>
+
 
 <p id="1"></p>
 
@@ -12,37 +27,29 @@
 
 
 <script>
-	var x = 750;
-	var y = 500;
+	var x = cx;
+	var y = cy+200;
+
+	toggle = true;
+
+	
+
 
 	function pattern(){
-		var r = 0.01; //ratio of speed or time
 
-		var rainbow = "#000000";
-
-		/*
-		if(t%3 == 1){
-			shootAcc(750+175*cos(t/50)*sin(t/100), 220+175*sin(t/50)*sin(t/100), -0.2, 0.002, 1.5, t/25, "#000000");
+		if(t%3==1){
 			
-			shootAcc(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), 0.2, -0.002, -1.5, t/25, "#000000");
-		}
-		*/
+			shootAcc(cx+175*cos(t/50)*sin(t/100), cy-50+175*sin(t/50)*sin(t/100), -1, 0.004, 1.5, -t/25, "#dFA000");
 
-		if(t%3 == 1){
-
-			shootAcc(750+175*cos(t/50)*sin(t/100), 220+175*sin(t/50)*sin(t/100), -0.5, 0.002, 1.5, -t/25, rainbow);
-
-			shootAcc(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), 0.5, -0.002, -1.5, -t/25, rainbow);
+			shootAcc(cx-175*cos(t/50)*sin(t/100), cy-50-175*sin(t/50)*sin(t/100), 1, -0.004, -1.5, -t/25, "#dFA000");
 			
-			//shootAcc(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), 0.5, -0.002, -1.5, pi+aim(750-175*cos(t/50)*sin(t/100), 220-175*sin(t/50)*sin(t/100), x, y), rainbow);
+
 		}
-
-
 	}
 
 	function mainLoop(){
 		pattern();
-		WASD()
+		WASD();
 		draw();
 		t++;
 	}
