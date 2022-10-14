@@ -67,7 +67,8 @@ var dxL = 0;
 var dxR = 0;
 var dyU = 0;
 var dyD = 0;
-
+var fast = true;
+var playerColor = "#ffffff"
 
 
 
@@ -194,7 +195,6 @@ function WASD(){
 	var unfocusSpeed = 2;
 	var focusSpeed = 1;
 
-	var fast = true;
 
 	var pressedKeys = {};
 	window.onkeyup = function(event) { pressedKeys[event.keyCode] = false; }
@@ -212,13 +212,14 @@ function WASD(){
 	    return; // Do nothing if the event was already processed
 	  }
 
-	  console.log(event.key)
+	 // console.log(event.key)
 
 
 	  if(fast){
 		  switch (event.key) {
 		  	case "z":
 		  		fast = false;
+		  		playerColor = "#ffd700"
 		  		break;
 		    case "ArrowUp":
 		      dyU = unfocusSpeed;
@@ -239,6 +240,7 @@ function WASD(){
 			switch (event.key) {
 				case "z":
 					fast = true;
+					playerColor = "#c0c0c0"
 					break;
 			    case "ArrowUp":
 			      dyU = focusSpeed;
@@ -365,11 +367,12 @@ function draw(){
 
 	//drawing the player
 	ctx.beginPath();
-	ctx.arc(x, y, 5, 0, pi*2);		
+	ctx.arc(x, y, 5, 0, pi*2);	
+	console.log(fast)	
 	if(!toggle){
 		ctx.fillStyle = "#0000FF";
 	} else {
-		ctx.fillStyle = "#FFFFFF";
+		ctx.fillStyle = playerColor;
 	} 
 	ctx.fill();
 	ctx.closePath();
