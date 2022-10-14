@@ -196,11 +196,14 @@ function WASD(){
 
 	var fast = true;
 
-	window.addEventListener("keypress",function(event){
-		if(event.key == "z"){
-			fast = (!fast);
-		}
-	})
+	var pressedKeys = {};
+	window.onkeyup = function(event) { pressedKeys[event.keyCode] = false; }
+	window.onkeydown = function(event) { pressedKeys[event.keyCode] = true; }
+
+	if(pressedKeys[36]||pressedKeys[37]||pressedKeys[38]||pressedKeys[39]||pressedKeys[40]||pressedKeys[41]){
+		alert("QED")
+	}
+
 
 //KEY DOWN
 
@@ -209,8 +212,14 @@ function WASD(){
 	    return; // Do nothing if the event was already processed
 	  }
 
+	  console.log(event.key)
+
+
 	  if(fast){
 		  switch (event.key) {
+		  	case "z":
+		  		fast = false;
+		  		break;
 		    case "ArrowUp":
 		      dyU = unfocusSpeed;
 		      break;
@@ -228,20 +237,23 @@ function WASD(){
 		  }
 		} else {
 			switch (event.key) {
-		    case "ArrowUp":
-		      dyU = focusSpeed;
-		      break;
-		    case "ArrowDown":
-		      dyD = focusSpeed;
-		      break;
-		    case "ArrowLeft":
-		      dxL = focusSpeed;
-		      break;
-		    case "ArrowRight":
-		      dxR = focusSpeed;
-		      break;
-		    default:
-		      return; // Quit when this doesn't handle the key event.
+				case "z":
+					fast = true;
+					break;
+			    case "ArrowUp":
+			      dyU = focusSpeed;
+			      break;
+			    case "ArrowDown":
+			      dyD = focusSpeed;
+			      break;
+			    case "ArrowLeft":
+			      dxL = focusSpeed;
+			      break;
+			    case "ArrowRight":
+			      dxR = focusSpeed;
+			      break;
+			    default:
+			      return; // Quit when this doesn't handle the key event.
 		  }
 		}
 
@@ -263,28 +275,16 @@ function WASD(){
 	  }
 
 	  switch (event.key) {
-	    case "w":
+	    case "ArrowUp":
 	      dyU = 0;
 	      break;
-	    case "s":
+	    case "ArrowDown":
 	      dyD = 0;
 	      break;
-	    case "a":
+	    case "ArrowLeft":
 	      dxL = 0;
 	      break;
-	    case "d":
-	      dxR = 0;
-	      break;
-	    case "W":
-	      dyU = 0;
-	      break;
-	    case "S":
-	      dyD = 0;
-	      break;
-	    case "A":
-	      dxL = 0;
-	      break;
-	    case "D":
+	    case "ArrowRight":
 	      dxR = 0;
 	      break;
 	    default:
@@ -295,7 +295,11 @@ function WASD(){
 	  event.preventDefault();
 		
 		}, true);
-	}
+
+
+
+
+}
 
 
 
@@ -364,11 +368,9 @@ function draw(){
 	ctx.arc(x, y, 5, 0, pi*2);		
 	if(!toggle){
 		ctx.fillStyle = "#0000FF";
-	} else if(!fast){
-		ctx.fillStyle = "#FFFFFF"
 	} else {
-		ctx.fillStyle = "#00FF00"
-	}
+		ctx.fillStyle = "#FFFFFF";
+	} 
 	ctx.fill();
 	ctx.closePath();
 
@@ -392,7 +394,6 @@ function draw(){
 
 
 // handle addPattern
-
 	for(let i = 0; i<countQ; i++){
 
 		if(queue[i].delay == 0){
@@ -400,12 +401,13 @@ function draw(){
 			bullets[queue[i].index].flag = "acc";
 			bullets[queue[i].index].v = queue[i].v;
 			bullets[queue[i].index].angle = queue[i].angle;
-			bullets[queue[i].index].vx = queue[i].v*cos(queue[i].angle);		
-			bullets[queue[i].index].vy = queue[i].v*sin(queue[i].angle);
 			bullets[queue[i].index].a = queue[i].a;
 			bullets[queue[i].index].v2 = queue[i].v2;
 			bullets[queue[i].index].color = queue[i].color;
 			
+			bullets[queue[i].index].vx = bullets[i].v*cos(bullets[i].angle);		
+			bullets[queue[i].index].vy = bullets[i].v*sin(bullets[i].angle);
+
 			queue[i].delay = -1;
 
 		} else if(queue[i].delay > 0){
@@ -414,6 +416,7 @@ function draw(){
 	}
 
   	
+
 
 // handle aura
   	for (let i = 0; i<count; i++){
