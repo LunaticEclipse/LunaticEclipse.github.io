@@ -192,8 +192,15 @@ function addPattern(index, delay, v1, a, v2, angle, color){
 function WASD(){
 
 	var unfocusSpeed = 2;
-	var focusSpeed = 0.7;
+	var focusSpeed = 1;
 
+	var fast = true;
+
+	window.addEventListener("keypress",function(event){
+		if(event.key == "z"){
+			fast = (!fast);
+		}
+	})
 
 //KEY DOWN
 
@@ -202,34 +209,41 @@ function WASD(){
 	    return; // Do nothing if the event was already processed
 	  }
 
-	  switch (event.key) {
-	    case "w":
-	      dyU = unfocusSpeed;
-	      break;
-	    case "s":
-	      dyD = unfocusSpeed;
-	      break;
-	    case "a":
-	      dxL = unfocusSpeed;
-	      break;
-	    case "d":
-	      dxR = unfocusSpeed;
-	      break;
-	    case "W":
-	      dyU = focusSpeed;
-	      break;
-	    case "S":
-	      dyD = focusSpeed;
-	      break;
-	    case "A":
-	      dxL = focusSpeed;
-	      break;
-	    case "D":
-	      dxR = focusSpeed;
-	      break;
-	    default:
-	      return; // Quit when this doesn't handle the key event.
-	  }
+	  if(fast){
+		  switch (event.key) {
+		    case "ArrowUp":
+		      dyU = unfocusSpeed;
+		      break;
+		    case "ArrowDown":
+		      dyD = unfocusSpeed;
+		      break;
+		    case "ArrowLeft":
+		      dxL = unfocusSpeed;
+		      break;
+		    case "ArrowRight":
+		      dxR = unfocusSpeed;
+		      break;
+		    default:
+		      return; // Quit when this doesn't handle the key event.
+		  }
+		} else {
+			switch (event.key) {
+		    case "ArrowUp":
+		      dyU = focusSpeed;
+		      break;
+		    case "ArrowDown":
+		      dyD = focusSpeed;
+		      break;
+		    case "ArrowLeft":
+		      dxL = focusSpeed;
+		      break;
+		    case "ArrowRight":
+		      dxR = focusSpeed;
+		      break;
+		    default:
+		      return; // Quit when this doesn't handle the key event.
+		  }
+		}
 
 	  // Cancel the default action to avoid it being handled twice
 	  event.preventDefault();
@@ -348,8 +362,13 @@ function draw(){
 	//drawing the player
 	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, pi*2);		
-	if(!toggle) ctx.fillStyle = "#0000FF";
-	if(toggle) ctx.fillStyle = "#FFFFFF"
+	if(!toggle){
+		ctx.fillStyle = "#0000FF";
+	} else if(!fast){
+		ctx.fillStyle = "#FFFFFF"
+	} else {
+		ctx.fillStyle = "#00FF00"
+	}
 	ctx.fill();
 	ctx.closePath();
 
