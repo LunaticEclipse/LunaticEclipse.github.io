@@ -58,6 +58,7 @@ var countQ = 0;
 
 
 
+
 //player coordinates
 var x = 0;
 var y = 0;
@@ -69,9 +70,7 @@ var dyU = 0;
 var dyD = 0;
 var fast = true;
 var playerColor = "#ffffff"
-
-
-
+var playerSpeed = 1.5;
 
 
 
@@ -192,17 +191,9 @@ function addPattern(index, delay, v1, a, v2, angle, color){
 
 function WASD(){
 
-	var unfocusSpeed = 2;
-	var focusSpeed = 1;
+	var unfocusSpeed = 1.5;
+	var focusSpeed = 0.7;
 
-
-	var pressedKeys = {};
-	window.onkeyup = function(event) { pressedKeys[event.keyCode] = false; }
-	window.onkeydown = function(event) { pressedKeys[event.keyCode] = true; }
-
-	if(pressedKeys[36]||pressedKeys[37]||pressedKeys[38]||pressedKeys[39]||pressedKeys[40]||pressedKeys[41]){
-		alert("QED")
-	}
 
 
 //KEY DOWN
@@ -220,18 +211,19 @@ function WASD(){
 		  	case "z":
 		  		fast = false;
 		  		playerColor = "#ffd700"
+		  		playerSpeed = focusSpeed;
 		  		break;
 		    case "ArrowUp":
-		      dyU = unfocusSpeed;
+		      dyU = 1;
 		      break;
 		    case "ArrowDown":
-		      dyD = unfocusSpeed;
+		      dyD = 1;
 		      break;
 		    case "ArrowLeft":
-		      dxL = unfocusSpeed;
+		      dxL = 1;
 		      break;
 		    case "ArrowRight":
-		      dxR = unfocusSpeed;
+		      dxR = 1;
 		      break;
 		    default:
 		      return; // Quit when this doesn't handle the key event.
@@ -241,18 +233,19 @@ function WASD(){
 				case "z":
 					fast = true;
 					playerColor = "#c0c0c0"
+					playerSpeed = unfocusSpeed;
 					break;
 			    case "ArrowUp":
-			      dyU = focusSpeed;
+			      dyU = 1;
 			      break;
 			    case "ArrowDown":
-			      dyD = focusSpeed;
+			      dyD = 1;
 			      break;
 			    case "ArrowLeft":
-			      dxL = focusSpeed;
+			      dxL = 1;
 			      break;
 			    case "ArrowRight":
-			      dxR = focusSpeed;
+			      dxR = 1;
 			      break;
 			    default:
 			      return; // Quit when this doesn't handle the key event.
@@ -379,10 +372,10 @@ function draw(){
 
 
 	//player movement
-	x -= dxL;
-  	x += dxR;
-  	y += dyD;
-  	y -= dyU;
+	x -= dxL*playerSpeed;
+  	x += dxR*playerSpeed;
+  	y += dyD*playerSpeed;
+  	y -= dyU*playerSpeed;
 
 
 

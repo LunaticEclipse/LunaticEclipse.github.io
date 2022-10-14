@@ -38,22 +38,9 @@
 	var temp = 0;
 	function pattern(){
 
-		if(t%8==1 && t%800<281){
-			if(t%800 == 1){
-				tx = x;
-				ty = y;
-			}
-
-			shootRing(cx, cy-150, 1.5, t/400, 16, 0, "#ffd000")
-			temp++;
-		}
-		if(t%20==1 && t%800<281){
-			if(t%800 == 1){
-				tx = x;
-				ty = y;
-			}
-
-			shootRing(cx, cy-150, 1.5, -t/400, 16, 0, "#ffd000")
+		if(t%32==1){
+			shootRing(cx, cy-150, 1.5, t/300, 16, 0, "#ffd000")
+			shootRing(cx, cy-150, 1.5, -t/300, 16, 0, "#ffd000")
 			temp++;
 		}
 	}
