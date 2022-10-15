@@ -70,8 +70,10 @@ var dyU = 0;
 var dyD = 0;
 var fast = true;
 var playerColor = "#ffffff"
-var playerSpeed = 1.5;
 
+const unfocusSpeed = 3.5;
+const focusSpeed = 1.5;
+var playerSpeed = unfocusSpeed;
 
 
 
@@ -190,9 +192,6 @@ function addPattern(index, delay, v1, a, v2, angle, color){
 
 
 function WASD(){
-
-	var unfocusSpeed = 1.5;
-	var focusSpeed = 0.7;
 
 
 
@@ -372,10 +371,10 @@ function draw(){
 
 
 	//player movement
-	x -= dxL*playerSpeed;
-  	x += dxR*playerSpeed;
-  	y += dyD*playerSpeed;
-  	y -= dyU*playerSpeed;
+	if(x>=5) x -= dxL*playerSpeed;
+  	if(x<=canvas.width-5) x += dxR*playerSpeed;
+  	if(y<=canvas.height-5) y += dyD*playerSpeed;
+  	if(y>=5) y -= dyU*playerSpeed;
 
 
 
@@ -395,11 +394,17 @@ function draw(){
 		if(queue[i].delay == 0){
 			
 			bullets[queue[i].index].flag = "acc";
+			if(queue[i].angle != "same"){
+				bullets[queue[i].index].angle = queue[i].angle;
+			}
 			bullets[queue[i].index].v = queue[i].v;
-			bullets[queue[i].index].angle = queue[i].angle;
 			bullets[queue[i].index].a = queue[i].a;
 			bullets[queue[i].index].v2 = queue[i].v2;
-			bullets[queue[i].index].color = queue[i].color;
+
+			// collided bullets stay red
+			if(bullets[queue[i].index].hit != 1){
+				bullets[queue[i].index].color = queue[i].color;
+			}
 			
 			bullets[queue[i].index].vx = bullets[i].v*cos(bullets[i].angle);		
 			bullets[queue[i].index].vy = bullets[i].v*sin(bullets[i].angle);
