@@ -33,7 +33,7 @@
 
 	function pattern(){
 
-		if(t%8==0 && t%800<=200){
+		if(t%10==0 && t%800<=200){
 			for(let i = 1; i<=16; i++){
 				shoot(cx, cy-110, 4, i*pi/8+t/150, "#ffd000")
 				//addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
