@@ -395,7 +395,9 @@ function draw(){
 		if(queue[i].delay == 0){
 			
 			bullets[queue[i].index].flag = "acc";
-			if(queue[i].angle != "same"){
+			if(queue[i].angle == "aim"){
+				bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
+			} else if(queue[i].angle != "same"){
 				bullets[queue[i].index].angle = queue[i].angle;
 			}
 			bullets[queue[i].index].v = queue[i].v;
