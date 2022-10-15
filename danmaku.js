@@ -108,6 +108,9 @@ flag 			to identify acc bullets (flag = "acc" leads to acceleration codes)
 angle 			initial angle 	(stored for accelerating bullets)
 v 				initial v 		(stored for accelerating bullets)
 
+hit 			whether a bullet has hit the player (1 or NaN)
+negative		make bullet black-core
+
 index 			index of bullet to be replaced
 delay 			delay before replacing the bullet 
 	[unit: 5ms  (e.g. delay=10 means a 50ms delay)]
@@ -403,6 +406,7 @@ function draw(){
 			bullets[queue[i].index].v = queue[i].v;
 			bullets[queue[i].index].a = queue[i].a;
 			bullets[queue[i].index].v2 = queue[i].v2;
+			bullets[queue[i].index].negative = bullets[i].negative;
 
 			// collided bullets stay red
 			if(bullets[queue[i].index].hit != 1){
@@ -411,6 +415,7 @@ function draw(){
 			
 			bullets[queue[i].index].vx = bullets[i].v*cos(bullets[i].angle);		
 			bullets[queue[i].index].vy = bullets[i].v*sin(bullets[i].angle);
+
 
 			queue[i].delay = -1;
 
@@ -484,7 +489,8 @@ function draw(){
 
 				if (toggle){
 					if(bullets[i].hit)	ctx.fillStyle = "#FFD8D8";
-					else 	ctx.fillStyle = "#FFFFFF";
+					else if(bullets[i].negative) 	ctx.fillStyle = "#000000";
+					else ctx.fillStyle = "#FFFFFF"
 
 					ctx.beginPath();
 					ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);

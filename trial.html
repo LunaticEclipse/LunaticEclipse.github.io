@@ -16,7 +16,7 @@
 
 <body>
 
-<canvas id="danmaku" width="1500" height="800" style="border:0px solid #000000;"></canvas>
+<canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
 
 
 <p id="1"></p>
@@ -31,18 +31,18 @@
 	var y = cy+300;
 	toggle = true;
 
+	var elem = document.getElementById("danmaku");
+	elem.requestFullscreen();
 	
 	function pattern(){
-		if(t%8==0){
+		if(t%5==0 && t%1200<450){
 		//if(t%12==0 && t>680){
 			for(let i = 1; i<=10; i++){
-				shoot(cx, cy-110, 4, i*pi/5+t/100, "#ffd000")
-				//addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
-				addPattern(count-1, 60, 0, 0.02, 2, "aim", "#d000d0")
+				shoot(cx, cy-110, 4, i*pi/5+t/100, "#ffa300")
+				addPattern(count-1, 60, -4, 0.018, 1.2, "same", "#d000d0")
 
-				shoot(cx, cy-110, 4, i*pi/5-t/100, "#ffd000")
-				//addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
-				addPattern(count-1, 60, 0, 0.01, 2.5, "same", "#00d0d0")
+				//shoot(cx, cy-110, 4, i*pi/5-t/100, "#ffd000")
+				//addPattern(count-1, 60, 0, 0.01, 2.5, "same", "#00d0d0")
 			}
 		}
 		
