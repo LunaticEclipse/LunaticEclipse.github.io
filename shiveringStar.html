@@ -38,13 +38,13 @@
 	var temp = 0;
 	function pattern(){
 
-		if(t%40==1 && t%800<281){
-			if(t%800 == 1){
+		if(t%20==1 && t%400<141){
+			if(t%400 == 1){
 				tx = x;
 				ty = y;
 			}
 
-			shootRing(cx, cy-150, 0.75, aim(cx,cy-150,tx,ty)+temp*pi/64, 64, 50, "#a0a0ff")
+			shootRing(cx, cy-150, 1.5, aim(cx,cy-150,tx,ty)+temp*pi/64, 64, 50, "#a0a0ff")
 			temp++;
 		}
 	}
@@ -55,7 +55,7 @@
 		draw();
 		t++;
 	}
-	setInterval(mainLoop, 5);	
+	setInterval(mainLoop, 10);	
 
 </script>
 
