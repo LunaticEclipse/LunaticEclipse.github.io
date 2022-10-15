@@ -72,8 +72,8 @@ var fast = true;
 
 var playerColor = "#c0c0c0"
 
-const unfocusSpeed = 3.5;
-const focusSpeed = 1.5;
+var unfocusSpeed = 3.5;
+var focusSpeed = 1.5;
 var playerSpeed = unfocusSpeed;
 
 
