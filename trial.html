@@ -28,39 +28,15 @@
 
 <script>
 	var x = cx;
-	var y = cy+200;
+	var y = cy+300;
 	toggle = true;
 
-	var tx = 0;
-	var ty = 0;
 	
-
-	var temp = 0;
 	function pattern(){
-
-		if(t%12==0 && t%800<=200){
-			for(let i = 1; i<=16; i++){
-				shoot(cx, cy-110, 4, i*pi/8+t/150, "#ffd000")
-				addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
-				addPattern(count-1, 75, 1.5, -0.02, -1.5, "same", "#ff00d0")
-
-				shoot(cx, cy-110, 4, i*pi/8-t/150, "#ffd000")
-				addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
-				addPattern(count-1, 75, 1.5, -0.02, -1.5, "same", "#ff00d0")
-			}
+		if(t%100==0){
+			shootRing(cx,cy-150,2,pi/2,16,10,"#ffa500")
 		}
-		if(t%8==0 && t%800>=680){
-		//if(t%12==0 && t>680){
-			for(let i = 1; i<=10; i++){
-				shoot(cx, cy-130, 4, i*pi/5+t/150, "#ffd000")
-				//addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
-				addPattern(count-1, 100, 2.5, 0, 2.5, "same", "#00d0d0")
-
-				shoot(cx, cy-130, 4, i*pi/5-t/150, "#ffd000")
-				//addPattern(count-1, 100, 2, -0.01, 0.7, "same", "#ffd0d0")
-				addPattern(count-1, 100, 2.5, 0, 2.5, "same", "#00d0d0")
-			}
-		}
+		
 	}
 
 	function mainLoop(){
