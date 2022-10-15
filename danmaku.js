@@ -69,7 +69,8 @@ var dxR = 0;
 var dyU = 0;
 var dyD = 0;
 var fast = true;
-var playerColor = "#ffffff"
+
+var playerColor = "#c0c0c0"
 
 const unfocusSpeed = 3.5;
 const focusSpeed = 1.5;
