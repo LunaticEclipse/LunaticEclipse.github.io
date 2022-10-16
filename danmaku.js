@@ -72,7 +72,7 @@ var fast = true;
 
 var playerColor = "#c0c0c0"
 
-var unfocusSpeed = 3.5;
+var unfocusSpeed = 4;
 var focusSpeed = 1.5;
 var playerSpeed = unfocusSpeed;
 
@@ -217,16 +217,48 @@ function WASD(){
 		  		playerSpeed = focusSpeed;
 		  		break;
 		    case "ArrowUp":
-		      dyU = 1;
+		      if(dxL == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else if (dxR == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else {
+		      	dyU = 1
+		      }
 		      break;
 		    case "ArrowDown":
-		      dyD = 1;
+		      if(dxL == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else if (dxR == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else {
+		      	dyD = 1
+		      }
 		      break;
 		    case "ArrowLeft":
-		      dxL = 1;
+		      if(dyU == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else if (dyD == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else {
+		      	dxL = 1
+		      }
 		      break;
 		    case "ArrowRight":
-		      dxR = 1;
+		      if(dyU == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else if (dyD == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else {
+		      	dxR = 1
+		      }
 		      break;
 		    default:
 		      return; // Quit when this doesn't handle the key event.
@@ -239,17 +271,49 @@ function WASD(){
 					playerSpeed = unfocusSpeed;
 					break;
 			    case "ArrowUp":
-			      dyU = 1;
-			      break;
-			    case "ArrowDown":
-			      dyD = 1;
-			      break;
-			    case "ArrowLeft":
-			      dxL = 1;
-			      break;
-			    case "ArrowRight":
-			      dxR = 1;
-			      break;
+		      if(dxL == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else if (dxR == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else {
+		      	dyU = 1
+		      }
+		      break;
+		    case "ArrowDown":
+		      if(dxL == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else if (dxR == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else {
+		      	dyD = 1
+		      }
+		      break;
+		    case "ArrowLeft":
+		      if(dyU == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else if (dyD == 1){
+		      	dxL = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else {
+		      	dxL = 1
+		      }
+		      break;
+		    case "ArrowRight":
+		      if(dyU == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyU = 1/sqrt(2)
+		      } else if (dyD == 1){
+		      	dxR = 1/sqrt(2)
+		      	dyD = 1/sqrt(2)
+		      } else {
+		      	dxR = 1
+		      }
+		      break;
 			    default:
 			      return; // Quit when this doesn't handle the key event.
 		  }
@@ -274,15 +338,39 @@ function WASD(){
 
 	  switch (event.key) {
 	    case "ArrowUp":
+	      if(dxL > 0){
+	      	dxL = 1
+	      } 
+	      if(dxR > 0){
+	      	dxR = 1
+	      }
 	      dyU = 0;
 	      break;
 	    case "ArrowDown":
+	      if(dxL > 0){
+	      	dxL = 1
+	      } 
+	      if(dxR > 0){
+	      	dxR = 1
+	      }
 	      dyD = 0;
 	      break;
 	    case "ArrowLeft":
+	      if(dyU > 0){
+	      	dyU = 1
+	      } 
+	      if(dyD > 0){
+	      	dyD = 1
+	      }
 	      dxL = 0;
 	      break;
 	    case "ArrowRight":
+	      if(dyU > 0){
+	      	dyU = 1
+	      } 
+	      if(dyD > 0){
+	      	dyD = 1
+	      }
 	      dxR = 0;
 	      break;
 	    default:
@@ -353,7 +441,7 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	//ctx.fillText(fps, 100, 50);
+	//ctx.fillText(fps, 1300, 700)
 
 
 
