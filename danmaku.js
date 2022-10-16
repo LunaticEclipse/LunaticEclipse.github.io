@@ -462,6 +462,8 @@ function draw(){
 	ctx.closePath();
 
 
+
+
 	//player movement
 	if(x>=5) x -= dxL*playerSpeed;
   	if(x<=canvas.width-5) x += dxR*playerSpeed;
