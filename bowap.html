@@ -22,15 +22,15 @@
 
 <script>
 	// player starting position!!
-	var x = cx-50;
-	var y = 600;
+	var x = cx;
+	var y = cy+200;
 
 	var toggle = true;
 
 	function pattern(){
-		if(t%4==1){
+		if(t%3==1){
 			for(let i = 0; i < 6; i++){
-				let j = i*pi/3+sq(t/60)
+				let j = i*pi/3+sq(t)/7200
 				//let j = i*pi/3+pi*sin(t/90)
 				shoot1(cx, 250, 2.5, j, "#ff00ff");
 			}
