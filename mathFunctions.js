@@ -1,11 +1,15 @@
 var pi = Math.PI;
 
-function sqrt(x){
-	return Math.sqrt(x);
+function random(x){
+	return Math.floor(Math.random()*x);
 }
 
 function sq(x){
 	return Math.pow(x,2);
+}
+
+function sqrt(x){
+	return Math.sqrt(x);
 }
 
 function abs(x){
