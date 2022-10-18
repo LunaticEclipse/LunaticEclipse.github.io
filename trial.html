@@ -32,29 +32,16 @@
 	var y = cy;
 	toggle = true;
 
-	var elem = document.getElementById("danmaku");
-	elem.requestFullscreen();
+	
 	
 	function pattern(){
-		if(t%2 == 0){
-			shoot(cx-150*cos(t/20), cy-150*sin(t/20), 0, t/20 +pi, "#00ffff")
-			addPattern(count-1, 60, 0, 0.01, 1, "same", "#00ffff")
-			shoot(cx+150*cos(t/20), cy+150*sin(t/20), 0, t/20, "#00ffff")
-			addPattern(count-1, 60, 0, 0.01, 1, "same", "#00ffff")
+		if(t%20==0){
+			shootRing(cx,cy-100,3, ((t/20)%2)*pi/32,32,0,"#00ff00")
+
+			for(let i = 1; i<=64; i++){
+				bullets[count-i].size = "large";
+			}
 		}
-		if(t%6 == 0){
-			//shoot(cx+350*cos(t/20), cy+350*sin(t/20), 0, t/20 + pi, "#ff00ff")
-			//addPattern(count-1, 60, 0, 0.01, 1, "same", "#000000")
-
-		}
-
-		if(t%25 == 0){
-			shoot(cx+300, cy+150*sin(t/23), 4, pi, "#ff0000")
-			shoot(cx-300, cy+150*sin(t/17), 4, 0, "#ff0000")
-
-		}
-
-
 	}
 
 	function mainLoop(){

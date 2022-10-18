@@ -78,6 +78,12 @@ var playerSpeed = unfocusSpeed;
 
 
 
+const bulletSize = 10;
+const bulletSizeL = 20;
+const bulletSizeS = 5;
+
+
+
 
 
 
@@ -98,6 +104,9 @@ function aim(x, y, tx, ty){
 
 /*
 BULLET ATTRIBUTES:
+size			"large" = 20;	"small" = 5;	otherwise = 10
+(see the const bulletSize)
+
 x, y, vx, vy	[self-explanatory]
 color	 		string of hex-code ("#000000"), can also be integer (for some reasons?)
 
@@ -485,6 +494,7 @@ function draw(){
 // handle addPattern
 	for(let i = 0; i<countQ; i++){
 
+
 		if(queue[i].delay == 0){
 			
 			bullets[queue[i].index].flag = "acc";
@@ -519,6 +529,12 @@ function draw(){
 
 // handle aura
   	for (let i = 0; i<count; i++){
+  		let r = bulletSize;
+  		if(bullets[i].size == "large"){
+  			r = bulletSizeL;
+  		} else if(bullets[i].size == "small"){
+  			r = bulletSizeS;
+  		}
 
 		// rendering the glow of bright bullets
 		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
@@ -533,25 +549,25 @@ function draw(){
 					if(bullets[i].hit){
 						//red bullets have brighter aura (30)
 
-						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 30);
+						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, r, bullets[i].x, bullets[i].y, 3*r);
 						grd.addColorStop(0, bullets[i].color);
 						grd.addColorStop(1, hexToRgbA(bullets[i].color));
 						ctx.fillStyle = grd;
 
 						ctx.beginPath();
-						ctx.arc(bullets[i].x, bullets[i].y, 30, 0, pi*2);
+						ctx.arc(bullets[i].x, bullets[i].y, 3*r, 0, pi*2);
 						ctx.fill();
 						ctx.closePath();
 					} else {
 						//regular bullet aura (20)
 
-						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, 10, bullets[i].x, bullets[i].y, 20);
+						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, r, bullets[i].x, bullets[i].y, 2*r);
 						grd.addColorStop(0, bullets[i].color);
 						grd.addColorStop(1, hexToRgbA(bullets[i].color));
 						ctx.fillStyle = grd;
 
 						ctx.beginPath();
-						ctx.arc(bullets[i].x, bullets[i].y, 20, 0, pi*2);
+						ctx.arc(bullets[i].x, bullets[i].y, 2*r, 0, pi*2);
 						ctx.fill();
 						ctx.closePath();
 					}
@@ -566,7 +582,12 @@ function draw(){
 
   	//handling bullets
 	for (let i = 0; i<count; i++){
-
+		let r = bulletSize;
+  		if(bullets[i].size == "large"){
+  			r = bulletSizeL;
+  		} else if(bullets[i].size == "small"){
+  			r = bulletSizeS;
+  		}
 
 		//if bullets are in loading zone
 		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
@@ -583,7 +604,7 @@ function draw(){
 					else ctx.fillStyle = "#FFFFFF"
 
 					ctx.beginPath();
-					ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);
+					ctx.arc(bullets[i].x, bullets[i].y, r, 0, pi*2);
 					ctx.fill();
 					ctx.closePath();
 
@@ -614,7 +635,7 @@ function draw(){
 
 
 			//hit detection 
-			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= 100){
+			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= r*r){
 
 				//change color to red (but only when it is standard monochromic bullet)
 				
