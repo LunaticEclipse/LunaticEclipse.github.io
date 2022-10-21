@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+<canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
+
+
+<p id="1"></p>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+
+	var x = cx;
+	var y = cy+200;
+	toggle = true;
+
+	
+	
+	function pattern(){
+
+		if(t%50 == 0){
+			shootRing(cx, cy-150, 2, (t/50)*pi/32, 32, 0, "#ff00ff")
+		}
+
+
+		var wave = pi/30*sin(t/16) + t/400;
+
+		shoot(cx,cy-200,15,wave,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx,cy-200,15,wave+pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx,cy-200,15,wave+2*pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx,cy-200,15,wave+pi,"#ff0000")
+		bullets[count-1].size = "small"
+
+
+		shoot(cx-300,cy,15,wave-pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx-300,cy,15,wave,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx-300,cy,15,wave+pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx-300,cy,15,wave+2*pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+
+		shoot(cx+300,cy,15,wave+pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx+300,cy,15,wave+2*pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx+300,cy,15,wave+pi,"#ff0000")
+		bullets[count-1].size = "small"
+		shoot(cx+300,cy,15,wave+4*pi/3,"#ff0000")
+		bullets[count-1].size = "small"
+	}
+
+	function mainLoop(){
+		pattern();
+		WASD();
+		draw();
+		
+		t++;
+	}
+	setInterval(mainLoop, 10);	
+
+</script>
+
+
+
+</body>
+</html>
