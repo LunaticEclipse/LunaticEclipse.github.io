@@ -232,7 +232,7 @@ function WASD(){
 		      } else if (dxR == 1){
 		      	dxR = 1/sqrt(2)
 		      	dyU = 1/sqrt(2)
-		      } else {
+		      } else if (dyU == 0){
 		      	dyU = 1
 		      }
 		      break;
@@ -243,7 +243,7 @@ function WASD(){
 		      } else if (dxR == 1){
 		      	dxR = 1/sqrt(2)
 		      	dyD = 1/sqrt(2)
-		      } else {
+		      } else if (dyD == 0){
 		      	dyD = 1
 		      }
 		      break;
@@ -254,7 +254,7 @@ function WASD(){
 		      } else if (dyD == 1){
 		      	dxL = 1/sqrt(2)
 		      	dyD = 1/sqrt(2)
-		      } else {
+		      } else if (dxL == 0){
 		      	dxL = 1
 		      }
 		      break;
@@ -265,7 +265,7 @@ function WASD(){
 		      } else if (dyD == 1){
 		      	dxR = 1/sqrt(2)
 		      	dyD = 1/sqrt(2)
-		      } else {
+		      } else if (dxR == 0){
 		      	dxR = 1
 		      }
 		      break;
@@ -286,7 +286,7 @@ function WASD(){
 			      } else if (dxR == 1){
 			      	dxR = 1/sqrt(2)
 			      	dyU = 1/sqrt(2)
-			      } else {
+			      } else if (dyU == 0){
 			      	dyU = 1
 			      }
 			      break;
@@ -297,7 +297,7 @@ function WASD(){
 			      } else if (dxR == 1){
 			      	dxR = 1/sqrt(2)
 			      	dyD = 1/sqrt(2)
-			      } else {
+			      } else if (dyD == 0){
 			      	dyD = 1
 			      }
 			      break;
@@ -308,7 +308,7 @@ function WASD(){
 			      } else if (dyD == 1){
 			      	dxL = 1/sqrt(2)
 			      	dyD = 1/sqrt(2)
-			      } else {
+			      } else if (dxL == 0){
 			      	dxL = 1
 			      }
 			      break;
@@ -319,7 +319,7 @@ function WASD(){
 			      } else if (dyD == 1){
 			      	dxR = 1/sqrt(2)
 			      	dyD = 1/sqrt(2)
-			      } else {
+			      } else if (dxR == 0){
 			      	dxR = 1
 			      }
 			      break;
@@ -450,10 +450,10 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(dxL, 100, 200)
-	ctx.fillText(dxR, 100, 230)
-	ctx.fillText(dyU, 100, 260)
-	ctx.fillText(dyD, 100, 290)
+	ctx.fillText(dxL, 100, 290)
+	ctx.fillText(dxR, 300, 230)
+	ctx.fillText(dyU, 200, 200)
+	ctx.fillText(dyD, 200, 260)
 	ctx.fillText(queue[2].v, 1300, 700)
 	ctx.fillText(queue[2].v2, 1300, 730)
 
