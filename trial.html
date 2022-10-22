@@ -29,18 +29,16 @@
 <script>
 
 	var x = cx;
-	var y = cy;
+	var y = cy+300;
 	toggle = true;
 
 	
 	
 	function pattern(){
-		if(t%20==0){
-			shootRing(cx,cy-100,3, ((t/20)%2)*pi/32,32,0,"#00ff00")
-
-			for(let i = 1; i<=64; i++){
-				bullets[count-i].size = "large";
-			}
+		if(t%999999 == 0){
+			shoot(cx,cy-200,5,pi/2,"#aa00aa")
+			addPattern(count-1, 30, 5, 0, 5, pi/2+pi/2, "#aa00aa")
+			//addPattern(count-1, 60, 5, 0, 5, pi/2, "#aa00aa")
 		}
 	}
 

@@ -73,7 +73,7 @@ var fast = true;
 var playerColor = "#c0c0c0"
 
 var unfocusSpeed = 4;
-var focusSpeed = 1.5;
+var focusSpeed = 2;
 var playerSpeed = unfocusSpeed;
 
 
@@ -165,7 +165,7 @@ function shootRing(x, y, v, angle, member, r, color){
 	var i = 0;
 	while(i<member){
 		var a = angle + i*2*pi/member;
-		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), v:v, spin:0, angle:angle, color:color};
+		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), v:v, spin:0, angle:a, color:color};
 		count += 1;
 		i += 1;
 	}
@@ -280,49 +280,49 @@ function WASD(){
 					playerSpeed = unfocusSpeed;
 					break;
 			    case "ArrowUp":
-		      if(dxL == 1){
-		      	dxL = 1/sqrt(2)
-		      	dyU = 1/sqrt(2)
-		      } else if (dxR == 1){
-		      	dxR = 1/sqrt(2)
-		      	dyU = 1/sqrt(2)
-		      } else {
-		      	dyU = 1
-		      }
-		      break;
-		    case "ArrowDown":
-		      if(dxL == 1){
-		      	dxL = 1/sqrt(2)
-		      	dyD = 1/sqrt(2)
-		      } else if (dxR == 1){
-		      	dxR = 1/sqrt(2)
-		      	dyD = 1/sqrt(2)
-		      } else {
-		      	dyD = 1
-		      }
-		      break;
-		    case "ArrowLeft":
-		      if(dyU == 1){
-		      	dxL = 1/sqrt(2)
-		      	dyU = 1/sqrt(2)
-		      } else if (dyD == 1){
-		      	dxL = 1/sqrt(2)
-		      	dyD = 1/sqrt(2)
-		      } else {
-		      	dxL = 1
-		      }
-		      break;
-		    case "ArrowRight":
-		      if(dyU == 1){
-		      	dxR = 1/sqrt(2)
-		      	dyU = 1/sqrt(2)
-		      } else if (dyD == 1){
-		      	dxR = 1/sqrt(2)
-		      	dyD = 1/sqrt(2)
-		      } else {
-		      	dxR = 1
-		      }
-		      break;
+			      if(dxL == 1){
+			      	dxL = 1/sqrt(2)
+			      	dyU = 1/sqrt(2)
+			      } else if (dxR == 1){
+			      	dxR = 1/sqrt(2)
+			      	dyU = 1/sqrt(2)
+			      } else {
+			      	dyU = 1
+			      }
+			      break;
+			    case "ArrowDown":
+			      if(dxL == 1){
+			      	dxL = 1/sqrt(2)
+			      	dyD = 1/sqrt(2)
+			      } else if (dxR == 1){
+			      	dxR = 1/sqrt(2)
+			      	dyD = 1/sqrt(2)
+			      } else {
+			      	dyD = 1
+			      }
+			      break;
+			    case "ArrowLeft":
+			      if(dyU == 1){
+			      	dxL = 1/sqrt(2)
+			      	dyU = 1/sqrt(2)
+			      } else if (dyD == 1){
+			      	dxL = 1/sqrt(2)
+			      	dyD = 1/sqrt(2)
+			      } else {
+			      	dxL = 1
+			      }
+			      break;
+			    case "ArrowRight":
+			      if(dyU == 1){
+			      	dxR = 1/sqrt(2)
+			      	dyU = 1/sqrt(2)
+			      } else if (dyD == 1){
+			      	dxR = 1/sqrt(2)
+			      	dyD = 1/sqrt(2)
+			      } else {
+			      	dxR = 1
+			      }
+			      break;
 			    default:
 			      return; // Quit when this doesn't handle the key event.
 		  }
@@ -450,7 +450,12 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	//ctx.fillText(fps, 1300, 700)
+	ctx.fillText(dxL, 100, 200)
+	ctx.fillText(dxR, 100, 230)
+	ctx.fillText(dyU, 100, 260)
+	ctx.fillText(dyD, 100, 290)
+	ctx.fillText(queue[2].v, 1300, 700)
+	ctx.fillText(queue[2].v2, 1300, 730)
 
 
 
@@ -523,6 +528,8 @@ function draw(){
 			queue[i].delay--;
 		}
 	}
+
+
 
   	
 
