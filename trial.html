@@ -33,10 +33,23 @@
 	toggle = true;
 
 	
-	
+	var temp = 1;
 	function pattern(){
-		if(t%20 == 0){
-			shootRing(cx,cy-200,3,pi/2,16,50,"#aa00aa")
+		if(t%8 == 0){
+			for(let i = 0; i<5; i++){
+
+				shoot(cx+210*cos(i*2*pi/5+pi/2), (cy-150)+210*sin(i*2*pi/5+pi/2), 1, temp*t/50+i*2*pi/5+pi/2,"#aa00aa")
+				shoot(cx+210*cos(i*2*pi/5+pi/2), (cy-150)+210*sin(i*2*pi/5+pi/2), 1, -temp*t/50+i*2*pi/5+pi/2,"#aa00aa")
+
+				temp = cos(t/1000);
+			}
+		}
+
+		if(t%40 == 0){
+			for(let i = 0; i<3; i++){
+				shoot(cx+210*cos(t/100+i*2*pi/3+pi/2), (cy-150)+210*sin(t/100+i*2*pi/3+pi/2), 1, Math.random()*3*pi/4 + pi,"#ffd700")
+				addPattern(count-1, 50, 1, 0, 1, aim(bullets[count-1].x, bullets[count-1].y, x, y), "#ffd700")
+			}
 		}
 	}
 

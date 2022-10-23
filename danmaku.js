@@ -73,7 +73,7 @@ var fast = true;
 var playerColor = "#c0c0c0"
 
 var unfocusSpeed = 4;
-var focusSpeed = 2;
+var focusSpeed = 1.5;
 var playerSpeed = unfocusSpeed;
 
 
@@ -260,8 +260,6 @@ function draw(){
 
 		if(queue[i].delay == 0){
 
-			alert("queue[" + i + "] triggered")
-
 			//ensure the addPattern is never activated again
 			queue[i].delay = -1
 			
@@ -414,7 +412,7 @@ function draw(){
 
 
 			//hit detection 
-			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= r*r){
+			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= (r-4)*(r-4)){
 
 				//change color to red (but only when it is standard monochromic bullet)
 				
@@ -425,6 +423,7 @@ function draw(){
 				// flag bullet as hit
 				bullets[i].hit = 1;
 			}
+
 
 
 			//handle shootAcc
