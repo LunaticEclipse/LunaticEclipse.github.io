@@ -35,10 +35,8 @@
 	
 	
 	function pattern(){
-		if(t%999999 == 0){
-			shoot(cx,cy-200,5,pi/2,"#aa00aa")
-			addPattern(count-1, 30, 5, 0, 5, pi/2+pi/2, "#aa00aa")
-			//addPattern(count-1, 60, 5, 0, 5, pi/2, "#aa00aa")
+		if(t%20 == 0){
+			shootRing(cx,cy-200,3,pi/2,16,50,"#aa00aa")
 		}
 	}
 

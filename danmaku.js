@@ -198,6 +198,256 @@ function addPattern(index, delay, v1, a, v2, angle, color){
 
 
 
+function draw(){
+
+	//refreshing screen
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+
+
+
+
+
+	//drawing spell card title
+	//OVERRIDE!! FPS DISPLAY
+	requestAnimFrame();
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "#FF0000";
+	//ctx.fillText(fps, 100, 100)
+	
+
+
+
+
+
+
+
+	//drawing the player
+	ctx.beginPath();
+	ctx.arc(x, y, 5, 0, pi*2);	
+	console.log(fast)	
+	if(!toggle){
+		ctx.fillStyle = "#0000FF";
+	} else {
+		ctx.fillStyle = playerColor;
+	} 
+	ctx.fill();
+	ctx.closePath();
+
+
+
+
+	//player movement
+	if(x>=5) x -= dxL*playerSpeed;
+  	if(x<=canvas.width-5) x += dxR*playerSpeed;
+  	if(y<=canvas.height-5) y += dyD*playerSpeed;
+  	if(y>=5) y -= dyU*playerSpeed;
+
+
+
+
+
+
+
+
+
+
+//BULLET DEPARTMENT
+
+
+// handle addPattern
+	for(let i = 0; i<countQ; i++){
+
+
+		if(queue[i].delay == 0){
+
+			alert("queue[" + i + "] triggered")
+
+			//ensure the addPattern is never activated again
+			queue[i].delay = -1
+			
+
+			//updating the bullet's attribute to the new ones
+			bullets[queue[i].index].flag = "acc";
+			if(queue[i].angle == "aim"){
+				bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
+			} else if(queue[i].angle != "same"){
+				bullets[queue[i].index].angle = queue[i].angle;
+			}
+			bullets[queue[i].index].v = queue[i].v;
+			bullets[queue[i].index].a = queue[i].a;
+			bullets[queue[i].index].v2 = queue[i].v2;
+
+
+
+			// collided bullets stay red
+			if(bullets[queue[i].index].hit != 1){
+				bullets[queue[i].index].color = queue[i].color;
+			}
+			
+			bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
+			bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
+
+
+			
+
+		} else if(queue[i].delay > 0){
+			queue[i].delay--;
+		}
+
+	}
+
+
+
+  	
+
+
+// handle aura
+  	for (let i = 0; i<count; i++){
+  		let r = bulletSize;
+  		if(bullets[i].size == "large"){
+  			r = bulletSizeL;
+  		} else if(bullets[i].size == "small"){
+  			r = bulletSizeS;
+  		}
+
+
+		// rendering the glow of bright bullets
+		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
+
+			if (bullets[i].color.charAt(0) == '#'){
+
+
+				//bullet is a monochromic circle
+				//draw circle at (x,y)
+
+				if (toggle){
+					if(bullets[i].hit){
+						//red bullets have brighter aura (30)
+
+						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, r, bullets[i].x, bullets[i].y, 3*r);
+						grd.addColorStop(0, bullets[i].color);
+						grd.addColorStop(1, hexToRgbA(bullets[i].color));
+						ctx.fillStyle = grd;
+
+						ctx.beginPath();
+						ctx.arc(bullets[i].x, bullets[i].y, 3*r, 0, pi*2);
+						ctx.fill();
+						ctx.closePath();
+					} else {
+						//regular bullet aura (20)
+
+						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, r, bullets[i].x, bullets[i].y, 2*r);
+						grd.addColorStop(0, bullets[i].color);
+						grd.addColorStop(1, hexToRgbA(bullets[i].color));
+						ctx.fillStyle = grd;
+
+						ctx.beginPath();
+						ctx.arc(bullets[i].x, bullets[i].y, 2*r, 0, pi*2);
+						ctx.fill();
+						ctx.closePath();
+					}
+				}
+
+			}
+		}
+
+  	}
+
+
+
+  	//handling bullets
+	for (let i = 0; i<count; i++){
+		let r = bulletSize;
+  		if(bullets[i].size == "large"){
+  			r = bulletSizeL;
+  		} else if(bullets[i].size == "small"){
+  			r = bulletSizeS;
+  		}
+
+		//if bullets are in loading zone
+		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
+			
+			if (bullets[i].color.charAt(0) == '#'){
+
+
+				//bullet is a monochromic circle
+				//draw circle at (x,y)
+
+				if (toggle){
+					if(bullets[i].hit)	ctx.fillStyle = "#FFD8D8";
+					else if(bullets[i].negative) 	ctx.fillStyle = "#000000";
+					else ctx.fillStyle = "#FFFFFF"
+
+					ctx.beginPath();
+					ctx.arc(bullets[i].x, bullets[i].y, r, 0, pi*2);
+					ctx.fill();
+					ctx.closePath();
+
+				} else {
+					ctx.beginPath();
+					ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
+					ctx.fillStyle = bullets[i].color;
+					ctx.fill();
+					ctx.closePath();
+				}
+
+
+
+			} else {
+
+				//bullet is of a special type, draw from Default_Shot.png
+				
+				var a = shotType(bullets[i].color);
+				ctx.drawImage(shot,a[0],a[1],a[2]-a[0],a[3]-a[1],bullets[i].x,bullets[i].y, a[2]-a[0], a[3]-a[1]);
+			}
+
+
+
+
+
+			//moving the bullet
+			bullets[i].x += bullets[i].vx;							
+			bullets[i].y += bullets[i].vy;
+
+
+
+
+
+			//hit detection 
+			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= r*r){
+
+				//change color to red (but only when it is standard monochromic bullet)
+				
+				if (bullets[i].color.charAt(0) == '#'){
+					bullets[i].color = "#FF0000";
+				}
+
+				// flag bullet as hit
+				bullets[i].hit = 1;
+			}
+
+
+			//handle shootAcc
+			if(bullets[i].flag == "acc"){
+
+				//slow down for negative a
+				//speed up 	for positive a
+				if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
+					bullets[i].v += bullets[i].a;
+					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+				} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
+					bullets[i].v += bullets[i].a;
+					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+				}
+			}
+
+		}
+	}
+}
+
+
 
 
 
@@ -430,251 +680,6 @@ function shotType(type){
 
 	}
 }
-
-
-
-
-
-function draw(){
-
-	//refreshing screen
-	ctx.clearRect(0,0,canvas.width,canvas.height);
-
-
-
-
-
-	//drawing spell card title
-	//OVERRIDE!! FPS DISPLAY
-
-	requestAnimFrame();
-	ctx.font = "30px Arial";
-	ctx.fillStyle = "#FF0000";
-	ctx.fillText(dxL, 100, 290)
-	ctx.fillText(dxR, 300, 230)
-	ctx.fillText(dyU, 200, 200)
-	ctx.fillText(dyD, 200, 260)
-	ctx.fillText(queue[2].v, 1300, 700)
-	ctx.fillText(queue[2].v2, 1300, 730)
-
-
-
-
-
-
-
-	//drawing the player
-	ctx.beginPath();
-	ctx.arc(x, y, 5, 0, pi*2);	
-	console.log(fast)	
-	if(!toggle){
-		ctx.fillStyle = "#0000FF";
-	} else {
-		ctx.fillStyle = playerColor;
-	} 
-	ctx.fill();
-	ctx.closePath();
-
-
-
-
-	//player movement
-	if(x>=5) x -= dxL*playerSpeed;
-  	if(x<=canvas.width-5) x += dxR*playerSpeed;
-  	if(y<=canvas.height-5) y += dyD*playerSpeed;
-  	if(y>=5) y -= dyU*playerSpeed;
-
-
-
-
-
-
-
-
-
-
-//BULLET DEPARTMENT
-
-
-// handle addPattern
-	for(let i = 0; i<countQ; i++){
-
-
-		if(queue[i].delay == 0){
-			
-			bullets[queue[i].index].flag = "acc";
-			if(queue[i].angle == "aim"){
-				bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
-			} else if(queue[i].angle != "same"){
-				bullets[queue[i].index].angle = queue[i].angle;
-			}
-			bullets[queue[i].index].v = queue[i].v;
-			bullets[queue[i].index].a = queue[i].a;
-			bullets[queue[i].index].v2 = queue[i].v2;
-			bullets[queue[i].index].negative = bullets[i].negative;
-
-			// collided bullets stay red
-			if(bullets[queue[i].index].hit != 1){
-				bullets[queue[i].index].color = queue[i].color;
-			}
-			
-			bullets[queue[i].index].vx = bullets[i].v*cos(bullets[i].angle);		
-			bullets[queue[i].index].vy = bullets[i].v*sin(bullets[i].angle);
-
-
-			queue[i].delay = -1;
-
-		} else if(queue[i].delay > 0){
-			queue[i].delay--;
-		}
-	}
-
-
-
-  	
-
-
-// handle aura
-  	for (let i = 0; i<count; i++){
-  		let r = bulletSize;
-  		if(bullets[i].size == "large"){
-  			r = bulletSizeL;
-  		} else if(bullets[i].size == "small"){
-  			r = bulletSizeS;
-  		}
-
-		// rendering the glow of bright bullets
-		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
-
-			if (bullets[i].color.charAt(0) == '#'){
-
-
-				//bullet is a monochromic circle
-				//draw circle at (x,y)
-
-				if (toggle){
-					if(bullets[i].hit){
-						//red bullets have brighter aura (30)
-
-						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, r, bullets[i].x, bullets[i].y, 3*r);
-						grd.addColorStop(0, bullets[i].color);
-						grd.addColorStop(1, hexToRgbA(bullets[i].color));
-						ctx.fillStyle = grd;
-
-						ctx.beginPath();
-						ctx.arc(bullets[i].x, bullets[i].y, 3*r, 0, pi*2);
-						ctx.fill();
-						ctx.closePath();
-					} else {
-						//regular bullet aura (20)
-
-						var grd = ctx.createRadialGradient(bullets[i].x, bullets[i].y, r, bullets[i].x, bullets[i].y, 2*r);
-						grd.addColorStop(0, bullets[i].color);
-						grd.addColorStop(1, hexToRgbA(bullets[i].color));
-						ctx.fillStyle = grd;
-
-						ctx.beginPath();
-						ctx.arc(bullets[i].x, bullets[i].y, 2*r, 0, pi*2);
-						ctx.fill();
-						ctx.closePath();
-					}
-				}
-
-			}
-		}
-
-  	}
-
-
-
-  	//handling bullets
-	for (let i = 0; i<count; i++){
-		let r = bulletSize;
-  		if(bullets[i].size == "large"){
-  			r = bulletSizeL;
-  		} else if(bullets[i].size == "small"){
-  			r = bulletSizeS;
-  		}
-
-		//if bullets are in loading zone
-		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
-			
-			if (bullets[i].color.charAt(0) == '#'){
-
-
-				//bullet is a monochromic circle
-				//draw circle at (x,y)
-
-				if (toggle){
-					if(bullets[i].hit)	ctx.fillStyle = "#FFD8D8";
-					else if(bullets[i].negative) 	ctx.fillStyle = "#000000";
-					else ctx.fillStyle = "#FFFFFF"
-
-					ctx.beginPath();
-					ctx.arc(bullets[i].x, bullets[i].y, r, 0, pi*2);
-					ctx.fill();
-					ctx.closePath();
-
-				} else {
-					ctx.beginPath();
-					ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
-					ctx.fillStyle = bullets[i].color;
-					ctx.fill();
-					ctx.closePath();
-				}
-
-
-
-			} else {
-
-				//bullet is of a special type, draw from Default_Shot.png
-				
-				var a = shotType(bullets[i].color);
-				ctx.drawImage(shot,a[0],a[1],a[2]-a[0],a[3]-a[1],bullets[i].x,bullets[i].y, a[2]-a[0], a[3]-a[1]);
-			}
-
-
-
-			//moving the bullet
-			bullets[i].x += bullets[i].vx;							
-			bullets[i].y += bullets[i].vy;
-
-
-
-			//hit detection 
-			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= r*r){
-
-				//change color to red (but only when it is standard monochromic bullet)
-				
-				if (bullets[i].color.charAt(0) == '#'){
-					bullets[i].color = "#FF0000";
-				}
-
-				// flag bullet as hit
-				bullets[i].hit = 1;
-			}
-
-
-			//handle shootAcc
-			if(bullets[i].flag == "acc"){
-
-				//slow down for negative a
-				//speed up 	for positive a
-				if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
-					bullets[i].v += bullets[i].a;
-					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
-					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
-				} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
-					bullets[i].v += bullets[i].a;
-					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
-					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
-				}
-			}
-
-		}
-	}
-}
-
 
 
 
