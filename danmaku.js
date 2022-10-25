@@ -80,7 +80,7 @@ var playerSpeed = unfocusSpeed;
 
 const bulletSize = 10;
 const bulletSizeL = 20;
-const bulletSizeS = 5;
+const bulletSizeS = 7;
 
 
 
@@ -187,12 +187,16 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 }
 
 
-/////// CONSTRUCTION IN PROGRESS  //////////
+
 function addPattern(index, delay, v1, a, v2, angle, color){
 	queue[countQ] = {index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color}
 	countQ += 1;
 }
-/////// CONSTRUCTION IN PROGRESS  //////////
+
+function addSpin(index, delay, omega, dAngle){
+	queue[countQ] = {index:index, delay:delay, omega:omega, dAngle:dAngle}
+	countQ += 1;
+}
 
 
 
@@ -275,12 +279,18 @@ function draw(){
 			bullets[queue[i].index].a = queue[i].a;
 			bullets[queue[i].index].v2 = queue[i].v2;
 
+			if(queue[i].omega < 0){
+
+			} else if(queue[i].omega >= 0){
+
+			}
 
 
 			// collided bullets stay red
 			if(bullets[queue[i].index].hit != 1){
 				bullets[queue[i].index].color = queue[i].color;
 			}
+
 			
 			bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
 			bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
@@ -412,7 +422,11 @@ function draw(){
 
 
 			//hit detection 
-			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= (r-4)*(r-4)){
+			let hitbox = 0;
+			if(r == bulletSizeS)	hitbox = r-2;
+			else if (r == bulletSize)	hitbox = r/2;
+			else hitbox = r-5;
+			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= hitbox*hitbox){
 
 				//change color to red (but only when it is standard monochromic bullet)
 				
@@ -676,7 +690,30 @@ function shotType(type){
 		case "smallgray":
 			return [84,0,96,12];
 			break;
-
+		case "redscale":
+			return [0,209,17,224];
+			break;
+		case "orangescale":
+			return [18,209,35,224];
+			break;
+		case "yellowscale":
+			return [36,209,53,224];
+			break;
+		case "greenscale":
+			return [54,209,71,224];
+			break;
+		case "cyanscale":
+			return [72,209,89,224];
+			break;
+		case "bluescale":
+			return [90,209,107,224];
+			break;
+		case "purplescale":
+			return [108,209,125,224];
+			break;
+		case "grayscale":
+			return [126,209,143,224];
+			break;
 	}
 }
 
