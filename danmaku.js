@@ -225,17 +225,7 @@ function draw(){
 
 
 
-	//drawing the player
-	ctx.beginPath();
-	ctx.arc(x, y, 5, 0, pi*2);	
-	console.log(fast)	
-	if(!toggle){
-		ctx.fillStyle = "#0000FF";
-	} else {
-		ctx.fillStyle = playerColor;
-	} 
-	ctx.fill();
-	ctx.closePath();
+	
 
 
 
@@ -279,19 +269,24 @@ function draw(){
 			bullets[queue[i].index].a = queue[i].a;
 			bullets[queue[i].index].v2 = queue[i].v2;
 
-			if(queue[i].omega < 0){
 
-			} else if(queue[i].omega >= 0){
-
+			//handling spin
+			if(isNaN(bullets[queue[i].index].totalSpin)){
+				bullets[queue[i].index].totalSpin = 0
+			}
+			if(abs(bullets[queue[i].index].totalSpin) < abs(bullets[queue[i].index].dAngle)){
+				bullets[queue[i].index].totalSpin += queue[i].omega;
+				bullets[queue[i].index].angle += queue[i].omega;
 			}
 
 
-			// collided bullets stay red
+			// handling color change (collided bullets stay red)
 			if(bullets[queue[i].index].hit != 1){
 				bullets[queue[i].index].color = queue[i].color;
 			}
 
 			
+			//updating vx, vy to new angle
 			bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
 			bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
 
@@ -360,6 +355,21 @@ function draw(){
 		}
 
   	}
+
+
+
+  	//drawing the player
+  	//it is drawn here so that it is above aura
+	ctx.beginPath();
+	ctx.arc(x, y, 5, 0, pi*2);	
+	console.log(fast)	
+	if(!toggle){
+		ctx.fillStyle = "#0000FF";
+	} else {
+		ctx.fillStyle = playerColor;
+	} 
+	ctx.fill();
+	ctx.closePath();
 
 
 
@@ -458,6 +468,9 @@ function draw(){
 
 		}
 	}
+
+
+
 }
 
 
