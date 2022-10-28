@@ -41,37 +41,31 @@
 
 	function pattern(){
 
-		if(t%750 == 749){
-			randX = Math.random()*750+350;
-			randY = Math.random()*250+50;
+		for(let i = 0; i<count; i++){
+			//if(bullets[i].color == "#ff0000") bullets[i].angle -= pi/700;
+			//else	bullets[i].angle += pi/700;
 		}
 
-		if(t%10 == 0){
-			 
-			 
+
+		if(t%31 == 0){
+
+			shootRing(sx, sy, 2, 0, 64, 10, "#ff0000")
+			for(let i = 1; i<=64; i++){
+				bullets[count-i].size = "small"
+				addPattern(count-i, 100, 2, 0, 2, bullets[count-i].angle, pi/750, "#ff00ff")
+			}
+			//shootRing(sx, sy, 2, pi/40, 30, 10, "#fe0000")
 			
-			if(abs(randX-sx) > 50) sx += (randX-sx)/abs(randX-sx)*15;
-			if(abs(randY-sy) > 50) sy += (randY-sy)/abs(randY-sy)*15;
+			
+		}
+		if(t%31 == 15){
 
-			for(let i = 0; i<7; i++){
-				shoot(sx,sy,1.5,t/50 + i*pi/10, "#ffa500")
-				shoot(sx,sy,-1.5,t/50 + i*pi/10, "#30d5c8")
-				shoot(sx,sy,1.6,t/50 + i*pi/10, "#ffa500")
-				shoot(sx,sy,-1.6,t/50 + i*pi/10, "#30d5c8")
-				
-				//shoot(450*sin(t/1000)+cx,cy-150,-2,t/50 + i*pi/10, "#ffd000")
-
-				for(let j = 1; j<=4; j++){
-					//bullets[count-j].size = "large"
-				}
+			shootRing(sx, sy, 2, 0, 64, 10, "#ff0000")
+			for(let i = 1; i<=64; i++){
+				bullets[count-i].size = "small"
+				addPattern(count-i, 100, 2, 0, 2, bullets[count-i].angle, -pi/750, "#ff00ff")
 			}
-
-/*
-			for(let i = 0; i<7; i++){
-				shoot(450*sin(t/1000)+cx,cy-150,2,t/50 + i*pi/10, "#ffa500")
-				shoot(450*sin(t/1000)+cx,cy-150,-2,t/50 + i*pi/10, "#ffd000")
-			}
-*/
+			//shootRing(sx, sy, 2, pi/40, 30, 10, "#fe0000")
 			
 			
 		}

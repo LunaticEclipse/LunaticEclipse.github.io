@@ -72,8 +72,8 @@ var fast = true;
 
 var playerColor = "#c0c0c0"
 
-var unfocusSpeed = 4;
-var focusSpeed = 1.5;
+var unfocusSpeed = 3;
+var focusSpeed = 1;
 var playerSpeed = unfocusSpeed;
 
 
@@ -130,11 +130,11 @@ spin 			[useless]
 
 //basic shot
 function shoot1(x, y, v, angle, color){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	count += 1;
 }
 function shoot(x, y, v, angle, color){
-	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	count += 1;
 }
 
@@ -142,10 +142,10 @@ function shoot(x, y, v, angle, color){
 function shoot3(x, y, tx, ty, v, color){
 	if(x > tx){
 		var angle = atan((ty-y)/(tx-x))+pi;
-		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	} else {
 		var angle = atan((ty-y)/(tx-x));
-		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	}
 	count += 1;
 }
@@ -153,10 +153,10 @@ function shoot3(x, y, tx, ty, v, color){
 function shootHoming(x, y, tx, ty, v, color){
 	if(x > tx){
 		var angle = atan((ty-y)/(tx-x))+pi;
-		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	} else {
 		var angle = atan((ty-y)/(tx-x));
-		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color};
+		bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	}
 	count += 1;
 }
@@ -165,14 +165,14 @@ function shootRing(x, y, v, angle, member, r, color){
 	var i = 0;
 	while(i<member){
 		var a = angle + i*2*pi/member;
-		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), v:v, spin:0, angle:a, color:color};
+		bullets[count] = {x:x+r*cos(a), y:y+r*sin(a), vx:v*cos(a), vy:v*sin(a), v:v, spin:0, angle:a, color:color, omega:0};
 		count += 1;
 		i += 1;
 	}
 }
 
 function shootAcc(x, y, v1, a, v2, angle, color){
-	bullets[count] = {flag:"acc", x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v:v1, a:a, v2:v2, angle:angle, color:color};
+	bullets[count] = {flag:"acc", x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v:v1, a:a, v2:v2, angle:angle, color:color, omega:0};
 	count += 1;
 }
 
@@ -180,7 +180,7 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 	var i = 0;
 	while(i<member){
 		var ang = angle + i*2*pi/member;
-		bullets[count] = {flag:"acc", x:x+r*cos(ang), y:y+r*sin(ang), vx:v1*cos(ang), vy:v1*sin(ang), v:v1, a:a, v2:v2, angle:ang, color:color};
+		bullets[count] = {flag:"acc", x:x+r*cos(ang), y:y+r*sin(ang), vx:v1*cos(ang), vy:v1*sin(ang), v:v1, a:a, v2:v2, angle:ang, color:color, omega:0};
 		count += 1;
 		i += 1;
 	}
@@ -188,15 +188,15 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 
 
 
-function addPattern(index, delay, v1, a, v2, angle, color){
-	queue[countQ] = {index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color}
+function addPattern(index, delay, v1, a, v2, angle, omega, color){
+	queue[countQ] = {index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color, omega:omega}
 	countQ += 1;
 }
 
-function addSpin(index, delay, omega, dAngle){
-	queue[countQ] = {index:index, delay:delay, omega:omega, dAngle:dAngle}
-	countQ += 1;
-}
+//function addSpin(index, delay, omega){
+	//queue[countQ] = {index:index, delay:delay, omega:omega}
+	//countQ += 1;
+//}
 
 
 
@@ -216,7 +216,7 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	//ctx.fillText(fps, 100, 100)
+	ctx.fillText(fps, 100, 100)
 	
 
 
@@ -251,7 +251,7 @@ function draw(){
 // handle addPattern
 	for(let i = 0; i<countQ; i++){
 
-
+		console.log(queue[i].omega)
 		if(queue[i].delay == 0){
 
 			//ensure the addPattern is never activated again
@@ -271,13 +271,8 @@ function draw(){
 
 
 			//handling spin
-			if(isNaN(bullets[queue[i].index].totalSpin)){
-				bullets[queue[i].index].totalSpin = 0
-			}
-			if(abs(bullets[queue[i].index].totalSpin) < abs(bullets[queue[i].index].dAngle)){
-				bullets[queue[i].index].totalSpin += queue[i].omega;
-				bullets[queue[i].index].angle += queue[i].omega;
-			}
+
+			bullets[queue[i].index].omega = queue[i].omega;
 
 
 			// handling color change (collided bullets stay red)
@@ -315,7 +310,7 @@ function draw(){
 
 
 		// rendering the glow of bright bullets
-		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
+		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-200 && bullets[i].y<canvas.height+100){
 
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -361,8 +356,7 @@ function draw(){
   	//drawing the player
   	//it is drawn here so that it is above aura
 	ctx.beginPath();
-	ctx.arc(x, y, 5, 0, pi*2);	
-	console.log(fast)	
+	ctx.arc(x, y, 5, 0, pi*2);
 	if(!toggle){
 		ctx.fillStyle = "#0000FF";
 	} else {
@@ -383,7 +377,7 @@ function draw(){
   		}
 
 		//if bullets are in loading zone
-		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-100 && bullets[i].y<canvas.height+100){
+		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-200 && bullets[i].y<canvas.height+100){
 			
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -424,6 +418,9 @@ function draw(){
 
 
 			//moving the bullet
+			bullets[i].angle += bullets[i].omega;
+			bullets[i].vx = bullets[i].v * cos(bullets[i].angle)
+			bullets[i].vy = bullets[i].v * sin(bullets[i].angle)
 			bullets[i].x += bullets[i].vx;							
 			bullets[i].y += bullets[i].vy;
 
@@ -490,8 +487,6 @@ function WASD(){
 	  if (event.defaultPrevented) {
 	    return; // Do nothing if the event was already processed
 	  }
-
-	 // console.log(event.key)
 
 
 	  if(fast){

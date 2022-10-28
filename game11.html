@@ -41,6 +41,10 @@
 
 	function pattern(){
 
+		for(let i = 0; i<count; i++){
+			bullets[i].angle -= pi/900
+		}
+
 		if(t%750 == 749){
 			randX = Math.random()*750+350;
 			randY = Math.random()*250+50;
