@@ -68,7 +68,7 @@ var dxL = 0;
 var dxR = 0;
 var dyU = 0;
 var dyD = 0;
-var fast = true;
+//var fast = true;
 
 var playerColor = "#c0c0c0"
 
@@ -485,10 +485,10 @@ function WASD(){
 	  }
 
 
-	  if(fast){
+	  //if(fast){
 		  switch (event.key) {
 		  	case "Shift":
-		  		fast = false;
+		  		//fast = false;
 		  		playerColor = "#ffd700"
 		  		playerSpeed = focusSpeed;
 		  		break;
@@ -539,61 +539,7 @@ function WASD(){
 		    default:
 		      return; // Quit when this doesn't handle the key event.
 		  }
-		} else {
-			switch (event.key) {
-				case "Shift":
-					fast = true;
-					playerColor = "#c0c0c0"
-					playerSpeed = unfocusSpeed;
-					break;
-			    case "ArrowUp":
-			      if(dxL == 1){
-			      	dxL = 1/sqrt(2)
-			      	dyU = 1/sqrt(2)
-			      } else if (dxR == 1){
-			      	dxR = 1/sqrt(2)
-			      	dyU = 1/sqrt(2)
-			      } else if (dyU == 0){
-			      	dyU = 1
-			      }
-			      break;
-			    case "ArrowDown":
-			      if(dxL == 1){
-			      	dxL = 1/sqrt(2)
-			      	dyD = 1/sqrt(2)
-			      } else if (dxR == 1){
-			      	dxR = 1/sqrt(2)
-			      	dyD = 1/sqrt(2)
-			      } else if (dyD == 0){
-			      	dyD = 1
-			      }
-			      break;
-			    case "ArrowLeft":
-			      if(dyU == 1){
-			      	dxL = 1/sqrt(2)
-			      	dyU = 1/sqrt(2)
-			      } else if (dyD == 1){
-			      	dxL = 1/sqrt(2)
-			      	dyD = 1/sqrt(2)
-			      } else if (dxL == 0){
-			      	dxL = 1
-			      }
-			      break;
-			    case "ArrowRight":
-			      if(dyU == 1){
-			      	dxR = 1/sqrt(2)
-			      	dyU = 1/sqrt(2)
-			      } else if (dyD == 1){
-			      	dxR = 1/sqrt(2)
-			      	dyD = 1/sqrt(2)
-			      } else if (dxR == 0){
-			      	dxR = 1
-			      }
-			      break;
-			    default:
-			      return; // Quit when this doesn't handle the key event.
-		  }
-		}
+		
 
 	  // Cancel the default action to avoid it being handled twice
 	  event.preventDefault();
@@ -613,6 +559,11 @@ function WASD(){
 	  }
 
 	  switch (event.key) {
+	  	case "Shift":
+	  		//fast = false;
+	  		playerColor = "#c0c0c0"
+	  		playerSpeed = unfocusSpeed;
+	  		break;
 	    case "ArrowUp":
 	      if(dxL > 0){
 	      	dxL = 1
