@@ -306,7 +306,7 @@ function draw(){
 
 
 		// rendering the glow of bright bullets
-		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-200 && bullets[i].y<canvas.height+100){
+		if(loaded(i)){
 
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -373,7 +373,7 @@ function draw(){
   		}
 
 		//if bullets are in loading zone
-		if(bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-200 && bullets[i].y<canvas.height+100){
+		if(loaded(i)){
 			
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -615,7 +615,13 @@ function WASD(){
 }
 
 
-
+function loaded(i){
+	if (bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-200 && bullets[i].y<canvas.height+100){
+		return true;
+	} else {
+		return false;
+	}
+}
 
 
 
