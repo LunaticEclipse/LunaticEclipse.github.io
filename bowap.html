@@ -27,12 +27,14 @@
 
 	var toggle = true;
 
+	t = -40
+
 	function pattern(){
-		if(t%3==1){
+		if(abs(t)%3==0){
 			for(let i = 0; i < 6; i++){
 				let j = i*pi/3+sq(t)/7200
 				//let j = i*pi/3+pi*sin(t/90)
-				shoot1(cx, 250, 2.5, j, "#ff00ff");
+				shoot1(cx, cy-150, 3.5, j, "#ff00ff");
 
 			}
 		}

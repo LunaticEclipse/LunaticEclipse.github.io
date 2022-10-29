@@ -40,7 +40,8 @@ shot.src = "img/Default_Shot.png";
 var cx = canvas.width/2;
 var cy = canvas.height/2;
 
-
+//death count
+var deathCount = 0;
 
 //title of spell cards
 var title = 0;
@@ -125,6 +126,16 @@ delay 			delay before replacing the bullet
 	[unit: 5ms  (e.g. delay=10 means a 50ms delay)]
 
 spin 			[useless]
+
+
+
+QUEUE SPECIAL CASES:
+angle	--		"aim"	->	aim at player (wonky at times, prob because arctan)
+				"same"	->	retain previous angle
+
+v 		--		"same"	->	initial speed same as before
+
+omega	--		"orbit"	->	orbit around (cx, cy) clockwise
 */
 
 
@@ -212,7 +223,7 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	//ctx.fillText(fps, 100, 100)
+	ctx.fillText(deathCount, 100, 100)
 	
 
 
@@ -247,45 +258,48 @@ function draw(){
 // handle addPattern
 	for(let i = 0; i<countQ; i++){
 
-		console.log(queue[i].omega)
-		if(queue[i].delay == 0){
+		if(loaded(queue[i].index)){
 
-			//ensure the addPattern is never activated again
-			queue[i].delay = -1
-			
+			if(queue[i].delay == 0){
 
-			//updating the bullet's attribute to the new ones
-			bullets[queue[i].index].flag = "acc";
-			if(queue[i].angle == "aim"){
-				bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
-			} else if(queue[i].angle != "same"){
-				bullets[queue[i].index].angle = queue[i].angle;
+				//ensure the addPattern is never activated again
+				queue[i].delay = -1
+				
+
+				//updating the bullet's attribute to the new ones
+				bullets[queue[i].index].flag = "acc";
+				if(queue[i].angle == "aim"){
+					bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
+				} else if(queue[i].angle != "same"){
+					bullets[queue[i].index].angle = queue[i].angle;
+				}
+				if(queue[i].v != "same") bullets[queue[i].index].v = queue[i].v;
+				bullets[queue[i].index].a = queue[i].a;
+				bullets[queue[i].index].v2 = queue[i].v2;
+
+
+				//handling spin
+
+				bullets[queue[i].index].omega = queue[i].omega;
+
+
+				// handling color change (collided bullets stay red)
+				if(bullets[queue[i].index].hit != 1){
+					bullets[queue[i].index].color = queue[i].color;
+				}
+
+				
+				//updating vx, vy to new angle
+				bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
+				bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
+
+
+				
+
+			} else if(queue[i].delay > 0){
+				queue[i].delay--;
 			}
-			bullets[queue[i].index].v = queue[i].v;
-			bullets[queue[i].index].a = queue[i].a;
-			bullets[queue[i].index].v2 = queue[i].v2;
 
-
-			//handling spin
-
-			bullets[queue[i].index].omega = queue[i].omega;
-
-
-			// handling color change (collided bullets stay red)
-			if(bullets[queue[i].index].hit != 1){
-				bullets[queue[i].index].color = queue[i].color;
-			}
-
-			
-			//updating vx, vy to new angle
-			bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
-			bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
-
-
-			
-
-		} else if(queue[i].delay > 0){
-			queue[i].delay--;
 		}
 
 	}
@@ -297,16 +311,18 @@ function draw(){
 
 // handle aura
   	for (let i = 0; i<count; i++){
-  		let r = bulletSize;
-  		if(bullets[i].size == "large"){
-  			r = bulletSizeL;
-  		} else if(bullets[i].size == "small"){
-  			r = bulletSizeS;
-  		}
-
 
 		// rendering the glow of bright bullets
 		if(loaded(i)){
+
+
+	  		let r = bulletSize;
+	  		if(bullets[i].size == "large"){
+	  			r = bulletSizeL;
+	  		} else if(bullets[i].size == "small"){
+	  			r = bulletSizeS;
+	  		}
+
 
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -363,17 +379,23 @@ function draw(){
 
 
 
+
   	//handling bullets
 	for (let i = 0; i<count; i++){
-		let r = bulletSize;
-  		if(bullets[i].size == "large"){
-  			r = bulletSizeL;
-  		} else if(bullets[i].size == "small"){
-  			r = bulletSizeS;
-  		}
+		
 
 		//if bullets are in loading zone
 		if(loaded(i)){
+
+
+			let r = bulletSize;
+	  		if(bullets[i].size == "large"){
+	  			r = bulletSizeL;
+	  		} else if(bullets[i].size == "small"){
+	  			r = bulletSizeS;
+	  		}
+
+
 			
 			if (bullets[i].color.charAt(0) == '#'){
 
@@ -414,7 +436,8 @@ function draw(){
 
 
 			//moving the bullet
-			bullets[i].angle += bullets[i].omega;
+			if(bullets[i].omega == "orbit") bullets[i].angle += bullets[i].v/sqrt(sq(bullets[i].x-cx)+sq(bullets[i].y-cy));
+			else bullets[i].angle += bullets[i].omega;
 			bullets[i].vx = bullets[i].v * cos(bullets[i].angle)
 			bullets[i].vy = bullets[i].v * sin(bullets[i].angle)
 			bullets[i].x += bullets[i].vx;							
@@ -427,7 +450,7 @@ function draw(){
 			//hit detection 
 			let hitbox = 0;
 			if(r == bulletSizeS)	hitbox = r-2;
-			else if (r == bulletSize)	hitbox = r/2;
+			else if (r == bulletSize)	hitbox = r-4;
 			else hitbox = r-5;
 			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= hitbox*hitbox){
 
@@ -437,8 +460,11 @@ function draw(){
 					bullets[i].color = "#FF0000";
 				}
 
+				if(!Object.hasOwn(bullets[i], 'hit')) deathCount++
+
 				// flag bullet as hit
 				bullets[i].hit = 1;
+
 			}
 
 
@@ -616,7 +642,7 @@ function WASD(){
 
 
 function loaded(i){
-	if (bullets[i].x>-100 && bullets[i].x<canvas.width+100 && bullets[i].y>-200 && bullets[i].y<canvas.height+100){
+	if (bullets[i].x>0 && bullets[i].x<canvas.width && bullets[i].y>-325 && bullets[i].y<canvas.height+325){
 		return true;
 	} else {
 		return false;
