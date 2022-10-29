@@ -193,10 +193,6 @@ function addPattern(index, delay, v1, a, v2, angle, omega, color){
 	countQ += 1;
 }
 
-//function addSpin(index, delay, omega){
-	//queue[countQ] = {index:index, delay:delay, omega:omega}
-	//countQ += 1;
-//}
 
 
 
@@ -216,7 +212,7 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(fps, 100, 100)
+	//ctx.fillText(fps, 100, 100)
 	
 
 
@@ -491,7 +487,7 @@ function WASD(){
 
 	  if(fast){
 		  switch (event.key) {
-		  	case "z":
+		  	case "Shift":
 		  		fast = false;
 		  		playerColor = "#ffd700"
 		  		playerSpeed = focusSpeed;
@@ -545,7 +541,7 @@ function WASD(){
 		  }
 		} else {
 			switch (event.key) {
-				case "z":
+				case "Shift":
 					fast = true;
 					playerColor = "#c0c0c0"
 					playerSpeed = unfocusSpeed;
