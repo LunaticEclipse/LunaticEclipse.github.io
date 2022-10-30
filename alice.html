@@ -51,6 +51,15 @@
 				addPattern(count-1, 50, 1, 0, 1, aim(bullets[count-1].x, bullets[count-1].y, x, y), 0, "#ffd700")
 			}
 		}
+
+		if(t%1500 == 1499){
+			t++;
+			for(let i = 0; i<100; i++){
+				pattern()
+				WASD();
+				draw();
+			}
+		}
 	}
 
 	function mainLoop(){
