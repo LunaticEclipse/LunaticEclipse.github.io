@@ -52,6 +52,15 @@
 				//addPattern(count-1, 60, 0, 0.01, 2.5, "same", "#00d0d0")
 			}
 		}
+
+		if(t%2000 == 999){
+			t++;
+			for(let i = 0; i<1000; i++){
+				pattern();
+				WASD();
+				t++
+			}
+		}
 	}
 
 	function mainLoop(){

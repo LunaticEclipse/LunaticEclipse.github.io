@@ -223,27 +223,8 @@ function draw(){
 	requestAnimFrame();
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(deathCount, 100, 100)
-	
-
-
-
-
-
-
-
-	
-
-
-
-
-	//player movement
-	if(x>=5) x -= dxL*playerSpeed;
-  	if(x<=canvas.width-5) x += dxR*playerSpeed;
-  	if(y<=canvas.height-5) y += dyD*playerSpeed;
-  	if(y>=5) y -= dyU*playerSpeed;
-
-
+	ctx.fillText(deathCount, 100, 150)
+	ctx.fillText(t/100, 100, 100)
 
 
 
@@ -254,59 +235,6 @@ function draw(){
 
 //BULLET DEPARTMENT
 
-
-// handle addPattern
-	for(let i = 0; i<countQ; i++){
-
-		if(loaded(queue[i].index)){
-
-			if(queue[i].delay == 0){
-
-				//ensure the addPattern is never activated again
-				queue[i].delay = -1
-				
-
-				//updating the bullet's attribute to the new ones
-				bullets[queue[i].index].flag = "acc";
-				if(queue[i].angle == "aim"){
-					bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
-				} else if(queue[i].angle != "same"){
-					bullets[queue[i].index].angle = queue[i].angle;
-				}
-				if(queue[i].v != "same") bullets[queue[i].index].v = queue[i].v;
-				bullets[queue[i].index].a = queue[i].a;
-				bullets[queue[i].index].v2 = queue[i].v2;
-
-
-				//handling spin
-
-				bullets[queue[i].index].omega = queue[i].omega;
-
-
-				// handling color change (collided bullets stay red)
-				if(bullets[queue[i].index].hit != 1){
-					bullets[queue[i].index].color = queue[i].color;
-				}
-
-				
-				//updating vx, vy to new angle
-				bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
-				bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
-
-
-				
-
-			} else if(queue[i].delay > 0){
-				queue[i].delay--;
-			}
-
-		}
-
-	}
-
-
-
-  	
 
 
 // handle aura
@@ -434,19 +362,6 @@ function draw(){
 
 
 
-
-			//moving the bullet
-			if(bullets[i].omega == "orbit") bullets[i].angle += bullets[i].v/sqrt(sq(bullets[i].x-cx)+sq(bullets[i].y-cy));
-			else bullets[i].angle += bullets[i].omega;
-			bullets[i].vx = bullets[i].v * cos(bullets[i].angle)
-			bullets[i].vy = bullets[i].v * sin(bullets[i].angle)
-			bullets[i].x += bullets[i].vx;							
-			bullets[i].y += bullets[i].vy;
-
-
-
-
-
 			//hit detection 
 			let hitbox = 0;
 			if(r == bulletSizeS)	hitbox = r-2;
@@ -468,23 +383,6 @@ function draw(){
 			}
 
 
-
-			//handle shootAcc
-			if(bullets[i].flag == "acc"){
-
-				//slow down for negative a
-				//speed up 	for positive a
-				if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
-					bullets[i].v += bullets[i].a;
-					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
-					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
-				} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
-					bullets[i].v += bullets[i].a;
-					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
-					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
-				}
-			}
-
 		}
 	}
 
@@ -501,6 +399,96 @@ function draw(){
 
 function WASD(){
 
+
+
+	//player movement
+	if(x>=5) x -= dxL*playerSpeed;
+  	if(x<=canvas.width-5) x += dxR*playerSpeed;
+  	if(y<=canvas.height-5) y += dyD*playerSpeed;
+  	if(y>=5) y -= dyU*playerSpeed;
+
+
+
+
+
+// handle addPattern
+	for(let i = 0; i<countQ; i++){
+
+		if(loaded(queue[i].index)){
+
+			if(queue[i].delay == 0){
+
+				//ensure the addPattern is never activated again
+				queue[i].delay = -1
+				
+
+				//updating the bullet's attribute to the new ones
+				bullets[queue[i].index].flag = "acc";
+				if(queue[i].angle == "aim"){
+					bullets[queue[i].index].angle = aim(bullets[queue[i].index].x,bullets[queue[i].index].y,x,y);
+				} else if(queue[i].angle != "same"){
+					bullets[queue[i].index].angle = queue[i].angle;
+				}
+				if(queue[i].v != "same") bullets[queue[i].index].v = queue[i].v;
+				bullets[queue[i].index].a = queue[i].a;
+				bullets[queue[i].index].v2 = queue[i].v2;
+
+
+				//handling spin
+
+				bullets[queue[i].index].omega = queue[i].omega;
+
+
+				// handling color change (collided bullets stay red)
+				if(bullets[queue[i].index].hit != 1){
+					bullets[queue[i].index].color = queue[i].color;
+				}
+
+				
+				//updating vx, vy to new angle
+				bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
+				bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
+
+
+				
+
+			} else if(queue[i].delay > 0){
+				queue[i].delay--;
+			}
+
+		}
+
+	}
+
+
+
+
+  	for(let i = 0; i<count; i++){
+		//moving the bullet
+		if(bullets[i].omega == "orbit") bullets[i].angle += bullets[i].v/sqrt(sq(bullets[i].x-cx)+sq(bullets[i].y-cy));
+		else bullets[i].angle += bullets[i].omega;
+		bullets[i].vx = bullets[i].v * cos(bullets[i].angle)
+		bullets[i].vy = bullets[i].v * sin(bullets[i].angle)
+		bullets[i].x += bullets[i].vx;							
+		bullets[i].y += bullets[i].vy;
+		
+
+		//handle shootAcc
+		if(bullets[i].flag == "acc"){
+
+			//slow down for negative a
+			//speed up 	for positive a
+			if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
+				bullets[i].v += bullets[i].a;
+				bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+				bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+			} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
+				bullets[i].v += bullets[i].a;
+				bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+				bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+			}
+		}
+	}
 
 
 //KEY DOWN
