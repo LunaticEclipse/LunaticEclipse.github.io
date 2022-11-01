@@ -34,6 +34,8 @@ var t = 0;
 //bullet sprite
 var shot = document.createElement('img');
 shot.src = "img/Default_Shot.png";
+var eye = document.createElement('img');
+eye.src = "img/eye.png";
 
 
 //midpoint of canvas
@@ -350,6 +352,10 @@ function draw(){
 				}
 
 
+
+			} else if (bullets[i].color == 'eye'){
+
+				ctx.drawImage(eye, 0, 0, 40, 26, bullets[i].x, bullets[i].y, 40, 26)
 
 			} else {
 
