@@ -412,8 +412,8 @@ function WASD(){
 
 	//player movement
 	if(touhou){
-		if(x>=380) x -= dxL*playerSpeed;
-	  	if(x<=1070) x += dxR*playerSpeed;
+		if(x>=355) x -= dxL*playerSpeed;
+	  	if(x<=1095) x += dxR*playerSpeed;
 	  	if(y<=canvas.height-5) y += dyD*playerSpeed;
 	  	if(y>=5) y -= dyU*playerSpeed;
 	 } else{
@@ -649,7 +649,7 @@ function WASD(){
 
 
 function onScreen(i){
-	if (touhou && bullets[i].x>375 && bullets[i].x<1075 && bullets[i].y>0 && bullets[i].y<canvas.height){
+	if (touhou && bullets[i].x>350 && bullets[i].x<1100 && bullets[i].y>0 && bullets[i].y<canvas.height){
 		return true;
 	} else if(!touhou && loaded(i)) {
 		return true;
