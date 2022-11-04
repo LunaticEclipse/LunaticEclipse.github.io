@@ -25,6 +25,9 @@
 //a toggle for options under development
 var toggle = false;
 
+//toggle for whether the game is touhou-mode or no
+var touhou = false;
+
 //accessing the canvas in html
 var canvas = document.getElementById("danmaku");
 var ctx = canvas.getContext("2d");
@@ -215,7 +218,7 @@ function draw(){
 
 	//refreshing screen
 	ctx.clearRect(0,0,canvas.width,canvas.height);
-
+	
 
 
 
@@ -243,7 +246,7 @@ function draw(){
   	for (let i = 0; i<count; i++){
 
 		// rendering the glow of bright bullets
-		if(loaded(i)){
+		if(onScreen(i)){
 
 
 	  		let r = bulletSize;
@@ -315,7 +318,7 @@ function draw(){
 		
 
 		//if bullets are in loading zone
-		if(loaded(i)){
+		if(onScreen(i)){
 
 
 			let r = bulletSize;
@@ -408,10 +411,17 @@ function WASD(){
 
 
 	//player movement
-	if(x>=5) x -= dxL*playerSpeed;
-  	if(x<=canvas.width-5) x += dxR*playerSpeed;
-  	if(y<=canvas.height-5) y += dyD*playerSpeed;
-  	if(y>=5) y -= dyU*playerSpeed;
+	if(touhou){
+		if(x>=380) x -= dxL*playerSpeed;
+	  	if(x<=1070) x += dxR*playerSpeed;
+	  	if(y<=canvas.height-5) y += dyD*playerSpeed;
+	  	if(y>=5) y -= dyU*playerSpeed;
+	 } else{
+	 	if(x>=5) x -= dxL*playerSpeed;
+	  	if(x<=canvas.width-5) x += dxR*playerSpeed;
+	  	if(y<=canvas.height-5) y += dyD*playerSpeed;
+	  	if(y>=5) y -= dyU*playerSpeed;
+	 }
 
 
 
@@ -632,6 +642,20 @@ function WASD(){
 
 
 
+}
+
+
+
+
+
+function onScreen(i){
+	if (touhou && bullets[i].x>375 && bullets[i].x<1075 && bullets[i].y>0 && bullets[i].y<canvas.height){
+		return true;
+	} else if(!touhou && loaded(i)) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 
