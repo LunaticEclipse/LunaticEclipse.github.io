@@ -40,6 +40,10 @@ shot.src = "img/Default_Shot.png";
 var eye = document.createElement('img');
 eye.src = "img/eye.png";
 
+//sfx source
+var die = document.createElement('die');
+die.src = "sound/die.wav";
+
 
 //midpoint of canvas
 var cx = canvas.width/2;
@@ -384,7 +388,9 @@ function draw(){
 					bullets[i].color = "#FF0000";
 				}
 
-				if(!Object.hasOwn(bullets[i], 'hit')) deathCount++
+				if(!Object.hasOwn(bullets[i], 'hit')){
+					deathCount++
+				}
 
 				// flag bullet as hit
 				bullets[i].hit = 1;
