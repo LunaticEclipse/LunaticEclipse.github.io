@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+<canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
+
+
+<p id="1"></p>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+
+	var x = cx;
+	var y = cy+300;
+	toggle = true;
+	touhou = true;
+
+	
+	var randX = cx;
+	var randY = cy-150;
+
+	var temp = 32;
+	function pattern(){
+		
+		if(t == 0){
+
+				let i = 0;
+				let member = 1500;
+				while(i<member){
+					let a = i*2*pi/member;
+					let vel = sqrt(sqrt(Math.random()*140))
+					let chroma = "#007bb8"
+					if(Math.floor(Math.random()*10) < 1)	chroma = "#c0c0c0"
+					
+					shootAcc(cx, cy, vel, -0.008, 0, a, chroma);
+
+					addPattern(count-1, 550, "same", 0.0015, 0.8, a + pi/2, "orbit", chroma)
+					//addPattern(count-1, 1150, "same", 0.002, 2, "same", 0, "#0000ff")
+
+					i += 1;
+				}
+
+		}
+		if(t%1500 == 1500){
+
+				let i = 0;
+				let member = 640;
+				while(i<member){
+					let a = i*2*pi/member;
+					let vel = sqrt(Math.random()*13)
+					shootAcc(cx, cy, vel, -0.008, 0, a, "#007bb8");
+
+					addPattern(count-1, 550, "same", 0.002, 2, a - pi/2, "orbit", "#007bb8")
+					addPattern(count-1, 1150, "same", 0.002, 2, "same", 0, "#007bb8")
+
+					i += 1;
+				}
+
+		}
+		
+
+
+	}
+
+	function mainLoop(){
+		temp = 32
+		pattern();
+		WASD();
+		draw();
+		
+		t++;
+	}
+	setInterval(mainLoop, 10);	
+
+</script>
+
+
+
+</body>
+</html>

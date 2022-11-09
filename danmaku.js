@@ -66,6 +66,10 @@ var count = 0; //bullet count
 var queue = [];
 var countQ = 0;
 
+//tracking lasers
+var lasers = [];
+var countL = 0;
+
 
 
 
@@ -196,6 +200,7 @@ function shootAcc(x, y, v1, a, v2, angle, color){
 	count += 1;
 }
 
+
 function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 	var i = 0;
 	while(i<member){
@@ -213,6 +218,23 @@ function addPattern(index, delay, v1, a, v2, angle, omega, color){
 	countQ += 1;
 }
 
+
+function laser(x, y, x2, y2, duration, color){
+	let m = (y2 - y) / (x2 - x);
+	while(touhou && x2>350 && x2<1100 && y2>0 && y2<canvas.height){
+		if(x2 == x){
+			y2 += (y2 - y)/abs(y2 - y)
+		}else if(x2 < x){
+			x2 -= 1
+			y2 -= m
+		} else {
+			x2 += 1;
+			y2 += m;
+		}
+	}
+	lasers[countL] = {x:x, y:y, x2:x2, y2:y2, duration:duration, color:color}
+	countL += 1;
+}
 
 
 
@@ -234,6 +256,51 @@ function draw(){
 	ctx.fillStyle = "#FF0000";
 	ctx.fillText(deathCount, 100, 150)
 	ctx.fillText(t/100, 100, 100)
+
+
+
+
+//LASER DEPARTMENT
+
+	for(let i = 0; i<countL; i++){
+
+		if(lasers[i].duration > 0){
+
+			ctx.moveTo(lasers[i].x, lasers[i].y)
+			ctx.lineTo(lasers[i].x2, lasers[i].y2)
+			ctx.lineWidth = 10;
+			ctx.strokeStyle = lasers[i].color
+			ctx.stroke()
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = "#ffffff"
+			ctx.stroke()
+
+
+			
+			ctx.fillStyle = "#ffffff";
+			ctx.beginPath();
+			ctx.arc(lasers[i].x, lasers[i].y, 10, 0, 20);
+			ctx.fill();
+			ctx.closePath();
+		}
+
+	}
+
+	for(let i = 0; i<countL; i++){
+
+		if(lasers[i].duration > 0){
+			
+			ctx.fillStyle = "#ffffff";
+			ctx.beginPath();
+			ctx.arc(lasers[i].x, lasers[i].y, 10, 0, 20);
+			ctx.fill();
+			ctx.closePath();
+
+			lasers[i].duration--;
+		}
+
+	}
+	
 
 
 

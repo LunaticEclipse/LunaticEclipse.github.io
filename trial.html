@@ -18,9 +18,6 @@
 
 <canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
 
-
-<p id="1"></p>
-
 <script type="text/javascript" src="mathFunctions.js"></script>
 <script type="text/javascript" src="danmaku.js"></script>
 
@@ -33,55 +30,52 @@
 	toggle = true;
 	touhou = true;
 
-	
-	var randX = cx;
-	var randY = cy-150;
 
-	var temp = 32;
+	var n = 1
+
 	function pattern(){
-		
-		if(t == 0){
 
-				let i = 0;
-				let member = 1500;
-				while(i<member){
-					let a = i*2*pi/member;
-					let vel = sqrt(sqrt(Math.random()*140))
-					let chroma = "#007bb8"
-					if(Math.floor(Math.random()*10) < 1)	chroma = "#c0c0c0"
-					
-					shootAcc(cx, cy, vel, -0.008, 0, a, chroma);
+		if(t%5 == 0){
 
-					addPattern(count-1, 550, "same", 0.0015, 0.8, a + pi/2, "orbit", chroma)
-					//addPattern(count-1, 1150, "same", 0.002, 2, "same", 0, "#0000ff")
-
-					i += 1;
-				}
-
+			//shootRing(cx, cy-200, 3, t/50, 5, 10, "#ffac00")
 		}
-		if(t%1500 == 1500){
 
-				let i = 0;
-				let member = 640;
-				while(i<member){
-					let a = i*2*pi/member;
-					let vel = sqrt(Math.random()*13)
-					shootAcc(cx, cy, vel, -0.008, 0, a, "#007bb8");
 
-					addPattern(count-1, 550, "same", 0.002, 2, a - pi/2, "orbit", "#007bb8")
-					addPattern(count-1, 1150, "same", 0.002, 2, "same", 0, "#007bb8")
-
-					i += 1;
-				}
-
+		if(t%5==0){
+			let tx = 500+t%1500
+			//laser(cx-150*cos(t/16),cy-150*sin(t/16), cx-170*cos(t/16+pi/1.3), cy-170*sin(t/16+pi/1.3), 24*pi, "#000000");
+			//laser(cx+50*cos(t/80)*t/50,cy+50*sin(t/80)*t/50, cx, cy, 300, "#000000");
+			laser(cx-150*cos(t/80)*sin(t/320),cy-150*sin(t/80)*sin(t/320), cx, cy, 300, "#000000");
+			//laser(cx+150*cos(t/20),cy+150*sin(t/20), tx, tx*tx/2500, 100, "#000000");
 		}
-		
+
+
+/*
+
+		if(t%500 == 40){
+			laser(cx-150,cy-250, cx-150, y, 250, "#ffa0a0");
+			laser(cx+150,cy-250, cx+150, y, 250, "#ffa0a0");
+		}
+
+		if(t%500 == 20){
+			laser(cx-100,cy-275, cx-100, y, 250, "#ffa0a0");
+			laser(cx+100,cy-275, cx+100, y, 250, "#ffa0a0");
+		}
+
+		if(t%500 == 0){
+			laser(cx-50,cy-285, cx-50, y, 250, "#ffa0a0");
+			
+			
+			laser(cx+50,cy-285, cx+50, y, 250, "#ffa0a0");
+		}
+		*/
 
 
 	}
 
+
+
 	function mainLoop(){
-		temp = 32
 		pattern();
 		WASD();
 		draw();
