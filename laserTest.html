@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+<canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+
+	var x = cx;
+	var y = cy+300;
+	toggle = true;
+	touhou = true;
+
+
+	var n = 1
+
+	function pattern(){
+
+		if(t%5 == 0){
+
+			//shootRing(cx, cy-200, 3, t/50, 5, 10, "#ffac00")
+		}
+
+
+		if(t%5==0){
+			let tx = 500+t%1500
+			//laser(cx-150*cos(t/16),cy-150*sin(t/16), cx-170*cos(t/16+pi/1.3), cy-170*sin(t/16+pi/1.3), 24*pi, "#000000");
+			//laser(cx+50*cos(t/80)*t/50,cy+50*sin(t/80)*t/50, cx, cy, 300, "#000000");
+			laser(cx-150*cos(t/80)*sin(t/320),cy-150*sin(t/80)*sin(t/320), cx, cy, 300, "#000000");
+			//laser(cx+150*cos(t/20),cy+150*sin(t/20), tx, tx*tx/2500, 100, "#000000");
+		}
+
+
+/*
+
+		if(t%500 == 40){
+			laser(cx-150,cy-250, cx-150, y, 250, "#ffa0a0");
+			laser(cx+150,cy-250, cx+150, y, 250, "#ffa0a0");
+		}
+
+		if(t%500 == 20){
+			laser(cx-100,cy-275, cx-100, y, 250, "#ffa0a0");
+			laser(cx+100,cy-275, cx+100, y, 250, "#ffa0a0");
+		}
+
+		if(t%500 == 0){
+			laser(cx-50,cy-285, cx-50, y, 250, "#ffa0a0");
+			
+			
+			laser(cx+50,cy-285, cx+50, y, 250, "#ffa0a0");
+		}
+		*/
+
+
+	}
+
+
+
+	function mainLoop(){
+		pattern();
+		WASD();
+		draw();
+		
+		t++;
+	}
+	setInterval(mainLoop, 10);	
+
+</script>
+
+
+
+</body>
+</html>

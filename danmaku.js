@@ -138,7 +138,9 @@ index 			index of bullet to be replaced
 delay 			delay before replacing the bullet 
 	[unit: 5ms  (e.g. delay=10 means a 50ms delay)]
 
-spin 			[useless]
+omega			angular velocity
+
+noReturn (bool)	bullet despawn after going offscreen
 
 
 
@@ -212,7 +214,7 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 }
 
 
-
+// noReturn bullets DESPAWN IMMEDIATELY upon going offscreen
 function addPattern(index, delay, v1, a, v2, angle, omega, color){
 	queue[countQ] = {index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color, omega:omega}
 	countQ += 1;
@@ -553,28 +555,31 @@ function WASD(){
 
 
   	for(let i = 0; i<count; i++){
-		//moving the bullet
-		if(bullets[i].omega == "orbit") bullets[i].angle += bullets[i].v/sqrt(sq(bullets[i].x-cx)+sq(bullets[i].y-cy));
-		else bullets[i].angle += bullets[i].omega;
-		bullets[i].vx = bullets[i].v * cos(bullets[i].angle)
-		bullets[i].vy = bullets[i].v * sin(bullets[i].angle)
-		bullets[i].x += bullets[i].vx;							
-		bullets[i].y += bullets[i].vy;
-		
 
-		//handle shootAcc
-		if(bullets[i].flag == "acc"){
+  		if(loaded(i)){
+			//moving the bullet
+			if(bullets[i].omega == "orbit") bullets[i].angle += bullets[i].v/sqrt(sq(bullets[i].x-cx)+sq(bullets[i].y-cy));
+			else bullets[i].angle += bullets[i].omega;
+			bullets[i].vx = bullets[i].v * cos(bullets[i].angle)
+			bullets[i].vy = bullets[i].v * sin(bullets[i].angle)
+			bullets[i].x += bullets[i].vx;							
+			bullets[i].y += bullets[i].vy;
+			
 
-			//slow down for negative a
-			//speed up 	for positive a
-			if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
-				bullets[i].v += bullets[i].a;
-				bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
-				bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
-			} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
-				bullets[i].v += bullets[i].a;
-				bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
-				bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+			//handle shootAcc
+			if(bullets[i].flag == "acc"){
+
+				//slow down for negative a
+				//speed up 	for positive a
+				if(bullets[i].a<0 && bullets[i].v > bullets[i].v2){
+					bullets[i].v += bullets[i].a;
+					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+				} else if(bullets[i].a>0 && bullets[i].v < bullets[i].v2){
+					bullets[i].v += bullets[i].a;
+					bullets[i].vx = bullets[i].v * cos(bullets[i].angle);
+					bullets[i].vy = bullets[i].v * sin(bullets[i].angle);
+				}
 			}
 		}
 	}
@@ -733,7 +738,9 @@ function onScreen(i){
 
 
 function loaded(i){
-	if (bullets[i].x>0 && bullets[i].x<canvas.width && bullets[i].y>-325 && bullets[i].y<canvas.height+325){
+	if(Object.hasOwn(bullets[i], 'noReturn') && onScreen(i)){
+		return true;
+	} else if (!Object.hasOwn(bullets[i], 'noReturn') && bullets[i].x>0 && bullets[i].x<canvas.width && bullets[i].y>-325 && bullets[i].y<canvas.height+100){
 		return true;
 	} else {
 		return false;
