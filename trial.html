@@ -31,12 +31,12 @@
 	touhou = true;
 
 
-	var n = 1
-
 	function pattern(){
 
-	
-
+		if(!(t%3)){
+			shoot(cx, cy-150, 1, pi/2+t/100, "#c00")
+			addBullet(count-1, 200, 1, 0.05, 5, pi/2+pi/20, 0, "#003")
+		}
 
 	}
 

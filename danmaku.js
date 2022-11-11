@@ -128,6 +128,7 @@ a 				acceleration
 v2 				final speed of accelerating bullet
 	[v1 DOES NOT EXIST]
 flag 			to identify acc bullets (flag = "acc" leads to acceleration codes)
+				to identify addBullet as opposed to addPattern (flag = "addBullet")
 angle 			initial angle 	(stored for accelerating bullets)
 v 				initial v 		(stored for accelerating bullets)
 
@@ -202,6 +203,11 @@ function shootAcc(x, y, v1, a, v2, angle, color){
 	count += 1;
 }
 
+function shootPlus(x, y, v1, a, v2, angle, omega, color){
+	bullets[count] = {flag:"acc", x:x, y:y, vx:v1*cos(angle), vy:v1*sin(angle), v:v1, a:a, v2:v2, angle:angle, color:color, omega:omega};
+	count += 1;
+}
+
 
 function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 	var i = 0;
@@ -217,6 +223,11 @@ function shootAccRing(x,y,v1,a,v2,angle,member,r,color){
 // noReturn bullets DESPAWN IMMEDIATELY upon going offscreen
 function addPattern(index, delay, v1, a, v2, angle, omega, color){
 	queue[countQ] = {index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color, omega:omega}
+	countQ += 1;
+}
+
+function addBullet(index, delay, v1, a, v2, angle, omega, color){
+	queue[countQ] = {flag:"addBullet", index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color, omega:omega}
 	countQ += 1;
 }
 
@@ -511,6 +522,13 @@ function WASD(){
 
 				//ensure the addPattern is never activated again
 				queue[i].delay = -1
+
+
+				if(Object.hasOwn(queue[i], 'flag')){
+				if(queue[i].flag == "addBullet"){
+					shootPlus(bullets[queue[i].index].x,bullets[queue[i].index].y, queue[i].v,queue[i].a,queue[i].v2,queue[i].angle,queue[i].omega,queue[i].color);
+				}
+				} else {
 				
 
 				//updating the bullet's attribute to the new ones
@@ -539,6 +557,9 @@ function WASD(){
 				//updating vx, vy to new angle
 				bullets[queue[i].index].vx = bullets[queue[i].index].v*cos(bullets[queue[i].index].angle);
 				bullets[queue[i].index].vy = bullets[queue[i].index].v*sin(bullets[queue[i].index].angle);
+
+
+			}
 
 
 				
