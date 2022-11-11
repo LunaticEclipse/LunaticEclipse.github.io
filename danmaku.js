@@ -129,6 +129,7 @@ v2 				final speed of accelerating bullet
 	[v1 DOES NOT EXIST]
 flag 			to identify acc bullets (flag = "acc" leads to acceleration codes)
 				to identify addBullet as opposed to addPattern (flag = "addBullet")
+				to identify deleteBullet (flag = "deleteBullet")
 angle 			initial angle 	(stored for accelerating bullets)
 v 				initial v 		(stored for accelerating bullets)
 
@@ -229,6 +230,11 @@ function addPattern(index, delay, v1, a, v2, angle, omega, color){
 function addBullet(index, delay, v1, a, v2, angle, omega, color){
 	queue[countQ] = {flag:"addBullet", index:index, delay:delay, v:v1, a:a, v2:v2, angle:angle, color:color, omega:omega}
 	countQ += 1;
+}
+
+function deleteBullet(index, delay){
+	queue[countQ] = {flag:"deleteBullet", index:index, delay:delay}
+	countQ+=1;
 }
 
 
@@ -525,9 +531,19 @@ function WASD(){
 
 
 				if(Object.hasOwn(queue[i], 'flag')){
+
 				if(queue[i].flag == "addBullet"){
 					shootPlus(bullets[queue[i].index].x,bullets[queue[i].index].y, queue[i].v,queue[i].a,queue[i].v2,queue[i].angle,queue[i].omega,queue[i].color);
 				}
+
+
+				if(queue[i].flag == "deleteBullet"){
+					bullets[queue[i].index].x = -1
+					bullets[queue[i].index].y = -1
+					bullets[queue[i].index].v = 0
+				}
+
+
 				} else {
 				
 
