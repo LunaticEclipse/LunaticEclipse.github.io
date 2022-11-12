@@ -87,7 +87,7 @@ var dyD = 0;
 var playerColor = "#c0c0c0"
 
 var unfocusSpeed = 3;
-var focusSpeed = 1;
+var focusSpeed = 1.5;
 var playerSpeed = unfocusSpeed;
 
 

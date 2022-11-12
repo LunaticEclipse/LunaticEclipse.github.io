@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+<canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+
+	var x = cx;
+	var y = cy+300;
+	toggle = true;
+	touhou = true;
+
+	var aimAssist = 0;
+
+	function pattern(){
+
+		if(t%500 == 70){
+			aimAssist = aim(cx,cy-130,x,y)
+		}
+
+		if(!(t%3) && t%500 > 70 && t%500 < 120){
+			shoot(cx, cy-130, 4, aimAssist, "#c00")
+			shoot(cx, cy-130, 4, aimAssist-pi/25, "#c00")
+			shoot(cx, cy-130, 4, aimAssist+pi/25, "#c00")
+
+			shoot(cx, cy-130, 4, aimAssist+pi/3, "#c00")
+			shoot(cx, cy-130, 4, aimAssist-pi/25+pi/3, "#c00")
+			shoot(cx, cy-130, 4, aimAssist+pi/25+pi/3, "#c00")
+
+			shoot(cx, cy-130, 4, aimAssist-pi/3, "#c00")
+			shoot(cx, cy-130, 4, aimAssist-pi/25-pi/3, "#c00")
+			shoot(cx, cy-130, 4, aimAssist+pi/25-pi/3, "#c00")
+
+			for(let i = 1; i<=9; i++){
+				//bullets[count-i].size = "large"
+				if(Math.random()*3 < 1){
+					addPattern(count-i, 150-t%500, 4, 0, 0, Math.random()*2*pi, 0, "#0c0")
+				}
+			}
+		}
+
+
+		if(!(t%6) && t%500 < 80){
+			shootRing(cx, cy-130, 1.5, t/75, 15, 0, "#00c")
+
+			for(let i = 1; i<=15; i++){
+				if(Math.random()*2 < 1){
+					addPattern(count-i, 150-t%500, "same", 0, 0, Math.random()*2*pi, 0, "#0c0")
+				}
+			}
+
+			shootRing(cx, cy-130, 1.75, t/75, 15, 0, "#00c")
+
+			for(let i = 1; i<=15; i++){
+				if(Math.random()*2 < 1){
+					addPattern(count-i, 150-t%500, "same", 0, 0, Math.random()*2*pi, 0, "#0c0")
+				}
+			}
+
+			shootRing(cx, cy-130, 2, t/75, 15, 0, "#00c")
+
+			for(let i = 1; i<=15; i++){
+				if(Math.random()*2 < 1){
+					addPattern(count-i, 150-t%500, "same", 0, 0, Math.random()*2*pi, 0, "#0c0")
+				}
+			}
+
+		}
+
+	}
+
+
+
+	function mainLoop(){
+		pattern();
+		WASD()
+
+		if(t%500>=145 && t%500<=160){
+			ctx.clearRect(0,0,canvas.width,canvas.height);
+		} else {
+			draw();
+		}
+		
+		t++;
+	}
+	setInterval(mainLoop, 10);	
+
+</script>
+
+
+
+</body>
+</html>
