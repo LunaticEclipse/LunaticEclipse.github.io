@@ -32,11 +32,13 @@
 
 
 	function spray(i){
-		addBullet(count-i, 50, 3, 0, 3, bullets[count-i].angle, pi/600*(2*(i%2)-1), bullets[count-1].color)
-		addBullet(count-i, 50, 3, 0, 3, bullets[count-i].angle+pi/6, pi/600*(2*(i%2)-1), bullets[count-1].color)
-		addBullet(count-i, 50, 3, 0, 3, bullets[count-i].angle-pi/6, pi/600*(2*(i%2)-1), bullets[count-1].color)
-		addBullet(count-i, 50, 3, 0, 3, bullets[count-i].angle+pi/12, pi/600*(2*(i%2)-1), bullets[count-1].color)
-		addBullet(count-i, 50, 3, 0, 3, bullets[count-i].angle-pi/12, pi/600*(2*(i%2)-1), bullets[count-1].color)
+		//let a = bullets[count-i].angle
+		let a = pi/2
+		addBullet(count-i, 50, 3, 0, 3, a, 0, bullets[count-1].color)
+		addBullet(count-i, 50, 3, 0, 3, a+pi/6, 0, bullets[count-1].color)
+		addBullet(count-i, 50, 3, 0, 3, a-pi/6, 0, bullets[count-1].color)
+		addBullet(count-i, 50, 3, 0, 3, a+pi/12, 0, bullets[count-1].color)
+		addBullet(count-i, 50, 3, 0, 3, a-pi/12, 0, bullets[count-1].color)
 		deleteBullet(count-i, 50)
 
 	}
@@ -44,48 +46,42 @@
 
 	function pattern(){
 
-		if(!(t%15)){
+		if(!(t%30)){
 
 			//shootRing(cx,cy-100, -3, 0, 32, 0, "#d80")
-			shootRing(cx,cy-100, -3, t/50, 8, 100, "#d80")
+			//shootRing(cx,cy-100, -3, t/50, 8, 100, "#d80")
 
-			for(let i = 1; i<=32; i++){
-				spray(i)
-			}
+			//for(let i = 1; i<=32; i++){
+				//spray(i)
+			//}
 
 
 
-		/*
+		
 			shoot(cx, cy-100, -3, pi/2, "#c00")
-			spray()
+
 
 			shoot(cx, cy-100, -3, pi/2+pi/6, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/2-pi/6, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/2+pi/12, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/2-pi/12, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/2+pi/4, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/2-pi/4, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/2+pi/4, "#c00")
-			spray()
 
 			shoot(cx, cy-100, -3, pi/6, "#00c")
-			spray()
 
 			shoot(cx, cy-100, -3, pi - pi/6, "#00c")
-			spray()
-			*/
+
+			for(let i = 1; i<=10; i++){
+				spray(i)
+			}
 
 
 		}
