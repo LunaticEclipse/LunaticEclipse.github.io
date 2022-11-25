@@ -104,6 +104,12 @@ const bulletSizeS = 7;
 
 
 
+function loop(i, f){
+	for(let j = 0; j<i; j++){
+		f();
+	}
+}
+
 
 
 //angle to aim at target
@@ -157,10 +163,12 @@ omega	--		"orbit"	->	orbit around (cx, cy) clockwise
 
 
 //basic shot
+
 function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	count += 1;
 }
+
 function shoot(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
 	count += 1;
@@ -258,23 +266,27 @@ function laser(x, y, x2, y2, duration, color){
 
 
 
-
 function draw(){
 
 	//refreshing screen
 	ctx.clearRect(0,0,canvas.width,canvas.height);
-	
-
 
 
 
 	//drawing spell card title
 	//OVERRIDE!! FPS DISPLAY
-	requestAnimFrame();
+
+	//call requestAnimFrame() every 1/10 seconds
+	//multiply fps by 10
+	//it is round(fps*1000)/100 to round to 2dp
+	if(!(t%10)) {requestAnimFrame();}
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(deathCount, 100, 150)
+	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
+	ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(t/100, 100, 100)
+
+	
 
 
 
@@ -534,6 +546,7 @@ function WASD(){
 
 				if(queue[i].flag == "addBullet"){
 					shootPlus(bullets[queue[i].index].x,bullets[queue[i].index].y, queue[i].v,queue[i].a,queue[i].v2,queue[i].angle,queue[i].omega,queue[i].color);
+					bullets[count-1].size = bullets[queue[i].index].size
 				}
 
 

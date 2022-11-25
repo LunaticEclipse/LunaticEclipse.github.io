@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<style>
+
+		body{
+			background-color: #000435;
+		}
+
+	</style>
+
+</head>
+
+
+<body>
+
+<canvas id="danmaku" width="1450" height="800" style="border:0px solid #000000;"></canvas>
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+
+<script>
+
+	var x = cx;
+	var y = cy+300;
+	toggle = true;
+	touhou = true;
+
+
+	function spray(i){
+		//let a = bullets[count-i].angle
+		let a = pi/2
+		addBullet(count-i, 50, 3, 0, 3, a, 0, bullets[count-i].color)
+		addBullet(count-i, 50, 3, 0, 3, a+pi/6, 0, bullets[count-i].color)
+		addBullet(count-i, 50, 3, 0, 3, a-pi/6, 0, bullets[count-i].color)
+		addBullet(count-i, 50, 3, 0, 3, a+pi/12, 0, bullets[count-i].color)
+		addBullet(count-i, 50, 3, 0, 3, a-pi/12, 0, bullets[count-i].color)
+		deleteBullet(count-i, 50)
+
+	}
+
+	
+
+	
+	function pattern(){
+
+		if(!(t%30)){
+
+			//shootRing(cx,cy-100, -3, 0, 32, 0, "#d80")
+			//shootRing(cx,cy-100, -3, t/50, 8, 100, "#d80")
+
+			//for(let i = 1; i<=32; i++){
+				//spray(i)
+			//}
+
+
+
+		
+			shoot(cx, cy-100, -3, pi/2, "#c00")
+
+			for(let i = 1; i<=1; i++){
+				spray(i)
+			}
+
+
+		}
+
+	}
+
+
+
+	function mainLoop(){
+		pattern();
+		WASD();
+		draw();
+		
+		t++;
+	}
+	setInterval(mainLoop, 10);	
+
+</script>
+
+
+
+</body>
+</html>

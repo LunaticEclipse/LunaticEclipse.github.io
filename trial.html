@@ -31,41 +31,39 @@
 	touhou = true;
 
 
-	function spray(i){
-		//let a = bullets[count-i].angle
-		let a = pi/2
-		addBullet(count-i, 50, 3, 0, 3, a, 0, bullets[count-i].color)
-		addBullet(count-i, 50, 3, 0, 3, a+pi/6, 0, bullets[count-i].color)
-		addBullet(count-i, 50, 3, 0, 3, a-pi/6, 0, bullets[count-i].color)
-		addBullet(count-i, 50, 3, 0, 3, a+pi/12, 0, bullets[count-i].color)
-		addBullet(count-i, 50, 3, 0, 3, a-pi/12, 0, bullets[count-i].color)
-		deleteBullet(count-i, 50)
-
-	}
 
 
 	function pattern(){
 
-		if(!(t%30)){
-
-			//shootRing(cx,cy-100, -3, 0, 32, 0, "#d80")
-			//shootRing(cx,cy-100, -3, t/50, 8, 100, "#d80")
-
-			//for(let i = 1; i<=32; i++){
-				//spray(i)
-			//}
-
-
 
 		
-			shoot(cx, cy-100, -3, pi/2, "#c00")
 
-			for(let i = 1; i<=1; i++){
-				spray(i)
+		if(!(t%7)){
+
+			for(let i = 0; i<3; i++){
+				
+				let a = t/30 + i*2*pi/3
+
+				for(let j = 0; j<1; j++){
+
+				let b = a + j*pi/10 + pi/4
+
+				shoot(cx+150*cos(a), (cy-100)+150*sin(a), -2, a, "#3dd")
+
+				addBullet(count-1, 200, -2, 0, 0, a - pi/4, 0, "#3dd")
+				addBullet(count-1, 200, -2, 0, 0, a + pi/4, 0, "#3dd")
+
+				bullets[count-1].size = "small"
+
+				}
+
+
+
 			}
 
-
 		}
+		
+		
 
 	}
 
@@ -78,6 +76,7 @@
 		
 		t++;
 	}
+
 	setInterval(mainLoop, 10);	
 
 </script>
