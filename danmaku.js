@@ -282,9 +282,11 @@ function draw(){
 	if(!(t%10)) {requestAnimFrame();}
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
-	ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(t/100, 100, 100)
+	ctx.fillText(deathCount + " misses", 100, 150)
+	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
+	
+	
 
 	
 
