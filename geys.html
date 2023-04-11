@@ -38,8 +38,8 @@
 
 
 	function map(){
-		if(t%100 == 0 && t<=1000){
-			(cx-400, 200, 5, pattern1, 0.7, pi/4);
+		if(t%15 == 0 && t<=1000){
+			drop(400 + random(650));
 		}
 		if(t%100 == 0 && t<=1000){
 			spawn(cx-400, 200, 5, pattern1, 0.7, pi/4);

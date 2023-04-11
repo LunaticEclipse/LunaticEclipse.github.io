@@ -53,9 +53,9 @@ var powerIcon = [];
 powerIcon[0] = document.createElement('img'); powerIcon[0].src = "img/pickup_solar.png";
 powerIcon[1] = document.createElement('img'); powerIcon[1].src = "img/pickup_wastetoenergy.png";
 powerIcon[2] = document.createElement('img'); powerIcon[2].src = "img/pickup_wind.png";
-powerIcon[3] = document.createElement('img'); powerIcon[3].src = "img/pickup_coal.png";
-powerIcon[4] = document.createElement('img'); powerIcon[4].src = "img/pickup_ngas.png";
-powerIcon[5] = document.createElement('img'); powerIcon[5].src = "img/pickup_oil.png";
+powerIcon[3] = document.createElement('img'); powerIcon[3].src = "img/pickupbad_coal.png";
+powerIcon[4] = document.createElement('img'); powerIcon[4].src = "img/pickupbad_ngas.png";
+powerIcon[5] = document.createElement('img'); powerIcon[5].src = "img/pickupbad_oil.png";
 
 //sfx source
 var die = document.createElement('die');
@@ -161,7 +161,7 @@ function spawn(x, y, hp, attack, v, angle){
 //power
 function drop(x){
 	power[countP] = {x:x, y:5, type:random(6)};
-	coountP += 1;
+	countP += 1;
 }
 
 
@@ -415,6 +415,17 @@ function draw(){
 	}
 
 
+//drawing power
+	for(let i = 0; i<countP; i++){
+
+		if(true){
+		
+			ctx.drawImage(powerIcon[power[i].type], power[i].x-20, power[i].y-20)
+
+		}
+	}
+
+
 
 
 
@@ -631,6 +642,10 @@ function WASD(){
 		enemy[i].y += enemy[i].v * sin(enemy[i].angle)
 	}
 
+	//power movement
+	for(let i = 0; i<countP; i++){
+		power[i].y += 0.7;
+	}
 
 
 
