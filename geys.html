@@ -17,6 +17,15 @@
 	var x = cx-50;
 	var y = 600;
 
+	var sound = [];
+
+	sound[0] = new Audio();
+	sound[0].src = "sound/shoot0.wav";
+	sound[1] = new Audio();
+	sound[1].src = "sound/shoot1.wav";
+	sound[2] = new Audio();
+	sound[2].src = "sound/shoot2.wav";
+
 
 	function map(){
 		if(t%100 == 0 && t<=1000){
@@ -33,7 +42,7 @@
 	}
 
 	function pattern2(){
-		if(abs(t)%6==0){
+		if(abs(t)%12==0){
 			for(let i = 0; i < 8; i++){
 				let j = i*pi/4+sq(t)/5000
 				shoot1(cx, cy-300, 1, j, "#880088");
@@ -47,6 +56,9 @@
 		if(shooting && cooldown<=0){
 			shooting = false;
 			cooldown = 200;
+
+			sound[random(2.9)].play();
+
 			for(let i = 0; i < 21; i+=1){
 				shoot(x, y-10,5, -30*pi/40 + i*pi/40 ,"#dddddd")
 				bullets[count-1].player = true;
