@@ -571,6 +571,13 @@ function draw(){
 	ctx.closePath();
 
 
+	//global warming death
+	if(warming >= 3 && y>=550){
+		deathCount++;
+		die.play();
+	}
+
+
 
 
   	//handling bullets

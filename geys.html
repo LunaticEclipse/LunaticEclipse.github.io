@@ -19,6 +19,8 @@
 
 
 <script>
+
+
 	// player starting position!!
 	touhou = true;
 	toggle = true;
@@ -30,6 +32,9 @@
 
 	var energy = 3;
 	var warming = 0;
+
+	var music = new Audio();
+	music.src = "sound/background.wav";
 
 	var die = new Audio();
 	die.src = "sound/die.wav";
@@ -114,6 +119,8 @@
 	function game(){
 
 		var over = false;
+
+		music.play();
 
 	function mainLoop(){
 		if(warming == 0) {body.style.backgroundColor = "#929292";}
