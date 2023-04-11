@@ -369,11 +369,14 @@ function draw(){
 //drawing enemies
 	
 	for(let i = 0; i<countE; i++){
+
+		if(enemy[i].hp > 0){
 		ctx.beginPath();
 		ctx.arc(enemy[i].x, enemy[i].y, 5, 0, pi*2);
 		ctx.fillStyle = "#0aaa0a";
 		ctx.fill();
 		ctx.closePath();
+		}
 	}
 
 
@@ -493,7 +496,7 @@ function draw(){
 
 				} else {
 					ctx.beginPath();
-					if(Object.hasOwn(bullets[i], 'player')) {ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);}
+					if(Object.hasOwn(bullets[i], 'player')) {ctx.arc(bullets[i].x, bullets[i].y, 20, 0, pi*2);}
 					else {ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);}		
 					ctx.fillStyle = bullets[i].color;
 					ctx.fill();
@@ -537,6 +540,19 @@ function draw(){
 
 				// flag bullet as hit
 				bullets[i].hit = 1;
+
+			}
+
+			if(Object.hasOwn(bullets[i], 'player')){
+
+				for(let j = 0; j<countE; j++){
+					if(enemy[j].hp>0 && sq(bullets[i].x-enemy[j].x)+sq(bullets[i].y-enemy[j].y) <= 400){
+
+						deleteBullet(i,0);
+						enemy[j].hp--;
+
+					}
+				}
 
 			}
 
