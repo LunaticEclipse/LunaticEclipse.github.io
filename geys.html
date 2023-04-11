@@ -28,7 +28,15 @@
 		if(t%10 == 0) {shootRing(xe, ye, 2, t/100, 3, 0, "#000000");}
 	}
 
+
+
 	function pattern(){
+		if(shooting && t%5 == 0){
+			//playerShoot(x, y);
+			shoot(x, y, 3, -pi/2, "#aaaaaa")
+			bullets[count-1].player = true;
+		}
+
 		for(let i = 0; i<countE; i++){
 			enemy[i].attack(enemy[i].x, enemy[i].y);
 		}

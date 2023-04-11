@@ -89,7 +89,7 @@ var playerColor = "#c0c0c0"
 var unfocusSpeed = 3;
 var focusSpeed = 1.5;
 var playerSpeed = unfocusSpeed;
-
+var shooting = false;
 
 
 
@@ -170,6 +170,8 @@ delay 			delay before replacing the bullet
 
 omega			angular velocity
 
+player (bool)	player bullets
+
 noReturn (bool)	bullet despawn after going offscreen
 
 
@@ -185,6 +187,11 @@ omega	--		"orbit"	->	orbit around (cx, cy) clockwise
 
 
 //basic shot
+
+function playerShoot(px, py){
+	shoot(px, py, 3, 0, "#aaaaaa")
+	count+=1;
+}
 
 function shoot1(x, y, v, angle, color){
 	bullets[count] = {x:x, y:y, vx:v*cos(angle), vy:v*sin(angle), v:v, spin:0, angle:angle, color:color, omega:0};
@@ -307,6 +314,7 @@ function draw(){
 	ctx.fillText(t/100, 100, 100)
 	ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
+	ctx.fillText("shooting: " + shooting, 100, 250);
 	
 	
 
@@ -684,6 +692,12 @@ function WASD(){
 
 	  //if(fast){
 		  switch (event.key) {
+		  	case "z":
+		  		shooting = true;
+		  		break;
+		  	case "Z":
+		  		shooting = true;
+		  		break;
 		  	case "Shift":
 		  		//fast = false;
 		  		playerColor = "#ffd700"
@@ -756,6 +770,12 @@ function WASD(){
 	  }
 
 	  switch (event.key) {
+	  	case "z":
+		  	shooting = false;
+		  	break;
+		 case "Z":
+		  	shooting = false;
+		  	break;
 	  	case "Shift":
 	  		//fast = false;
 	  		playerColor = "#c0c0c0"
