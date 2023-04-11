@@ -31,9 +31,17 @@
 
 
 	function pattern(){
-		if(shooting && t%5 == 0){
+		if(shooting && t%15 == 0){
 			//playerShoot(x, y);
-			shoot(x, y, 3, -pi/2, "#aaaaaa")
+			shoot(x, y-10, 3, -pi/2, "#dddddd")
+			bullets[count-1].player = true;
+			shoot(x, y-10, 3, -pi/2+pi/5, "#dddddd")
+			bullets[count-1].player = true;
+			shoot(x, y-10, 3, -pi/2-pi/5, "#dddddd")
+			bullets[count-1].player = true;
+			shoot(x, y-10, 3, -pi/2+2*pi/5, "#dddddd")
+			bullets[count-1].player = true;
+			shoot(x, y-10, 3, -pi/2-2*pi/5, "#dddddd")
 			bullets[count-1].player = true;
 		}
 

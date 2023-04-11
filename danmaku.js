@@ -491,7 +491,8 @@ function draw(){
 
 				} else {
 					ctx.beginPath();
-					ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);		
+					if(Object.hasOwn(bullets[i], 'player')) {ctx.arc(bullets[i].x, bullets[i].y, 10, 0, pi*2);}
+					else {ctx.arc(bullets[i].x, bullets[i].y, 5, 0, pi*2);}		
 					ctx.fillStyle = bullets[i].color;
 					ctx.fill();
 					ctx.closePath();
@@ -519,7 +520,7 @@ function draw(){
 			if(r == bulletSizeS)	hitbox = r-2;
 			else if (r == bulletSize)	hitbox = r-4;
 			else hitbox = r-5;
-			if(sq(bullets[i].x-x)+sq(bullets[i].y-y) <= hitbox*hitbox){
+			if(!Object.hasOwn(bullets[i], 'player') && sq(bullets[i].x-x)+sq(bullets[i].y-y) <= hitbox*hitbox){
 
 				//change color to red (but only when it is standard monochromic bullet)
 				
