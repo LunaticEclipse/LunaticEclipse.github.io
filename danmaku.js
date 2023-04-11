@@ -44,6 +44,15 @@ shot.src = "img/Default_Shot.png";
 var eye = document.createElement('img');
 eye.src = "img/eye.png";
 
+//power sprite
+var powerIcon = [];
+powerIcon[0] = document.createElement('img'); powerIcon[0].src = "img/pickup_solar.png";
+powerIcon[1] = document.createElement('img'); powerIcon[1].src = "img/pickup_wastetoenergy.png";
+powerIcon[2] = document.createElement('img'); powerIcon[2].src = "img/pickup_wind.png";
+powerIcon[3] = document.createElement('img'); powerIcon[3].src = "img/pickup_coal.png";
+powerIcon[4] = document.createElement('img'); powerIcon[4].src = "img/pickup_ngas.png";
+powerIcon[5] = document.createElement('img'); powerIcon[5].src = "img/pickup_oil.png";
+
 //sfx source
 var die = document.createElement('die');
 die.src = "sound/die.wav";
@@ -102,6 +111,9 @@ var cooldown = 0;
 var enemy = [];
 var countE = 0;
 
+//power
+var power = [];
+var countP = 0;
 
 
 
@@ -142,7 +154,11 @@ function spawn(x, y, hp, attack, v, angle){
 	countE += 1;
 }
 
-
+//power
+function drop(x){
+	power[countP] = {x:x, y:5, type:random(6)};
+	coountP += 1;
+}
 
 
 

@@ -39,6 +39,9 @@
 
 	function map(){
 		if(t%100 == 0 && t<=1000){
+			(cx-400, 200, 5, pattern1, 0.7, pi/4);
+		}
+		if(t%100 == 0 && t<=1000){
 			spawn(cx-400, 200, 5, pattern1, 0.7, pi/4);
 		}
 
@@ -70,7 +73,7 @@
 			shooting = false;
 			cooldown = 200;
 
-			sound[random(2.9)].play();
+			sound[random(3)].play();
 
 			for(let i = 0; i < 21; i+=1){
 				shoot(x, y-10,5, -30*pi/40 + i*pi/40 ,"#dddddd")
