@@ -419,6 +419,16 @@ function draw(){
 	for(let i = 0; i<countP; i++){
 
 		if(true){
+
+			var grd = ctx.createRadialGradient(power[i].x, power[i].y, 20, power[i].x, power[i].y, 35);
+			grd.addColorStop(0, "#ffff00");
+			grd.addColorStop(1, hexToRgbA("#ffff00"));
+			ctx.fillStyle = grd;
+
+			ctx.beginPath();
+			ctx.arc(power[i].x, power[i].y, 35, 0, pi*2);
+			ctx.fill();
+			ctx.closePath();
 		
 			ctx.drawImage(powerIcon[power[i].type], power[i].x-20, power[i].y-20)
 
