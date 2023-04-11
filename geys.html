@@ -27,6 +27,8 @@
 	var x = cx-50;
 	var y = 600;
 
+	var energy = 3;
+
 	var sound = [];
 
 	sound[0] = new Audio();
@@ -38,7 +40,7 @@
 
 
 	function map(){
-		if(t%50 == 0 && t<=1000){
+		if(t%100 == 0){
 			drop(400 + random(650));
 		}
 		if(t%100 == 0 && t<=1000){
@@ -46,7 +48,7 @@
 		}
 
 		if(t==1500){
-			spawn(cx, cy-300, 200, pattern2, 0, 0);
+			spawn(cx, cy-250, 200, pattern2, 0, 0);
 		}
 	}
 
@@ -69,9 +71,11 @@
 
 	function pattern(){
 
-		if(shooting && cooldown<=0){
+		if(shooting && cooldown<=0 && energy > 0){
 			shooting = false;
-			cooldown = 200;
+			cooldown = 100;
+
+			energy--;
 
 			sound[random(3)].play();
 
@@ -105,6 +109,6 @@
 		t++;
 		if(cooldown>0) {cooldown-=1;}
 	}
-	setInterval(mainLoop, 8);	
+	var brake = setInterval(mainLoop, 8);	
 
 </script>

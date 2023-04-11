@@ -58,8 +58,13 @@ powerIcon[4] = document.createElement('img'); powerIcon[4].src = "img/pickupbad_
 powerIcon[5] = document.createElement('img'); powerIcon[5].src = "img/pickupbad_oil.png";
 
 //sfx source
-var die = document.createElement('die');
+var die = new Audio();
 die.src = "sound/die.wav";
+
+var collect = new Audio();
+collect.src = "sound/pickup.wav";
+var collectBad = new Audio();
+collectBad.src = "sound/pickupBad.wav";
 
 
 //midpoint of canvas
@@ -160,7 +165,7 @@ function spawn(x, y, hp, attack, v, angle){
 
 //power
 function drop(x){
-	power[countP] = {x:x, y:5, type:random(6)};
+	power[countP] = {x:x, y:5, type:random(6), collected:false};
 	countP += 1;
 }
 
@@ -329,6 +334,7 @@ function draw(){
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
 
 
+	//DISPLAY
 	//drawing spell card title
 	//OVERRIDE!! FPS DISPLAY
 
@@ -351,7 +357,30 @@ function draw(){
 	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
 	ctx.fillText("on-screen: " + onScreenCount, 100, 250);
 	//ctx.fillText("cooldown: " + cooldown, 100, 300);
-	
+
+
+	ctx.fillText("Energy: ", 1200, 250);
+	if(energy > 0){
+		ctx.beginPath();
+		ctx.arc(1250, 300, 30, 0, pi*2);
+		ctx.fillStyle = "#ffd700";
+		ctx.fill();
+		ctx.closePath();
+	}
+	if(energy > 1){
+		ctx.beginPath();
+		ctx.arc(1250, 380, 30, 0, pi*2);
+		ctx.fillStyle = "#ffd700";
+		ctx.fill();
+		ctx.closePath();
+	}
+	if(energy > 2){
+		ctx.beginPath();
+		ctx.arc(1250, 460, 30, 0, pi*2);
+		ctx.fillStyle = "#ffd700";
+		ctx.fill();
+		ctx.closePath();
+	}
 	
 
 	
@@ -418,7 +447,7 @@ function draw(){
 //drawing power
 	for(let i = 0; i<countP; i++){
 
-		if(true){
+		if(power[i].y<800 && !power[i].collected){
 
 			var grd = ctx.createRadialGradient(power[i].x, power[i].y, 20, power[i].x, power[i].y, 35);
 			grd.addColorStop(0, "#ffff00");
@@ -433,6 +462,18 @@ function draw(){
 			ctx.drawImage(powerIcon[power[i].type], power[i].x-20, power[i].y-20)
 
 		}
+	}
+
+//power collection
+	for(let i = 0; i<countP; i++){
+
+		if(sq(power[i].x-x)+sq(power[i].y-y)<=1225 && !power[i].collected && energy<3){
+			power[i].collected = true;
+			energy++;
+			if(power[i].type<3) {collect.play();}
+			else {collectBad.play();}
+		}
+
 	}
 
 
@@ -594,6 +635,7 @@ function draw(){
 
 				if(!Object.hasOwn(bullets[i], 'hit')){
 					deathCount++
+					die.play();
 				}
 
 				// flag bullet as hit
@@ -654,7 +696,7 @@ function WASD(){
 
 	//power movement
 	for(let i = 0; i<countP; i++){
-		power[i].y += 0.7;
+		power[i].y += 1.5;
 	}
 
 
