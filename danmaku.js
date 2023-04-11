@@ -68,6 +68,8 @@ collect.src = "sound/pickup.wav";
 var collectBad = new Audio();
 collectBad.src = "sound/pickupBad.wav";
 
+var boom = new Audio();
+boom.src = "sound/boom.wav"
 
 //midpoint of canvas
 var cx = canvas.width/2;
@@ -476,8 +478,16 @@ function draw(){
 		if(sq(power[i].x-x)+sq(power[i].y-y)<=1225 && !power[i].collected && energy<3){
 			power[i].collected = true;
 			energy++;
-			if(power[i].type<3) {collect.play();}
-			else {collectBad.play(); warming++;}
+			if(power[i].type<3) {
+				collect.play();
+			} else {
+				if(warming==2){
+					boom.play();
+				} else {
+					collectBad.play();
+				}
+				warming++;
+			}
 		}
 
 	}
