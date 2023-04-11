@@ -33,6 +33,10 @@ var canvas = document.getElementById("danmaku");
 var ctx = canvas.getContext("2d");
 var t = 0;
 
+//background
+var bkgrnd = document.createElement('img');
+bkgrnd.src = "img/city3.png";
+
 
 //bullet sprite
 var shot = document.createElement('img');
@@ -300,6 +304,9 @@ function draw(){
 	//refreshing screen
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 
+
+	//draw background
+	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
 
 
 	//drawing spell card title
@@ -864,7 +871,7 @@ function WASD(){
 
 
 function onScreen(i){
-	if(project && bullets[i].x>0 && bullets[i].x<canvas.width && bullets[i].y>0 && bullets[i].y<canvas.height){
+	if(project && bullets[i].x>345 && bullets[i].x<1105 && bullets[i].y>0 && bullets[i].y<800){
 		return true;
 	} else if (project){
 		return false;
