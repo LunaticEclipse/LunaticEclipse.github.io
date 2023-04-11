@@ -92,6 +92,15 @@ var playerSpeed = unfocusSpeed;
 
 
 
+
+
+//enemy
+var enemy = [];
+var countE = 0;
+
+
+
+
 const bulletSize = 10;
 const bulletSizeL = 20;
 const bulletSizeS = 7;
@@ -120,6 +129,19 @@ function aim(x, y, tx, ty){
 		return atan((ty-y)/(tx-x));
 	}
 }
+
+
+
+//enemy
+function spawn(x, y, attack, v, angle){
+	enemy[countE] = {x:x, y:y, attack:attack, v:v, angle:angle};
+	countE += 1;
+}
+
+
+
+
+
 
 
 /*
@@ -333,8 +355,17 @@ function draw(){
 		}
 
 	}
-	
 
+
+//drawing enemies
+	
+	for(let i = 0; i<countE; i++){
+		ctx.beginPath();
+		ctx.arc(enemy[i].x, enemy[i].y, 5, 0, pi*2);
+		ctx.fillStyle = "#0aaa0a";
+		ctx.fill();
+		ctx.closePath();
+	}
 
 
 
@@ -528,6 +559,12 @@ function WASD(){
 	  	if(y<=canvas.height-5) y += dyD*playerSpeed;
 	  	if(y>=5) y -= dyU*playerSpeed;
 	 }
+
+	//enemy movement
+	for(let i = 0; i<countE; i++){
+		enemy[i].x += enemy[i].v * cos(enemy[i].angle)
+		enemy[i].y += enemy[i].v * sin(enemy[i].angle)
+	}
 
 
 
@@ -779,7 +816,11 @@ function WASD(){
 
 
 function onScreen(i){
-	if (touhou && bullets[i].x>350 && bullets[i].x<1100 && bullets[i].y>0 && bullets[i].y<canvas.height){
+	if(project && bullets[i].x>0 && bullets[i].x<canvas.width && bullets[i].y>0 && bullets[i].y<canvas.height){
+		return true;
+	} else if (project){
+		return false;
+	} else if (touhou && bullets[i].x>350 && bullets[i].x<1100 && bullets[i].y>0 && bullets[i].y<canvas.height){
 		return true;
 	} else if(!touhou && loaded(i)) {
 		return true;

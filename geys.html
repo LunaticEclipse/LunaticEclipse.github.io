@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="danmaku" width="1500" height="1000" style="border:0px solid #000000;"></canvas>
+
+
+<script type="text/javascript" src="mathFunctions.js"></script>
+<script type="text/javascript" src="danmaku.js"></script>
+
+
+<script>
+	// player starting position!!
+	touhou = true;
+	var project = true;
+
+	var x = cx-50;
+	var y = 600;
+
+
+	function map(){
+		if(t%500 == 0){
+			spawn(500, 200+t/5, pattern1, 0.5, 0);
+		}
+	}
+
+	function pattern1(xe, ye){
+		if(t%10 == 0) {shootRing(xe, ye, 2, t/100, 3, 0, "#000000");}
+	}
+
+	function pattern(){
+		for(let i = 0; i<countE; i++){
+			enemy[i].attack(enemy[i].x, enemy[i].y);
+		}
+		
+	}
+
+	function mainLoop(){
+		map();
+		pattern();
+		WASD()
+		draw();
+		t++;
+	}
+	setInterval(mainLoop, 5);	
+
+</script>
