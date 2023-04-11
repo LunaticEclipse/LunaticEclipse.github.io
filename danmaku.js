@@ -37,6 +37,8 @@ var t = 0;
 var bkgrnd = document.createElement('img');
 bkgrnd.src = "img/city3.png";
 
+var sea = document.createElement('img');
+sea.src = "img/sea.png"
 
 //bullet sprite
 var shot = document.createElement('img');
@@ -332,6 +334,10 @@ function draw(){
 
 	//draw background
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
+
+	if(warming >= 3){
+		ctx.drawImage(sea, cx-750, 500)
+	}
 
 
 	//DISPLAY
