@@ -90,7 +90,7 @@ var unfocusSpeed = 3;
 var focusSpeed = 1.5;
 var playerSpeed = unfocusSpeed;
 var shooting = false;
-
+var cooldown = 0;
 
 
 
@@ -133,8 +133,8 @@ function aim(x, y, tx, ty){
 
 
 //enemy
-function spawn(x, y, attack, v, angle){
-	enemy[countE] = {x:x, y:y, attack:attack, v:v, angle:angle};
+function spawn(x, y, hp, attack, v, angle){
+	enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle};
 	countE += 1;
 }
 
@@ -315,6 +315,7 @@ function draw(){
 	ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
 	ctx.fillText("shooting: " + shooting, 100, 250);
+	ctx.fillText("cooldown: " + cooldown, 100, 300);
 	
 	
 
@@ -374,6 +375,7 @@ function draw(){
 		ctx.fill();
 		ctx.closePath();
 	}
+
 
 
 
@@ -520,6 +522,7 @@ function draw(){
 			if(r == bulletSizeS)	hitbox = r-2;
 			else if (r == bulletSize)	hitbox = r-4;
 			else hitbox = r-5;
+
 			if(!Object.hasOwn(bullets[i], 'player') && sq(bullets[i].x-x)+sq(bullets[i].y-y) <= hitbox*hitbox){
 
 				//change color to red (but only when it is standard monochromic bullet)

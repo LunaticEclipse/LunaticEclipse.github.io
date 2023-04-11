@@ -19,33 +19,33 @@
 
 
 	function map(){
-		if(t%500 == 0){
-			spawn(500, 200+t/5, pattern1, 0.5, 0);
+		if(t < 1500 && t%500 == 0){
+			spawn(500, 200+t/5, 3, pattern1, 0.5, pi/3);
 		}
 	}
 
 	function pattern1(xe, ye){
-		if(t%10 == 0) {shootRing(xe, ye, 2, t/100, 3, 0, "#000000");}
+		if(t%10 == 0) {shootRing(xe, ye, 2, t/100*sin(t), 3, 0, "#000000");}
 	}
 
 
 
 	function pattern(){
-		if(shooting && t%15 == 0){
-			//playerShoot(x, y);
-			shoot(x, y-10, 3, -pi/2, "#dddddd")
-			bullets[count-1].player = true;
-			shoot(x, y-10, 3, -pi/2+pi/5, "#dddddd")
-			bullets[count-1].player = true;
-			shoot(x, y-10, 3, -pi/2-pi/5, "#dddddd")
-			bullets[count-1].player = true;
-			shoot(x, y-10, 3, -pi/2+2*pi/5, "#dddddd")
-			bullets[count-1].player = true;
-			shoot(x, y-10, 3, -pi/2-2*pi/5, "#dddddd")
-			bullets[count-1].player = true;
+
+		if(shooting && cooldown<=0){
+			shooting = false;
+			cooldown = 200;
+			for(let i = 0; i < 21; i+=1){
+				shoot(x, y-10,5, -30*pi/40 + i*pi/40 ,"#dddddd")
+				shoot(x, y-10,6, -30*pi/40 + i*pi/40 ,"#dddddd")
+				shoot(x, y-10,4, -30*pi/40 + i*pi/40 ,"#dddddd")
+				shoot(x, y-10,5.5, -30*pi/40 + i*pi/40 ,"#dddddd")
+				shoot(x, y-10,6.5, -30*pi/40 + i*pi/40 ,"#dddddd")
+				shoot(x, y-10,4.5, -30*pi/40 + i*pi/40 ,"#dddddd")
+			}
 		}
 
-		for(let i = 0; i<countE; i++){
+		for(let i = 0; i<countE; i+=1){
 			enemy[i].attack(enemy[i].x, enemy[i].y);
 		}
 		
@@ -57,6 +57,7 @@
 		WASD()
 		draw();
 		t++;
+		if(cooldown>0) {cooldown-=1;}
 	}
 	setInterval(mainLoop, 5);	
 
