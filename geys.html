@@ -22,12 +22,14 @@
 	// player starting position!!
 	touhou = true;
 	toggle = true;
+	const body = document.querySelector('body');
 	var project = true;
 
 	var x = cx-50;
 	var y = 600;
 
 	var energy = 3;
+	var warming = 0;
 
 	var sound = [];
 
@@ -43,8 +45,9 @@
 		if(t%100 == 0){
 			drop(400 + random(650));
 		}
-		if(t%100 == 0 && t<=1000){
-			spawn(cx-400, 200, 5, pattern1, 0.7, pi/4);
+		if(t%150 == 0 && t<=1000){
+			spawn(cx-250, 200, 5, pattern1, 0.7, pi/2);
+			spawn(cx+250, 200, 5, pattern1, 0.7, pi/2);
 		}
 
 		if(t==1500){
@@ -53,10 +56,13 @@
 	}
 
 	function pattern1(xe, ye){
-		if(t%10 == 0 && t%300<200) {
-			shootRing(xe, ye, 2, t/50, 3, 0, "#000000");
-			shootRing(xe, ye, 2.5, t/50, 3, 0, "#000000");
+		
+		if(t%100 == 0) {
+			shootAccRing(xe,ye,3,-0.1,1.5,random(4),12,10,"#000000")
+			//shootRing(xe, ye, 2, t/50, 3, 0, "#000000");
+			//shootRing(xe, ye, 2.5, t/50, 3, 0, "#000000");
 		}
+		
 	}
 
 	function pattern2(){
@@ -102,6 +108,10 @@
 	}
 
 	function mainLoop(){
+		if(warming == 0) {body.style.backgroundColor = "#929292";}
+		else if (warming == 1) {body.style.backgroundColor = "#727272";}
+		else if (warming == 2) {body.style.backgroundColor = "#525252";}
+		else {body.style.backgroundColor = "#323232";}
 		map();
 		pattern();
 		WASD()

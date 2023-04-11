@@ -471,7 +471,7 @@ function draw(){
 			power[i].collected = true;
 			energy++;
 			if(power[i].type<3) {collect.play();}
-			else {collectBad.play();}
+			else {collectBad.play(); warming++;}
 		}
 
 	}
