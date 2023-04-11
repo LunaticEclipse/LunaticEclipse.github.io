@@ -44,6 +44,10 @@ shot.src = "img/Default_Shot.png";
 var eye = document.createElement('img');
 eye.src = "img/eye.png";
 
+//reimu
+var reimu = document.createElement('img');
+reimu.src = "img/reimu.png";
+
 //power sprite
 var powerIcon = [];
 powerIcon[0] = document.createElement('img'); powerIcon[0].src = "img/pickup_solar.png";
@@ -479,6 +483,8 @@ function draw(){
 
   	//drawing the player
   	//it is drawn here so that it is above aura
+  	ctx.drawImage(reimu, x-16, y-21)
+
 	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, pi*2);
 	if(!toggle){
@@ -486,7 +492,7 @@ function draw(){
 	} else {
 		ctx.fillStyle = playerColor;
 	} 
-	ctx.fill();
+	if(playerSpeed == focusSpeed) {ctx.fill();}
 	ctx.closePath();
 
 
