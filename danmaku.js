@@ -125,6 +125,9 @@ var countE = 0;
 var power = [];
 var countP = 0;
 
+//timer for sea level to take effect
+var warmingTimer = -1;
+
 
 
 const bulletSize = 10;
@@ -335,7 +338,12 @@ function draw(){
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
 
 	if(warming >= 3){
-		ctx.drawImage(sea, cx-750, 500)
+		ctx.drawImage(sea, cx-750, 500);
+	}
+
+	if(warming == 3){
+		warmingTimer = 300;
+		warming++;
 	}
 
 
@@ -360,7 +368,7 @@ function draw(){
 	//ctx.fillText(t/100, 100, 100)
 	//ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
-	ctx.fillText("on-screen: " + onScreenCount, 100, 250);
+	//ctx.fillText("on-screen: " + onScreenCount, 100, 250);
 	//ctx.fillText("cooldown: " + cooldown, 100, 300);
 
 
@@ -572,7 +580,7 @@ function draw(){
 
 
 	//global warming death
-	if(warming >= 3 && y>=550){
+	if(warming >= 3 && y>=550 && warmingTimer == 0){
 		deathCount++;
 		die.play();
 	}

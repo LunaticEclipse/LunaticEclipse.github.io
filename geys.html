@@ -132,7 +132,12 @@
 		WASD()
 		draw();
 		t++;
-		if(cooldown>0) {cooldown-=1;}
+		if(warmingTimer > 0) {warmingTimer -= 1;}
+		if(cooldown>0) {
+			cooldown-=1;
+		}
+
+		
 
 		if(deathCount > 0)	{
 			over = true;
