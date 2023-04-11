@@ -60,9 +60,6 @@ powerIcon[4] = document.createElement('img'); powerIcon[4].src = "img/pickupbad_
 powerIcon[5] = document.createElement('img'); powerIcon[5].src = "img/pickupbad_oil.png";
 
 //sfx source
-var die = new Audio();
-die.src = "sound/die.wav";
-
 var collect = new Audio();
 collect.src = "sound/pickup.wav";
 var collectBad = new Audio();
@@ -361,7 +358,7 @@ function draw(){
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
 	//ctx.fillText(t/100, 100, 100)
-	ctx.fillText(deathCount + " misses", 100, 150)
+	//ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
 	ctx.fillText("on-screen: " + onScreenCount, 100, 250);
 	//ctx.fillText("cooldown: " + cooldown, 100, 300);
@@ -650,7 +647,7 @@ function draw(){
 				}
 
 				if(!Object.hasOwn(bullets[i], 'hit')){
-					deathCount++
+					deathCount++;
 					die.play();
 				}
 

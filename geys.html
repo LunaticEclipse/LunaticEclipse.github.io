@@ -31,6 +31,9 @@
 	var energy = 3;
 	var warming = 0;
 
+	var die = new Audio();
+	die.src = "sound/die.wav";
+
 	var sound = [];
 
 	sound[0] = new Audio();
@@ -107,6 +110,11 @@
 		
 	}
 
+
+	function game(){
+
+		var over = false;
+
 	function mainLoop(){
 		if(warming == 0) {body.style.backgroundColor = "#929292";}
 		else if (warming == 1) {body.style.backgroundColor = "#727272";}
@@ -118,7 +126,20 @@
 		draw();
 		t++;
 		if(cooldown>0) {cooldown-=1;}
+
+		if(deathCount > 0)	{
+			over = true;
+			clearInterval(brake);
+		}
 	}
-	var brake = setInterval(mainLoop, 8);	
+	var brake = setInterval(mainLoop, 8);
+
+	die.play();
+
+	}
+
+	game();
+
+
 
 </script>
