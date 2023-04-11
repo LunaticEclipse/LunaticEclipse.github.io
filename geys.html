@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<canvas id="danmaku" width="1500" height="1000" style="border:0px solid #000000;"></canvas>
+<canvas id="danmaku" width="1500" height="800" style="border:0px solid #000000;"></canvas>
 
 
 <script type="text/javascript" src="mathFunctions.js"></script>
@@ -29,16 +29,19 @@
 
 	function map(){
 		if(t%100 == 0 && t<=1000){
-			spawn(500, 200, 10, pattern1, 0.5, pi/4);
+			spawn(cx-400, 200, 5, pattern1, 0.7, pi/4);
 		}
 
 		if(t==1500){
-			spawn(cx, cy-300, 500, pattern2, 0, 0);
+			spawn(cx, cy-300, 200, pattern2, 0, 0);
 		}
 	}
 
 	function pattern1(xe, ye){
-		if(t%10 == 0) {shootRing(xe, ye, 2, t/100*sin(t), 3, 0, "#000000");}
+		if(t%10 == 0 && t%300<200) {
+			shootRing(xe, ye, 2, t/50, 3, 0, "#000000");
+			shootRing(xe, ye, 2.5, t/50, 3, 0, "#000000");
+		}
 	}
 
 	function pattern2(){

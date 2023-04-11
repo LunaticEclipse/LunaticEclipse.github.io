@@ -308,14 +308,22 @@ function draw(){
 	//call requestAnimFrame() every 1/10 seconds
 	//multiply fps by 10
 	//it is round(fps*1000)/100 to round to 2dp
+
+	var onScreenCount=0;
+	for(let i = 0; i<count; i++){
+		if(onScreen(i)){
+			onScreenCount++;
+		}
+	}
+
 	if(!(t%10)) {requestAnimFrame();}
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "#FF0000";
-	ctx.fillText(t/100, 100, 100)
+	//ctx.fillText(t/100, 100, 100)
 	ctx.fillText(deathCount + " misses", 100, 150)
 	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
-	ctx.fillText("shooting: " + shooting, 100, 250);
-	ctx.fillText("cooldown: " + cooldown, 100, 300);
+	ctx.fillText("on-screen: " + onScreenCount, 100, 250);
+	//ctx.fillText("cooldown: " + cooldown, 100, 300);
 	
 	
 
