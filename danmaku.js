@@ -338,6 +338,11 @@ function draw(){
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
 
 	if(warming > 0){
+		ctx.beginPath();
+		ctx.rect(3, 1170-100*warming,1494,800);
+		ctx.fillStyle = "#168BC5"
+		ctx.fill();
+
 		ctx.drawImage(sea, cx-750, 870-100*warming);
 	}
 
@@ -458,8 +463,13 @@ function draw(){
 		if(power[i].y<800 && !power[i].collected){
 
 			var grd = ctx.createRadialGradient(power[i].x, power[i].y, 20, power[i].x, power[i].y, 35);
-			grd.addColorStop(0, "#ffff00");
-			grd.addColorStop(1, hexToRgbA("#ffff00"));
+			if(power[i].type < 3){
+				grd.addColorStop(0, "#ffff00");
+				grd.addColorStop(1, hexToRgbA("#ffff00"));
+			} else {
+				grd.addColorStop(0, "#ffc000");
+				grd.addColorStop(1, hexToRgbA("#ffc000"));
+			}
 			ctx.fillStyle = grd;
 
 			ctx.beginPath();
