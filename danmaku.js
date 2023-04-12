@@ -482,6 +482,7 @@ function draw(){
 				collect.play();
 			} else {
 				collectBad.play();
+				warmingTimer = 200;
 				warming++;
 			}
 		}
@@ -571,7 +572,7 @@ function draw(){
 
 
 	//global warming death
-	if(y>=(920-100*warming)){
+	if(y>=(920-100*warming) && warmingTimer == 0){
 		deathCount++;
 		die.play();
 	}
