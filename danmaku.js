@@ -350,7 +350,7 @@ function draw(){
 		ctx.fillStyle = "#168BC5"
 		ctx.fill();
 
-		ctx.drawImage(sea, cx-750, 870-100*warming);
+		ctx.drawImage(sea, cx-750, 820-90*warming);
 	}
 
 
@@ -534,10 +534,56 @@ function draw(){
 
 
 	//global warming death
-	if(y>=(920-100*warming) && warmingTimer == 0){
+	if(y>=(870-90*warming) && warmingTimer == 0){
 		deathCount++;
 		die.play();
 	}
+
+
+	//drawing power
+	for(let i = 0; i<countP; i++){
+
+		if(power[i].y<800 && !power[i].collected){
+
+			var grd = ctx.createRadialGradient(power[i].x, power[i].y, 20, power[i].x, power[i].y, 35);
+			if(power[i].type < 3){
+				grd.addColorStop(0, "#30ff30");
+				grd.addColorStop(1, hexToRgbA("#30ff30"));
+			} else {
+				grd.addColorStop(0, "#ffb000");
+				grd.addColorStop(1, hexToRgbA("#ffb000"));
+			}
+			ctx.fillStyle = grd;
+
+			ctx.beginPath();
+			ctx.arc(power[i].x, power[i].y, 35, 0, pi*2);
+			ctx.fill();
+			ctx.closePath();
+		
+			ctx.drawImage(powerIcon[power[i].type], power[i].x-20, power[i].y-20)
+
+		}
+	}
+
+	//power collection
+	for(let i = 0; i<countP; i++){
+
+		if(sq(power[i].x-x)+sq(power[i].y-y)<=1225 && !power[i].collected && energy<3){
+			power[i].collected = true;
+			energy++;
+			if(power[i].type<3) {
+				collect.currentTime = 0;
+				collect.play();
+			} else {
+				collectBad.currentTime = 0;
+				collectBad.play();
+				warmingTimer = 50;
+				warming++;
+			}
+		}
+
+	}
+
 
 
 
@@ -645,6 +691,7 @@ function draw(){
 	//drawing enemies
 	
 	for(let i = 0; i<countE; i++){
+		if(enemy[i].x>345 && enemy[i].x<1105 && enemy[i].y>0 && enemy[i].y<800){
 
 		if(enemy[i].hp > 0 && t%200<100){
 
@@ -653,52 +700,10 @@ function draw(){
 		} else if(enemy[i].hp > 0){
 			ctx.drawImage(fairy2, enemy[i].x-21, enemy[i].y-27)
 		}
-	}
-
-
-//drawing power
-	for(let i = 0; i<countP; i++){
-
-		if(power[i].y<800 && !power[i].collected){
-
-			var grd = ctx.createRadialGradient(power[i].x, power[i].y, 20, power[i].x, power[i].y, 35);
-			if(power[i].type < 3){
-				grd.addColorStop(0, "#30ff30");
-				grd.addColorStop(1, hexToRgbA("#30ff30"));
-			} else {
-				grd.addColorStop(0, "#ffb000");
-				grd.addColorStop(1, hexToRgbA("#ffb000"));
-			}
-			ctx.fillStyle = grd;
-
-			ctx.beginPath();
-			ctx.arc(power[i].x, power[i].y, 35, 0, pi*2);
-			ctx.fill();
-			ctx.closePath();
-		
-			ctx.drawImage(powerIcon[power[i].type], power[i].x-20, power[i].y-20)
 
 		}
 	}
 
-//power collection
-	for(let i = 0; i<countP; i++){
-
-		if(sq(power[i].x-x)+sq(power[i].y-y)<=1225 && !power[i].collected && energy<3){
-			power[i].collected = true;
-			energy++;
-			if(power[i].type<3) {
-				collect.currentTime = 0;
-				collect.play();
-			} else {
-				collectBad.currentTime = 0;
-				collectBad.play();
-				warmingTimer = 200;
-				warming++;
-			}
-		}
-
-	}
 
 
 
