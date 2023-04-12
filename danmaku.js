@@ -683,8 +683,10 @@ function draw(){
 			power[i].collected = true;
 			energy++;
 			if(power[i].type<3) {
+				collect.currentTime = 0;
 				collect.play();
 			} else {
+				collectBad.currentTime = 0;
 				collectBad.play();
 				warmingTimer = 200;
 				warming++;

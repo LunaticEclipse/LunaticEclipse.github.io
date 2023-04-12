@@ -94,7 +94,10 @@
 
 			energy--;
 
-			sound[random(3)].play();
+			var soundeffectid = random(3)
+
+			sound[soundeffectid].currentTime = 0;
+			sound[soundeffectid].play();
 
 			for(let i = 0; i < 21; i+=1){
 				shoot(x, y-10,5, -30*pi/40 + i*pi/40 ,"#dddddd")
@@ -145,6 +148,8 @@
 
 		if(deathCount > 0)	{
 			over = true;
+			music.pause();
+			music.currentTime = 0;
 			clearInterval(brake);
 		}
 	}
