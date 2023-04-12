@@ -62,6 +62,14 @@
 		}
 
 		if(t==1500){
+			spawn(400, cy, 30, pattern3, 1, 0);
+		}
+
+		if(t==2500){
+			spawn(1085, cy-100, 60, pattern4, -1, 0);
+		}
+
+		if(t==5000){
 			spawn(cx, cy-300, 200, pattern2, 0, 0);
 		}
 	}
@@ -72,6 +80,32 @@
 			shootAccRing(xe,ye,3,-0.1,1.5,random(4),12,10,"#000000")
 			//shootRing(xe, ye, 2, t/50, 3, 0, "#000000");
 			//shootRing(xe, ye, 2.5, t/50, 3, 0, "#000000");
+		}
+		
+	}
+
+	function pattern3(xe, ye){
+
+		if(t%5==1){
+			
+			shootAcc(xe+175*cos(t/50)*sin(t/100), ye+175*sin(t/50)*sin(t/100), -1, 0.004, 1.5, -t/25, "#dFA000");
+
+			shootAcc(xe-175*cos(t/50)*sin(t/100), ye-175*sin(t/50)*sin(t/100), 1, -0.004, -1.5, -t/25, "#dFA000");
+			
+
+		}
+		
+	}
+
+	function pattern4(xe, ye){
+
+		if(t%5==1){
+			
+			shootAcc(xe+175*cos(t/100)*sin(t/200), ye+175*sin(t/100)*sin(t/200), -1, 0.004, 1.5, -t/25, "#fFA000");
+
+			shootAcc(xe-175*cos(t/100)*sin(t/200), ye-175*sin(t/100)*sin(t/200), 1, -0.004, -1.5, -t/25, "#fFA000");
+			
+
 		}
 		
 	}

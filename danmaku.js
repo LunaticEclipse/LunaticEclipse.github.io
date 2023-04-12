@@ -53,6 +53,9 @@ reimu.src = "img/player.png";
 //enemy
 var fairy = document.createElement('img');
 fairy.src = "img/fairy.png"
+var fairy2 = document.createElement('img');
+fairy2.src = "img/fairy2.png"
+
 
 //power sprite
 var powerIcon = [];
@@ -643,10 +646,12 @@ function draw(){
 	
 	for(let i = 0; i<countE; i++){
 
-		if(enemy[i].hp > 0){
+		if(enemy[i].hp > 0 && t%200<100){
 
 			ctx.drawImage(fairy, enemy[i].x-32, enemy[i].y-27)
 
+		} else if(enemy[i].hp > 0){
+			ctx.drawImage(fairy2, enemy[i].x-21, enemy[i].y-27)
 		}
 	}
 
