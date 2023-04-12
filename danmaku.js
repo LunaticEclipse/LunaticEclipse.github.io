@@ -339,7 +339,7 @@ function draw(){
 
 	if(warming > 0){
 		ctx.beginPath();
-		ctx.rect(3, 1170-100*warming,1494,800);
+		ctx.rect(3, 1170-100*warming,1456,800);
 		ctx.fillStyle = "#168BC5"
 		ctx.fill();
 
