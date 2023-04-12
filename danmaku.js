@@ -337,13 +337,8 @@ function draw(){
 	//draw background
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
 
-	if(warming >= 3){
-		ctx.drawImage(sea, cx-750, 500);
-	}
-
-	if(warming == 3){
-		warmingTimer = 300;
-		warming++;
+	if(warming > 0){
+		ctx.drawImage(sea, cx-750, 870-100*warming);
 	}
 
 
@@ -486,11 +481,7 @@ function draw(){
 			if(power[i].type<3) {
 				collect.play();
 			} else {
-				if(warming==2){
-					boom.play();
-				} else {
-					collectBad.play();
-				}
+				collectBad.play();
 				warming++;
 			}
 		}
@@ -580,11 +571,10 @@ function draw(){
 
 
 	//global warming death
-	if(warming >= 3 && y>=550 && warmingTimer == 0){
+	if(y>=(920-100*warming)){
 		deathCount++;
 		die.play();
 	}
-
 
 
 
