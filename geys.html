@@ -65,14 +65,21 @@
 			spawn(400, cy, 30, pattern3, 0.3, 0);
 		}
 
-		if(t==3000){
+		if(t==2500){
 			spawn(1085, cy-100, 60, pattern4, -0.3, 0);
 		}
 
-		if(t==6000){
-			spawn(cx, cy-300, 200, pattern2, 0, 0);
+		if(t==4500){
+			const spell1 = [pattern2, 100, pattern5];
+			spawnBoss(cx, cy-230, 75, spell1, 0, 0);
 		}
+
 	}
+
+
+
+
+
 
 	function pattern1(xe, ye){
 		
@@ -110,21 +117,33 @@
 		
 	}
 
-	function pattern2(){
+	function pattern2(xe, ye){
 		if(abs(t)%12==0){
 			for(let i = 0; i < 8; i++){
 				let j = i*pi/4+sq(t)/5000
-				shoot1(cx, cy-300, 1, j, "#880088");
+				shoot1(xe, ye, 1, j, "#880088");
 
 			}
 		}
 	}
 
+	function pattern5(xe, ye){
+		if(t%6==1){
+			for(let i = 0; i < 6; i++){
+				let j = i*pi/3+pi*sin(t/90)
+				shoot1(xe+200*cos(j), ye+200*sin(j), 1.2, j+pi+pi/20, "#000000");
+			}
+		}
+	}
+
+
+
+
 	function pattern(){
 
 		if(shooting && cooldown<=0 && energy > 0){
 			shooting = false;
-			cooldown = 100;
+			cooldown = 10;
 
 			energy--;
 
@@ -150,7 +169,11 @@
 		}
 
 		for(let i = 0; i<countE; i+=1){
-			if(enemy[i].hp > 0) {enemy[i].attack(enemy[i].x, enemy[i].y);}
+			if(enemy[i].hp > 0 && !enemy[i].boss) {enemy[i].attack(enemy[i].x, enemy[i].y);}
+
+			if(enemy[i].hp > 0 && enemy[i].boss) {
+				enemy[i].attack[enemy[i].phase](enemy[i].x, enemy[i].y);
+			}
 		}
 		
 	}

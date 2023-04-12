@@ -170,7 +170,13 @@ function aim(x, y, tx, ty){
 
 //enemy
 function spawn(x, y, hp, attack, v, angle){
-	enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle};
+	enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle, boss:false};
+	countE += 1;
+}
+
+function spawnBoss(x, y, hp, attack, v, angle){
+	//enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle, boss:true, phase:0};
+	enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle, boss:true, phase:0};
 	countE += 1;
 }
 
@@ -346,7 +352,7 @@ function draw(){
 
 	if(warming > 0){
 		ctx.beginPath();
-		ctx.rect(3, 1170-100*warming,1456,800);
+		ctx.rect(0, 1120-90*warming,1456,800);
 		ctx.fillStyle = "#168BC5"
 		ctx.fill();
 
@@ -673,7 +679,7 @@ function draw(){
 			if(Object.hasOwn(bullets[i], 'player')){
 
 				for(let j = 0; j<countE; j++){
-					if(enemy[j].hp>0 && sq(bullets[i].x-enemy[j].x)+sq(bullets[i].y-enemy[j].y) <= 400){
+					if((enemy[j].hp>0||enemy[j].boss) && sq(bullets[i].x-enemy[j].x)+sq(bullets[i].y-enemy[j].y) <= 400){
 
 						deleteBullet(i,0);
 						enemy[j].hp--;
@@ -693,11 +699,11 @@ function draw(){
 	for(let i = 0; i<countE; i++){
 		if(enemy[i].x>345 && enemy[i].x<1105 && enemy[i].y>0 && enemy[i].y<800){
 
-		if(enemy[i].hp > 0 && t%200<100){
+		if((enemy[i].hp > 0 || enemy[i].boss) && t%200<100){
 
 			ctx.drawImage(fairy, enemy[i].x-32, enemy[i].y-27)
 
-		} else if(enemy[i].hp > 0){
+		} else if(enemy[i].hp > 0 || enemy[i].boss){
 			ctx.drawImage(fairy2, enemy[i].x-21, enemy[i].y-27)
 		}
 
@@ -738,6 +744,12 @@ function WASD(){
 	for(let i = 0; i<countE; i++){
 		enemy[i].x += enemy[i].v * cos(enemy[i].angle)
 		enemy[i].y += enemy[i].v * sin(enemy[i].angle)
+
+		if(enemy[i].boss && enemy[i].hp <= 0){
+			enemy[i].hp = enemy[i].attack[enemy[i].phase+1];
+			enemy[i].phase+=2;
+
+		}
 	}
 
 	//power movement
