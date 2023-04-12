@@ -11,6 +11,8 @@
 
 <body>
 
+<img id="gif" src="https://media.tenor.com/QwyDTN_0AfAAAAAC/the-goon-win.gif" hidden>
+
 <canvas id="danmaku" width="1500" height="800" style="border:0px solid #000000;"></canvas>
 
 
@@ -74,7 +76,7 @@
 		}
 
 		if(t==4000){
-			const spell1 = [pattern2, 50, pattern5];
+			const spell1 = [pattern2, 50, pattern5, 20, pristineInsanity];
 			spawnBoss(cx, cy-230, 50, spell1, 0, 0);
 			boom.currentTime = 0;
 			boom.play();
@@ -162,6 +164,17 @@
 					i += 1;
 				}
 
+		}
+	}
+
+	function pristineInsanity(xe, ye){
+		if(t%8 == 1){
+			for(let i = 0; i<20; i++){
+				let j = i*pi/10
+				shoot1(xe+30*cos(j), ye+30*sin(j), 1, j+t/40, "#ffffff");
+				bullets[count-1].size = "small";
+				bullets[count-1].negative = true;
+			}
 		}
 	}
 

@@ -763,6 +763,12 @@ function WASD(){
 			enemy[i].phase+=2;
 			boom.play();
 
+			if(enemy[i].phase >= 5){
+				alert("you win!!")
+				var image = document.getElementById("gif");
+		      	image.setAttribute("hidden", false);
+			}
+
 		}
 	}
 
