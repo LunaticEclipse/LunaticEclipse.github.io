@@ -30,7 +30,7 @@
 	var x = cx-50;
 	var y = 600;
 
-	var energy = 3;
+	var energy = 5;
 	var warming = 0;
 
 	var music = new Audio();
@@ -70,8 +70,14 @@
 		}
 
 		if(t==4500){
-			const spell1 = [pattern2, 100, pattern5];
-			spawnBoss(cx, cy-230, 75, spell1, 0, 0);
+			//spawn(cx, cy-230, 50, planetarium, 0, 0);
+		}
+
+		if(t==4000){
+			const spell1 = [pattern2, 50, pattern5];
+			spawnBoss(cx, cy-230, 50, spell1, 0, 0);
+			boom.currentTime = 0;
+			boom.play();
 		}
 
 	}
@@ -133,6 +139,29 @@
 				let j = i*pi/3+pi*sin(t/90)
 				shoot1(xe+200*cos(j), ye+200*sin(j), 1.2, j+pi+pi/20, "#000000");
 			}
+		}
+	}
+
+	function planetarium(xe, ye){
+
+		if(t == 4700){
+
+				let i = 0;
+				let member = 1000;
+				while(i<member){
+					let a = i*2*pi/member;
+					let vel = sqrt(sqrt(Math.random()*140))
+					let chroma = "#007bb8"
+					if(Math.floor(Math.random()*10) < 1)	chroma = "#c0c0c0"
+					
+					shootAcc(xe, ye, vel, -0.008, 0, a, chroma);
+
+					addPattern(count-1, 550, "same", 0.0015, 0.8, a + pi/2, "orbit", chroma)
+					//addPattern(count-1, 1150, "same", 0.002, 2, "same", 0, "#0000ff")
+
+					i += 1;
+				}
+
 		}
 	}
 

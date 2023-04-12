@@ -175,7 +175,6 @@ function spawn(x, y, hp, attack, v, angle){
 }
 
 function spawnBoss(x, y, hp, attack, v, angle){
-	//enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle, boss:true, phase:0};
 	enemy[countE] = {x:x, y:y, hp:hp, attack:attack, v:v, angle:angle, boss:true, phase:0};
 	countE += 1;
 }
@@ -407,6 +406,20 @@ function draw(){
 		ctx.fill();
 		ctx.closePath();
 	}
+	if(energy > 3){
+		ctx.beginPath();
+		ctx.arc(1250, 540, 30, 0, pi*2);
+		ctx.fillStyle = "#ffd700";
+		ctx.fill();
+		ctx.closePath();
+	}
+	if(energy > 4){
+		ctx.beginPath();
+		ctx.arc(1250, 620, 30, 0, pi*2);
+		ctx.fillStyle = "#ffd700";
+		ctx.fill();
+		ctx.closePath();
+	}
 	
 
 	
@@ -574,7 +587,7 @@ function draw(){
 	//power collection
 	for(let i = 0; i<countP; i++){
 
-		if(sq(power[i].x-x)+sq(power[i].y-y)<=1225 && !power[i].collected && energy<3){
+		if(sq(power[i].x-x)+sq(power[i].y-y)<=1225 && !power[i].collected && energy<5){
 			power[i].collected = true;
 			energy++;
 			if(power[i].type<3) {
@@ -748,6 +761,7 @@ function WASD(){
 		if(enemy[i].boss && enemy[i].hp <= 0){
 			enemy[i].hp = enemy[i].attack[enemy[i].phase+1];
 			enemy[i].phase+=2;
+			boom.play();
 
 		}
 	}
