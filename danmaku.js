@@ -48,7 +48,7 @@ eye.src = "img/eye.png";
 
 //reimu
 var reimu = document.createElement('img');
-reimu.src = "img/reimu.png";
+reimu.src = "img/player.png";
 
 //power sprite
 var powerIcon = [];
@@ -464,11 +464,11 @@ function draw(){
 
 			var grd = ctx.createRadialGradient(power[i].x, power[i].y, 20, power[i].x, power[i].y, 35);
 			if(power[i].type < 3){
-				grd.addColorStop(0, "#ffff00");
-				grd.addColorStop(1, hexToRgbA("#ffff00"));
+				grd.addColorStop(0, "#30ff30");
+				grd.addColorStop(1, hexToRgbA("#30ff30"));
 			} else {
-				grd.addColorStop(0, "#ffc000");
-				grd.addColorStop(1, hexToRgbA("#ffc000"));
+				grd.addColorStop(0, "#ffb000");
+				grd.addColorStop(1, hexToRgbA("#ffb000"));
 			}
 			ctx.fillStyle = grd;
 
@@ -568,7 +568,7 @@ function draw(){
 
   	//drawing the player
   	//it is drawn here so that it is above aura
-  	ctx.drawImage(reimu, x-16, y-21)
+  	ctx.drawImage(reimu, x-20, y-20)
 
 	ctx.beginPath();
 	ctx.arc(x, y, 5, 0, pi*2);
