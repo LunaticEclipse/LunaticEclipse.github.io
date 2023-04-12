@@ -53,13 +53,15 @@
 		if(t%100 == 0){
 			drop(400 + random(650));
 		}
-		if(t%150 == 0 && t<=1000){
-			spawn(cx-250, 200, 5, pattern1, 0.7, pi/2);
-			spawn(cx+250, 200, 5, pattern1, 0.7, pi/2);
+
+
+		if(t%90 == 0 && t<=1000){
+			spawn(cx-300+random(600), 100, 7, pattern1, 0.7, pi/2);
+			spawn(cx-300+random(600), 100, 7, pattern1, 0.7, pi/2);
 		}
 
 		if(t==1500){
-			spawn(cx, cy-250, 200, pattern2, 0, 0);
+			spawn(cx, cy-300, 200, pattern2, 0, 0);
 		}
 	}
 
