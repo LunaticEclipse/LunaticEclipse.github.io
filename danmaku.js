@@ -351,7 +351,7 @@ function draw(){
 
 
 	ctx.font = "30px Arial";
-	ctx.fillStyle = "#FFFFFF";
+	ctx.fillStyle = "#FF3030";
 
 	//draw background
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
@@ -367,6 +367,9 @@ function draw(){
 
 	ctx.drawImage(arrow, 50, 100)
 	ctx.fillText("Move", 50, 270);
+
+	ctx.fillText("Z  --  Shoot", 50, 370);
+	ctx.fillText("Shift  --  Slow", 50, 420);
 
 	var grd = ctx.createRadialGradient(100, 580, 20, 100, 580, 35);
 	grd.addColorStop(0, "#30ff30");
