@@ -46,6 +46,9 @@ shot.src = "img/Default_Shot.png";
 var eye = document.createElement('img');
 eye.src = "img/eye.png";
 
+var arrow = document.createElement('img');
+arrow.src = "img/arrow.png";
+
 //reimu
 var reimu = document.createElement('img');
 reimu.src = "img/player.png";
@@ -74,6 +77,7 @@ collectBad.src = "sound/pickupBad.wav";
 
 var boom = new Audio();
 boom.src = "sound/boom.wav"
+
 
 //midpoint of canvas
 var cx = canvas.width/2;
@@ -346,6 +350,9 @@ function draw(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "#FFFFFF";
+
 	//draw background
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
 
@@ -358,6 +365,37 @@ function draw(){
 		ctx.drawImage(sea, cx-750, 820-90*warming);
 	}
 
+	ctx.drawImage(arrow, 50, 100)
+	ctx.fillText("Move", 50, 270);
+
+	var grd = ctx.createRadialGradient(100, 580, 20, 100, 580, 35);
+	grd.addColorStop(0, "#30ff30");
+	grd.addColorStop(1, hexToRgbA("#30ff30"));
+	ctx.fillStyle = grd;
+	ctx.beginPath();
+	ctx.arc(100, 580, 35, 0, pi*2);
+	ctx.fill();
+	ctx.closePath();
+	ctx.drawImage(powerIcon[0], 100-20, 580-20)
+
+	ctx.fillStyle = "#30ff30";
+	ctx.fillText("Renewable", 150, 590);
+
+	var grd = ctx.createRadialGradient(100, 680, 20, 100, 680, 35);
+	grd.addColorStop(0, "#ffb000");
+	grd.addColorStop(1, hexToRgbA("#ffb000"));
+	ctx.fillStyle = grd;
+	ctx.beginPath();
+	ctx.arc(100, 680, 35, 0, pi*2);
+	ctx.fill();
+	ctx.closePath();
+	ctx.drawImage(powerIcon[4], 100-20, 680-20)
+
+	ctx.fillStyle = "#ffb000";
+	ctx.fillText("Fossil Fuel", 150, 690);
+
+	
+	ctx.fillStyle = "#ff0000";
 
 	//DISPLAY
 	//drawing spell card title
@@ -375,11 +413,10 @@ function draw(){
 	}
 
 	if(!(t%10)) {requestAnimFrame();}
-	ctx.font = "30px Arial";
-	ctx.fillStyle = "#FF0000";
+	
 	//ctx.fillText(t/100, 100, 100)
 	//ctx.fillText(deathCount + " misses", 100, 150)
-	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 200);
+	ctx.fillText(Math.round(fps*1000)/100 + " fps", 100, 50);
 	//ctx.fillText("on-screen: " + onScreenCount, 100, 250);
 	//ctx.fillText("cooldown: " + cooldown, 100, 300);
 
