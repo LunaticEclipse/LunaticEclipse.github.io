@@ -353,8 +353,7 @@ function draw(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 
 
-	ctx.font = "30px Arial";
-	ctx.fillStyle = "#FF3030";
+	
 
 	//draw background
 	ctx.drawImage(bkgrnd, 345, 0, 760, 800);
@@ -367,6 +366,9 @@ function draw(){
 
 		ctx.drawImage(sea, cx-750, 820-90*warming);
 	}
+
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "#FF3030";
 
 	ctx.drawImage(arrow, 50, 100)
 	ctx.fillText("Move", 50, 270);
