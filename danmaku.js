@@ -764,9 +764,11 @@ function WASD(){
 			boom.play();
 
 			if(enemy[i].phase >= 5){
-				alert("you win!!")
 				var image = document.getElementById("gif");
-		      	image.setAttribute("hidden", false);
+		      	image.hidden = false;
+		      	canvas.hidden = true;
+
+
 			}
 
 		}
