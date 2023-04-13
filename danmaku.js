@@ -793,6 +793,7 @@ function WASD(){
 		if(enemy[i].boss && enemy[i].hp <= 0){
 			enemy[i].hp = enemy[i].attack[enemy[i].phase+1];
 			enemy[i].phase+=2;
+			boom.currentTime = 0;
 			boom.play();
 
 			if(enemy[i].phase >= 5){
