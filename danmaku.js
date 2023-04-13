@@ -387,7 +387,7 @@ function draw(){
 	ctx.drawImage(powerIcon[0], 100-20, 580-20)
 
 	ctx.fillStyle = "#30ff30";
-	ctx.fillText("Renewable", 150, 590);
+	ctx.fillText("Clean Energy", 150, 590);
 
 	var grd = ctx.createRadialGradient(100, 680, 20, 100, 680, 35);
 	grd.addColorStop(0, "#ffb000");
