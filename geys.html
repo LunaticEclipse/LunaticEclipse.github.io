@@ -32,7 +32,7 @@
 	var x = cx-50;
 	var y = 600;
 
-	var energy = 5;
+	var energy = 500;
 	var warming = 0;
 
 	var music = new Audio();
@@ -74,8 +74,12 @@
 			spawn(1085, cy-100, 60, pattern4, -0.3, 0);
 		}
 
-		if(t==4500){
-			//spawn(cx, cy-230, 50, planetarium, 0, 0);
+		if(t==3000){
+			music.volume = 0.7
+		}
+
+		if(t==3500){
+			music.volume = 0.4
 		}
 
 		if(t==4000){
