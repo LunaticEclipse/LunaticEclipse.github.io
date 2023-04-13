@@ -84,6 +84,7 @@
 			boom.currentTime = 0;
 			boom.play();
 			music.pause();
+			music.currentTime = 0;
 			bossmusic.play();
 		}
 
@@ -254,6 +255,8 @@
 			over = true;
 			music.pause();
 			music.currentTime = 0;
+			bossmusic.pause();
+			bossmusic.currentTime = 0;
 			clearInterval(brake);
 		}
 	}

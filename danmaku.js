@@ -69,6 +69,9 @@ powerIcon[3] = document.createElement('img'); powerIcon[3].src = "img/pickupbad_
 powerIcon[4] = document.createElement('img'); powerIcon[4].src = "img/pickupbad_ngas.png";
 powerIcon[5] = document.createElement('img'); powerIcon[5].src = "img/pickupbad_oil.png";
 
+var energyIcon = document.createElement('img');
+energyIcon.src = "img/energy.png"
+
 //sfx source
 var collect = new Audio();
 collect.src = "sound/pickup.wav";
@@ -426,39 +429,26 @@ function draw(){
 
 	ctx.fillText("Energy: ", 1200, 250);
 	if(energy > 0){
+		ctx.drawImage(energyIcon, 1220, 270);
+/*
 		ctx.beginPath();
 		ctx.arc(1250, 300, 30, 0, pi*2);
 		ctx.fillStyle = "#ffd700";
 		ctx.fill();
 		ctx.closePath();
+*/
 	}
 	if(energy > 1){
-		ctx.beginPath();
-		ctx.arc(1250, 380, 30, 0, pi*2);
-		ctx.fillStyle = "#ffd700";
-		ctx.fill();
-		ctx.closePath();
+		ctx.drawImage(energyIcon, 1220, 350);
 	}
 	if(energy > 2){
-		ctx.beginPath();
-		ctx.arc(1250, 460, 30, 0, pi*2);
-		ctx.fillStyle = "#ffd700";
-		ctx.fill();
-		ctx.closePath();
+		ctx.drawImage(energyIcon, 1220, 430);
 	}
 	if(energy > 3){
-		ctx.beginPath();
-		ctx.arc(1250, 540, 30, 0, pi*2);
-		ctx.fillStyle = "#ffd700";
-		ctx.fill();
-		ctx.closePath();
+		ctx.drawImage(energyIcon, 1220, 510);
 	}
 	if(energy > 4){
-		ctx.beginPath();
-		ctx.arc(1250, 620, 30, 0, pi*2);
-		ctx.fillStyle = "#ffd700";
-		ctx.fill();
-		ctx.closePath();
+		ctx.drawImage(energyIcon, 1220, 590);
 	}
 	
 
