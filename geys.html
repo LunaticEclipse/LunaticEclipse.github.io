@@ -66,6 +66,8 @@
 			spawn(cx-300+random(600), 100, 6, pattern1, 0.7, pi/2);
 		}
 
+		/*
+
 		if(t==1500){
 			spawn(400, cy, 30, pattern3, 0.3, 0);
 		}
@@ -73,17 +75,18 @@
 		if(t==2500){
 			spawn(1085, cy-100, 60, pattern4, -0.3, 0);
 		}
-
-		if(t==3000){
+		*/
+		if(t==900){
 			music.volume = 0.6
 		}
 
-		if(t==3500){
+		if(t==1200){
 			music.volume = 0.25
 		}
+		
 
-		if(t==4000){
-			const spell1 = [pattern2, 50, pattern5, 20, pristineInsanity];
+		if(t==1500){
+			const spell1 = [pattern5, 50, pattern2, 20, pristineInsanity];
 			spawnBoss(cx, cy-230, 50, spell1, 0, 0);
 			boom.currentTime = 0;
 			boom.play();
@@ -102,7 +105,7 @@
 	function pattern1(xe, ye){
 		
 		if(t%100 == 0) {
-			shootAccRing(xe,ye,3,-0.1,1.5,random(4),12,10,"#000000")
+			shootAccRing(xe,ye,3,-0.1,1.5,random(4),6,10,"#000000")
 			//shootRing(xe, ye, 2, t/50, 3, 0, "#000000");
 			//shootRing(xe, ye, 2.5, t/50, 3, 0, "#000000");
 		}
