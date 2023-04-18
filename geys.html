@@ -61,28 +61,28 @@
 		}
 
 
-		if(t%90 == 0 && t<=1000){
+		if(t%90 == 0 && t<=2000){
 			spawn(cx-300+random(600), 100, 6, pattern1, 0.7, pi/2);
 			spawn(cx-300+random(600), 100, 6, pattern1, 0.7, pi/2);
-		}
-
-		if(t==1500){
-			spawn(400, cy, 30, pattern3, 0.3, 0);
 		}
 
 		if(t==2500){
-			spawn(1085, cy-100, 60, pattern4, -0.3, 0);
-		}
-
-		if(t==3000){
-			music.volume = 0.6
+			spawn(400, cy, 30, pattern3, 0.3, 0);
 		}
 
 		if(t==3500){
-			music.volume = 0.25
+			spawn(1085, cy-100, 60, pattern4, -0.3, 0);
 		}
 
 		if(t==4000){
+			music.volume = 0.6
+		}
+
+		if(t==4500){
+			music.volume = 0.25
+		}
+
+		if(t==5000){
 			const spell1 = [pattern2, 50, pattern5, 20, pristineInsanity];
 			spawnBoss(cx, cy-230, 50, spell1, 0, 0);
 			boom.currentTime = 0;
